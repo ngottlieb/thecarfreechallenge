@@ -1,10 +1,10 @@
 -# navigation styled for Bootstrap 3.0
-.container
-  %nav.navbar.bg-inverse
-    %ul.nav.navbar-nav.clearfix
-      %li.nav-item
-        %button.navbar-toggler.hidden-sm-up.nav-link{"aria-controls" => "exCollapsingNavbar2", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#exCollapsingNavbar2", "data-toggle" => "collapse", :type => "button"}
-          \ &#9776;
-    #exCollapsingNavbar2.collapse.navbar-toggleable-xs
-      = link_to "Rails bootstrap", root_path, class: 'navbar-brand'
-      %ul.nav.navbar-nav= render 'layouts/navigation_links'
+%nav.navbar.navbar-light.navbar-expand-lg
+  .container
+    %button.navbar-toggler{ type: "button", data: { toggle: "collapse", target: "#navbarNav" },
+      aria: { expanded: "false", label: "Toggle navigation" }}
+      %span.navbar-toggler-icon
+    .navbar-collapse.collapse
+      %ul.navbar-nav
+        %li.nav-item Hello
+      = render 'layouts/user_navigation'

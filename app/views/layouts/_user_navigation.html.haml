@@ -1,0 +1,6 @@
+%ul.navbar-nav.ml-auto
+  - if user_signed_in?
+    %li.nav-item= link_to "Account", edit_user_registration_path(current_user), class: 'nav-link'
+  - else
+    %li.nav-item= link_to "Log in", new_user_session_path, class: "nav-link"
+    %li.nav-item= link_to "Sign up", new_user_registration_path, class: "nav-link"
