@@ -16,3 +16,8 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require_tree .
+
+$(document).on('ready', function() {
+  var elements = $('.sticky');
+  Stickyfill.add(elements);
+});

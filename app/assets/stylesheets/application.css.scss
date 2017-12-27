@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+.sticky {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+.sticky:before,
+.sticky:after {
+  content: '';
+  display: table;
+}

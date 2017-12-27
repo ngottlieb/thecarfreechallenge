@@ -1,5 +1,14 @@
-#landing_header.jumbotron.align-items-center.flex-column.justify-content-center.d-flex.min-100
+#landing_header.jumbotron.align-items-center.flex-column.justify-content-center.d-flex.min-100.mb-0
   %h1.display-3 #carfreechallenge
   %p Put your money where your mouth is and pledge to recreate outdoors without driving.
+%nav#landing_nav.navbar.navbar-light.bg-light.navbar-expand-md.sticky
+  %a.navbar-brand{ href: '#' }Home
+  %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavbar' } }
+    %span.navbar-toggler-icon
+  #landingNavbar.collapse.navbar-collapse
+    %ul.nav.navbar-nav
+      = link_to 'One', '#sec1', class: 'nav-link'
+      = link_to 'Two', '#sec2', class: 'nav-link'
+    = render 'layouts/user_navigation'
 %h3 Welcome
 = link_to 'Sign in with Strava', user_strava_omniauth_authorize_path
