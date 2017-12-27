@@ -54,3 +54,4 @@ group :test do
 end
 
 gem "omniauth-strava"
+gem 'annotate', '~> 2.7.2'
