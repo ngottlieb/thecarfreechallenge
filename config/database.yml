@@ -16,9 +16,9 @@ development:
   adapter:  postgresql
   host:     /tmp
   encoding: unicode
-  database: CarFreeAdventureChallenge_development
+  database: car_free_adventure_challenge_development
   pool:     5
-  username: CarFreeAdventureChallenge
+  username: car_free_adventure_challenge
   password:
   template: template0
 
@@ -44,9 +44,9 @@ test:
   adapter:  postgresql
   host:     /tmp
   encoding: unicode
-  database: CarFreeAdventureChallenge_test
+  database: car_free_adventure_challenge_test
   pool:     5
-  username: CarFreeAdventureChallenge
+  username: car_free_adventure_challenge
   password:
   template: template0
 
@@ -54,8 +54,8 @@ production:
   adapter:  postgresql
   host:     /tmp
   encoding: unicode
-  database: CarFreeAdventureChallenge_production
+  database: car_free_adventure_challenge_production
   pool:     5
-  username: CarFreeAdventureChallenge
+  username: car_free_adventure_challenge
   password:
   template: template0
