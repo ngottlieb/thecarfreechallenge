@@ -1,10 +1,14 @@
 .bg-image-full {
-  height: 230px;
+  height: 400px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   background-size: cover;
   -o-background-size: cover;
-  background-image: image-url('landing-page-header.jpg');
   color: white;
+}
+@for $i from 1 through 5 {
+  .landing-image-#{$i} {
+    background-image: image-url('landing-pg-#{$i}.jpg');
+  }
 }
