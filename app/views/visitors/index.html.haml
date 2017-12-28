@@ -7,8 +7,24 @@
     %span.navbar-toggler-icon
   #landingNavbar.collapse.navbar-collapse
     %ul.nav.navbar-nav
-      = link_to 'One', '#sec1', class: 'nav-link'
-      = link_to 'Two', '#sec2', class: 'nav-link'
+      = link_to 'What', '#what', class: 'nav-link'
+      = link_to 'How', '#how', class: 'nav-link'
     = render 'layouts/user_navigation'
-%h3 Welcome
+.container-fluid{ data: { spy: 'scroll', target: '#landingNavbar', offset: '0' } }
+  .section#what
+    %h4 What Is the #carfreechallenge?
+    %p Outdoor sports enthusiasts are often also environmentalists. We want to protect the world we play in, and part of that is doing what we can to combat climate change. Unfortunately, the pursuit of adventure sports often involves a lot of travel, both on a large scale -- international trips -- and on a daily basis (your drive to the trailhead). Join me in pledging to minimize the carbon impact of our adventures in 2018 by finding things close to home and using alternative methods of transit!
+    %p Different sports might require different metrics -- if you're a road biker or sea kayaker, you might want to use miles. As a mountain biker, skier, trail runner, and kayaker, I'm pledging to gain at least 150,000 feet of elevation without driving my car in 2018. Sign up and set your own goals and share with your friends!
+  .section#how
+    %h4 How can we join?
+    %p 
+      The simplest way to join is to
+      = link_to 'sign up', new_user_registration_path
+      here. You can set goals, update progress, see where you stand on the leaderboards, and share with friends.
+    %p
+      If you're on Strava, we've built an integration so that your activities can be automatically tracked here. You can
+      = link_to 'sign up with Strava', user_strava_omniauth_authorize_path
+      or link your existing user account later. Then, just mark your carbon neutral activities with the hashtag
+      %strong #carfreechallenge
+      in either the title or the description and we'll find them automatically and count them here
 = link_to 'Sign in with Strava', user_strava_omniauth_authorize_path
