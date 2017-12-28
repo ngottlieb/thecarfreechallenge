@@ -15,7 +15,7 @@
 //= require turbolinks
 //= require popper
 //= require bootstrap-sprockets
-//= require stickyfilljs/dist/stickyfill.min.js
+//= require stickyfill.min.js
 //= require_tree .
 
 $(document).on('ready', function() {

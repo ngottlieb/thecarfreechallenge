@@ -2,7 +2,6 @@
   "name": "CarFreeAdventureChallenge",
   "private": true,
   "dependencies": {
-    "jquery": "^3.2.1",
-    "stickyfilljs": "^2.0.3"
+    "jquery": "^3.2.1"
   }
 }
