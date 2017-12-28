@@ -12,13 +12,6 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require turbolinks
 //= require popper
 //= require bootstrap-sprockets
-//= require stickyfill.min.js
 //= require_tree .
-
-$(document).on('ready', function() {
-  var elements = $('.sticky');
-  Stickyfill.add(elements);
-});

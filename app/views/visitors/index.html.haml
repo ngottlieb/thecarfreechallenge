@@ -1,8 +1,8 @@
-%nav#landing_nav.navbar.navbar-light.bg-light.navbar-expand-md.sticky
+%nav.navbar.navbar-light.bg-light.navbar-expand-md.fixed-top
   %a.navbar-brand{ href: '#' }#carfreechallenge
-  %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavbar' } }
+  %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavLinks' } }
     %span.navbar-toggler-icon
-  #landingNavbar.collapse.navbar-collapse
+  #landingNavLinks.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = link_to 'What', '#what', class: 'nav-link'
       = link_to 'How', '#how', class: 'nav-link'
@@ -10,86 +10,87 @@
       = link_to 'FAQ', '#faq', class: 'nav-link'
     = render 'layouts/user_navigation'
 
-%main{ data: { spy: 'scroll', target: '#landingNavbar', offset: '0' } }
-  %header#landing_header.bg-image-full.py-5.align-items-center.flex-column.justify-content-center.d-flex.min-100.mb-0
-    %h1.display-3 #carfreechallenge
-    %p Put your money where your mouth is and pledge to recreate outdoors without driving.
-  
-  %section#what.py-5
-    .container
-      %h1 What Is the #carfreechallenge?
-      %p
-        Outdoor sports enthusiasts are often also environmentalists. We want to protect the world
-        we play in, and part of that is doing what we can to combat climate change.
-        Unfortunately, the pursuit of adventure sports often involves a lot of travel,
-        both on a large scale -- international trips -- and on a daily basis (your drive to the trailhead).
-        Join me in pledging to minimize the carbon impact of our recreation in 2018 by finding adventures
-        close to home and using alternative methods of transit!
-      %p
-        Different sports might require different metrics -- if you're a road biker or sea kayaker,
-        you might want to use miles. As a mountain biker, skier, trail runner, and kayaker,
-        I'm pledging to gain at least 150,000 feet of elevation without driving my car in 2018.
-        Join me by signing up and setting your own goals!
-  
-  %section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
-    &nbsp;
-  
-  %section#how.py-5
-    .container
-      %h1 How can I join?
-      %p 
-        The simplest way to join is to
-        = link_to 'sign up', new_user_registration_path
-        here. You can set goals, update progress, see where you stand on the leaderboards, and share with friends.
-      %p
-        If you're on Strava, we've built an integration so that your activities can be automatically tracked here. You can
-        = link_to 'sign up with Strava', user_strava_omniauth_authorize_path
-        or link your existing user account later. Then, just mark your carbon neutral activities with the hashtag
-        %strong #carfreechallenge
-        in either the title or the description and we'll find them automatically and count them here
+%header#landing_header.bg-image-full.py-5.align-items-center.flex-column.justify-content-center.d-flex.min-100.mb-0
+  %h1.display-3 #carfreechallenge
+  %p Put your money where your mouth is and pledge to recreate outdoors without driving.
 
-  %section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
-    &nbsp;
+%section#what.py-5
+  .container
+    %h1 What Is the #carfreechallenge?
+    %p.lead
+      Outdoor sports enthusiasts are often also environmentalists. We want to protect the world
+      we play in, and part of that is doing what we can to combat climate change.
+      Unfortunately, the pursuit of adventure sports often involves a lot of travel,
+      both on a large scale -- international trips -- and on a daily basis (your drive to the trailhead).
+      Join me in pledging to minimize the carbon impact of our recreation in 2018 by finding adventures
+      close to home and using alternative methods of transit!
+    %p
+      Different sports might require different metrics -- if you're a road biker or sea kayaker,
+      you might want to use miles. As a mountain biker, skier, trail runner, and kayaker,
+      I'm pledging to gain at least 150,000 feet of elevation without driving my car in 2018.
+      Join me by signing up and setting your own goals!
 
-  %section#share.py-5
-    .container
-      %h1 Share
-      %p
-        Share the #carfreechallenge on Facebook and use the hashtag on Instagram! Get your friends to make the pledge!
+%section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
+  &nbsp;
 
-  %section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
-    &nbsp;
+%section#how.py-5
+  .container
+    %h1 How can I join?
+    %p.lead
+      The simplest way to join is to
+      = link_to 'sign up', new_user_registration_path
+      here. You can set goals, update progress, see where you stand on the leaderboards, and share with friends.
+    %p
+      If you're on Strava, we've built an integration so that your activities can be automatically tracked here. You can
+      = link_to 'sign up with Strava', user_strava_omniauth_authorize_path
+      or link your existing user account later. Then, just mark your carbon neutral activities with the hashtag
+      %strong #carfreechallenge
+      in either the title or the description and we'll find them automatically and count them here
 
-  %section#faq.py-5
-    .container
-      %h1 FAQ
-      %h4 But I live in X...I can't get outside without driving!
-      %p
-        Fair enough! We can't all live in Jackson (who can afford to anyway!), but I bet there are a lot of
-        adventures you can find close to home. We'll be adding some tools for finding local adventures to the website,
-        but here are a few ideas to get you started:
-        %ul
-          %li
-            = link_to 'Strava', 'http://www.strava.com'
-            has some great tools like heatmaps and flybys to help you find what other adventurers are doing in your area.
-            Identify some people who share your passions, follow them, and let them lead you to new places!
-          %li
-            = link_to 'Instagram.', 'http://www.instagram.com'
-            It pains me a little to say this, but Instagram can be a great way to discover new, local spots.
-          %li
-            = link_to 'Caltopo.', 'http://www.caltopo.com'
-            The reality is that nothing beats a good old fashioned map! Caltopo has some great tools for working with maps
-            and a number of excellent bases to choose from.
-          %li
-            = link_to 'GaiaGPS', 'https://www.gaiagps.com'
-            is my favorite mobile map application with great topo maps and trails and roads sourced from all over the place.
-      %h4 What counts as "car free?"
-      %p
-        Great question. The short answer is, it's up to you -- this is all voluntary and self-reporting.
-        For the purposes of the challenge, I'm saying
-        %strong no driving.
-        Meaning, you can't drive your car and you can't carpool with a friend. Mass transit is good to go -- you'd be
-        surprised what awesome places subways, trains, and busses can get you to! Along those lines, I'm also saying
-        things like gondolas, lifts, etc. are ok, but you can't count them for your vertical feet. In other words,
-        4 laps off the tram at Jackson is 0' towards the challenge. But if you take the tram up and spend your whole
-        day earning turns in Granite Creek, that can count, as long as you didn't drive to the mountain!
+%section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
+  &nbsp;
+
+%section#share.py-5
+  .container
+    %h1 Share
+    %p.lead
+      Share the #carfreechallenge on Facebook and use the hashtag on Instagram! Get your friends to make the pledge!
+
+%section.py-5.bg-image-full{ style: 'background-image: ' + image_url('landing-page-header.jpg') }
+  &nbsp;
+
+%section#faq.py-5
+  .container
+    %h1 FAQ
+    %h4 But I live in X...I can't get outside without driving!
+    %p.lead
+      Fair enough! We can't all live in Jackson (who can afford to anyway!), but I bet there are a lot of
+      adventures you can find close to home. We'll be adding some tools for finding local adventures to the website,
+      but here are a few ideas to get you started:
+      %ul
+        %li
+          = link_to 'Strava', 'http://www.strava.com'
+          has some great tools like heatmaps and flybys to help you find what other adventurers are doing in your area.
+          Identify some people who share your passions, follow them, and let them lead you to new places!
+        %li
+          = link_to 'Instagram.', 'http://www.instagram.com'
+          It pains me a little to say this, but Instagram can be a great way to discover new, local spots.
+        %li
+          = link_to 'Caltopo.', 'http://www.caltopo.com'
+          The reality is that nothing beats a good old fashioned map! Caltopo has some great tools for working with maps
+          and a number of excellent bases to choose from.
+        %li
+          = link_to 'GaiaGPS', 'https://www.gaiagps.com'
+          is my favorite mobile map application with great topo maps and trails and roads sourced from all over the place.
+    %h4 What counts as "car free?"
+    %p
+      Great question. The short answer is, it's up to you -- this is all voluntary and self-reporting.
+      For the purposes of the challenge, I'm saying
+      %strong no driving.
+      Meaning, you can't drive your car and you can't carpool with a friend. Mass transit is good to go -- you'd be
+      surprised what awesome places subways, trains, and busses can get you to!
+    %p
+      Along those lines, things like gondolas, lifts, etc. are ok, but you can't count them towards your goal.
+      In other words, 4 laps off the tram at Jackson is 0' towards the challenge. But if you take the tram up
+      and spend your whole day earning turns in Granite Creek, that can count, as long as you didn't
+      drive to the mountain!

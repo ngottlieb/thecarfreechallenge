@@ -36,7 +36,7 @@ img {
 // to make views framework-neutral
 main {
   @extend .container-fluid;
-  @extend .p-0;
+  padding: 56px 0 0 0;
 }
 
 nav {
