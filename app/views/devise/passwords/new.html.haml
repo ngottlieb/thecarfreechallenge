@@ -1,0 +1,16 @@
+.card.card-login.mx-auto.mt-5
+  .card-header Reset Password
+
+  .card-body
+    .text-center.mt-4.mb-5
+      %h4 Forgot your password?
+      %p Enter your email address and we will send you instructions on how to reset your password.
+    
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+      = devise_error_messages!
+
+      .form-group
+        = f.email_field :email, autofocus: true, class: 'form-control',
+          placeholder: 'Enter email address'
+      = f.submit 'Reset Password', class: 'btn btn-primary btn-block'
+    = render "devise/shared/links"
