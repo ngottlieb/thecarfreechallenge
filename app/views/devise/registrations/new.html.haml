@@ -1,0 +1,23 @@
+%h2 Take the Pledge
+%p
+  %strong Got a Strava account?
+  = link_to "Sign up through Strava", user_strava_omniauth_authorize_path
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+  = devise_error_messages!
+  .field
+    = f.label :email
+    = f.email_field :email, autofocus: true
+  .field
+    = f.label :password
+    - if @minimum_password_length
+      %em (#{@minimum_password_length} characters minimum)
+    %br
+    = f.password_field :password, autocomplete: 'off'
+  .field
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation, autocomplete: "off"
+  .actions
+    = f.submit 'Sign up'
+
+= render 'devise/shared/links'
