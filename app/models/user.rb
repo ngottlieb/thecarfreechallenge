@@ -27,6 +27,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[strava]
 
   has_many :goals
+  has_many :activities
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -35,5 +36,9 @@ class User < ApplicationRecord
       #user.name = auth.info.name   # assuming the user model has a name
       #user.image = auth.info.image # assuming the user model has an image
     end
+  end
+
+  def is_strava_user?
+    provider == 'strava' and uid.present?
   end
 end

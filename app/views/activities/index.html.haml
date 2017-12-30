@@ -1,0 +1,48 @@
+.row
+  .col-12
+    = link_to '+ Log an activity', new_activity_path, class: 'float-md-right btn btn-success'
+    %h1 Log Your Progress
+    - if current_user.is_strava_user?
+      .card.mb-3
+        .card-header How to Use #carfreechallenge With Strava
+        .card-body
+          %p
+            It's really easy to log activities and progress since you already use Strava.
+            Just add the hash tag
+            %strong #carfreechallenge
+            to the title or description of any applicable activities on Strava and they'll show up here
+            and count towards your goals.
+    - else
+      .card.mb-3
+        .card-header
+          Use
+          = succeed '?' do
+            = link_to 'Strava', 'http://www.strava.com', target: '_blank'
+        .card-body
+          %p
+            If you're already on Strava, it's really easy to log
+            %strong #carfreechallenge
+            activities! Just add the hashtag 
+            %strong #carfreechallenge
+            to the title or description of any applicable activities on Strava and they'll show up here
+            and count towards your goal.
+          = link_to 'Link Your Account With Strava', user_strava_omniauth_authorize_path, class: 'btn btn-block btn-strava'
+.card.mb-3
+  .card-header Progress Log
+  .card-body
+    .table-responsive
+      %table.table.table-bordered#activityTable
+        %thead
+          %th Date Logged
+          %th Activity Date
+          %th= Goal.metric_label('distance', current_user.measurement_system).titlecase
+          %th= Goal.metric_label('vertical_gain', current_user.measurement_system).titlecase
+          %th Sport
+        %tbody
+          - @activities.each do |act|
+            %tr
+              %td= act.created_at.try(:strftime,"%m-%d-%Y")
+              %td= act.activity_date.try(:strftime,"%m-%d-%Y")
+              %td= act.distance
+              %td= act.vertical_gain
+              %td= act.sport

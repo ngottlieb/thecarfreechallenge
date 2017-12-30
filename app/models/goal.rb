@@ -20,6 +20,10 @@ class Goal < ApplicationRecord
     end
   end
 
+  def self.metric_label(metric, measurement_system)
+    METRICS_LABELS[metric][measurement_system]
+  end
+
   def metric_label
     METRICS_LABELS[metric][user.measurement_system]
   end

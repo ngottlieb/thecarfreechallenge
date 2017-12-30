@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :goals, only: [:index, :create]
+  resources :activities, only: [:index, :create, :new]
 end
