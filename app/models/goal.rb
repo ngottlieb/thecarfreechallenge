@@ -30,7 +30,7 @@ class Goal < ApplicationRecord
 
   # returns progress towards goal %
   def progress
-    # stub, needs to calculate progress
-    25
+    result = user.total_metric_in_date_range(metric)*100 / total
+    result > 100 ? 100 : result
   end
 end
