@@ -1,0 +1,35 @@
+- if current_user.goals.present?
+  .card.mb-3
+    .card-header My Goals
+    .card-body
+      - current_user.goals.each do |g|
+        .row
+          .col-sm-12
+            I pledge to travel
+            %strong= g.total
+            human-powered
+            %strong= g.metric_label
+            (without driving!) in 2018!
+        .row
+          .col-sm-10.progress-bar-container
+            .progress
+              .progress-bar{ style: "width: #{g.progress}%;" }
+
+          .col-sm-2
+            = link_to 'Share Your Goal', '', class: 'btn btn-success btn-block'
+
+
+.card.mb-3
+  .card-header Set a Goal for Car Free Adventures in 2018
+  .card-body
+    = form_for @goal do |f|
+      .form-group
+        .form-row
+          .col-md-10
+            I pledge to travel
+            = f.text_field :total, placeholder: '100,000'
+            human-powered
+            = f.select(:metric, Goal.metrics_select_values(current_user), selected: 'vertical_gain')
+            in 2018 (without driving!)
+          .col-md-2
+            = f.submit 'Set Goal', class: 'btn btn-primary btn-block'
