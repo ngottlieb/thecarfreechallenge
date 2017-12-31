@@ -54,4 +54,4 @@ end
 
 gem "omniauth-strava"
 gem 'annotate', '~> 2.7.2'
-gem 'social-share-button'
+gem 'social-share-button', '~> 1.1.0'
