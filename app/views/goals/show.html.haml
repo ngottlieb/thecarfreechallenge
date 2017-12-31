@@ -6,6 +6,7 @@
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #carfreechallenge'}"}
     %meta{ property: 'og:title', content: 'Take the #carfreechallenge' }
     %meta{ property: 'og:description', content: "#{@goal.user.name} has taken the #carfreechallenge. Join them in pledging to minimize your driving for outdoor recreation!!" }
+    %meta{ property: 'og:image', content: image_url('landing-pg-1.jpg') }
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -25,5 +26,5 @@
       -# if user is signed in, show them the share buttons
       - if user_signed_in?
         .float-md-left
-          = social_share_button_tag('Share this goal')
+          = social_share_button_tag("#{@goal.user.name} has taken the #carfreechallenge. Find out more and join them!")
         = link_to 'Back', goals_path, class: 'float-md-right'
