@@ -1,0 +1,29 @@
+!!!
+%html
+  %head
+    %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
+    %title= content_for?(:title) ? yield(:title) : 'Take the #carfreechallenge'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #carfreechallenge'}"}
+    %meta{ property: 'og:title', content: 'Take the #carfreechallenge' }
+    %meta{ property: 'og:description', content: "#{@goal.user.name} has taken the #carfreechallenge. Join them in pledging to minimize your driving for outdoor recreation!!" }
+    = stylesheet_link_tag 'application', media: 'all'
+    = javascript_include_tag 'application'
+    = csrf_meta_tags
+  %body.bg-dark
+    .container
+      .card.mx-auto.mt-5.text-center
+        .card-header
+          #{@goal.user.name} is taking the
+          = succeed '!' do
+            %strong #carfreechallenge
+        %section.bg-image-full.landing-image-1
+        .card-body
+          %h4
+            #{@goal.user.name} has pledged to travel #{number_with_delimiter(@goal.total)} human powered #{@goal.metric_label} in 2018 without driving!
+          = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
+          = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
+      -# if user is signed in, show them the share buttons
+      - if user_signed_in?
+        .float-md-left
+          = social_share_button_tag('Share this goal')
+        = link_to 'Back', goals_path, class: 'float-md-right'

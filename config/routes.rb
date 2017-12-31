@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   end
   root to: 'visitors#index'
 
-  resources :goals, only: [:index, :create]
+  resources :goals, only: [:index, :create, :show]
   resources :activities, only: [:index, :create, :new]
 end

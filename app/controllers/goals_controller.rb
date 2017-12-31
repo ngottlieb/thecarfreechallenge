@@ -1,5 +1,11 @@
 class GoalsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
+
+  # for facebook sharing
+  def show
+    @goal = Goal.find(params[:id])
+    render 'show', layout: nil
+  end
 
   def index
     @goal = Goal.new

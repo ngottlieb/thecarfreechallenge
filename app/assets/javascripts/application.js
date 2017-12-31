@@ -15,4 +15,5 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require datatables.min.js
+//= require social-share-button
 //= require_tree .
