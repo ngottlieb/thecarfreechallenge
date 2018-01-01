@@ -2,8 +2,11 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'Car Free Challenge'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Car Free Challenge'}"}
+    %title= content_for?(:title) ? yield(:title) : 'The Car Free Challenge'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'The Car Free Challenge'}"}
+    %meta{ property: 'og:title', content: 'Take the #carfreechallenge' }
+    %meta{ property: 'og:description', content: "Pledge to minimize your driving for outdoor recreation in 2018 by setting a goal for car free adventures!" }
+    %meta{ property: 'og:image', content: image_url('landing-pg-1.jpg') }
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
