@@ -12,21 +12,10 @@
             %strong #carfreechallenge
             to the title or description of any applicable activities on Strava and they'll show up here
             and count towards your goals.
-    - else
-      .card.mb-3
-        .card-header
-          Use
-          = succeed '?' do
-            = link_to 'Strava', 'http://www.strava.com', target: '_blank'
-        .card-body
-          %p
-            If you're already on Strava, it's really easy to log
-            %strong #carfreechallenge
-            activities! Just add the hashtag 
-            %strong #carfreechallenge
-            to the title or description of any applicable activities on Strava and they'll show up here
-            and count towards your goal.
-          = link_to 'Link Your Account With Strava', user_strava_omniauth_authorize_path, class: 'btn btn-block btn-strava'
+          .alert.alert-info
+            We don't have real-time importing of data from Strava just yet, but we'll be able to pull
+            the information retroactively, so don't worry about logging your progress here (but DO use
+            the hash tag on Strava)! We'll have it up and running within a week or two.
 .card.mb-3
   .card-header Progress Log
   .card-body
