@@ -1,3 +1,13 @@
+#fb-root
+  %script
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=254460291246256';
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
 %nav.navbar.navbar-light.bg-light.navbar-expand-md.fixed-top
   %a.navbar-brand{ href: '#' }#carfreechallenge
   %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavLinks' } }
@@ -28,7 +38,9 @@
       Different sports might require different metrics -- if you're a road biker or sea kayaker,
       you might want to use miles. As a mountain biker, skier, trail runner, and kayaker,
       I'm pledging to gain at least 150,000 feet of elevation without driving my car in 2018.
-      Join me by signing up and setting your own goals!
+      Join me by
+      = link_to 'signing up', new_user_registration_path
+      and setting your own goals!
 
 %section.py-5.bg-image-full.landing-image-2
   &nbsp;
@@ -39,13 +51,17 @@
     %p
       The simplest way to join is to
       = link_to 'sign up', new_user_registration_path
-      here. You can set goals, update progress, see where you stand on the leaderboards, and share with friends.
+      here. You can set goals, update progress and share with friends.
     %p
-      If you're on Strava, we've built an integration so that your activities can be automatically tracked here. You can
+      You can also use the hashtag
+      %strong #carfreechallenge
+      on social media to help spread the message!
+    %p
+      If you're on Strava, we're building an integration so that your activities can be automatically tracked here. You can
       = link_to 'sign up with Strava', user_strava_omniauth_authorize_path
       or link your existing user account later. Then, just mark your carbon neutral activities with the hashtag
       %strong #carfreechallenge
-      in either the title or the description and we'll find them automatically and count them here
+      in either the title or the description and we'll find them automatically and tally them towards your goals.
 
 %section.py-5.bg-image-full.landing-image-3
   &nbsp;
@@ -54,7 +70,11 @@
   .container
     %h1 Share
     %p
-      Share the #carfreechallenge on Facebook and use the hashtag on Instagram! Get your friends to make the pledge!
+      .fb-share-button{ data: { href: 'http://www.thecarfreechallenge.com', layout: 'button' } }
+      on Facebook and use the
+      %strong #carfreechallenge
+      hashtag on Instagram or other social media! Once you've signed up and created a goal,
+      you can share that directly from the app, as well.
 
 %section.py-5.bg-image-full.landing-image-4
   &nbsp;
@@ -70,18 +90,24 @@
       %ul
         %li
           = link_to 'Strava', 'http://www.strava.com'
-          has some great tools like heatmaps and flybys to help you find what other adventurers are doing in your area.
-          Identify some people who share your passions, follow them, and let them lead you to new places!
-        %li
-          = link_to 'Instagram.', 'http://www.instagram.com'
-          It pains me a little to say this, but Instagram can be a great way to discover new, local spots.
+          is like an internet guidebook. There are helpful features like heatmaps and flybys to help you find
+          what other adventurers are doing in your area, and you can search activities with keywords to try to find
+          things in a particular area.
         %li
           = link_to 'Caltopo.', 'http://www.caltopo.com'
-          The reality is that nothing beats a good old fashioned map! Caltopo has some great tools for working with maps
-          and a number of excellent bases to choose from.
+          Nothing beats a good old fashioned map! Caltopo has some great tools for working with maps
+          and a number of excellent base tiles to choose from.
         %li
           = link_to 'GaiaGPS', 'https://www.gaiagps.com'
-          is my favorite mobile map application with great topo maps and trails and roads sourced from all over the place.
+          is my favorite mobile map application with great topo maps and an extensive knowledge of trails and roads
+          (even old decommissioned ones).
+        %li
+          = link_to 'Instagram.', 'http://www.instagram.com'
+          It pains me a little to say this, but browsing Instagram can be a great way to discover new, local spots.
+    %h4 But really though. I can't find anything that doesn't involve driving.
+    %p
+      = mail_to 'nick@thecarfreechallenge.com', 'Email me'
+      and I will personally help you find adventures close to home.
     %h4 What counts as "car free?"
     %p
       Great question. The short answer is, it's up to you -- this is all voluntary and self-reporting.
@@ -93,4 +119,13 @@
       Along those lines, things like gondolas, lifts, etc. are ok, but you can't count them towards your goal.
       In other words, 4 laps off the tram at Jackson is 0' towards the challenge. But if you take the tram up
       and spend your whole day earning turns in Granite Creek, that can count, as long as you didn't
-      drive to the mountain!
+      drive to the mountain.
+
+%section.py-5
+  .container
+    %p.text-small
+      This website and campaign were created by
+      = succeed '.' do
+        = link_to 'Nick Gottlieb', 'http://www.nicholasgottlieb.com'
+      He's pledging to gain 150,000 vertical feet without driving this year.
+      
