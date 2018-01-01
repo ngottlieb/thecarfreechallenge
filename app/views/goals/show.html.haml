@@ -26,5 +26,6 @@
       -# if user is signed in, show them the share buttons
       - if user_signed_in?
         .float-md-left
-          = social_share_button_tag("#{@goal.user.name} has taken the #carfreechallenge. Find out more and join them!")
+          - desc = "#{@goal.user.name} has taken the #carfreechallenge. Find out more and join them!"
+          = social_share_button_tag(desc, url: goal_url(@goal), desc: desc)
         = link_to 'Back', goals_path, class: 'float-md-right'
