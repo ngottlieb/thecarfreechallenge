@@ -4,12 +4,16 @@
     = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
       .form-group
         %strong Got a Strava account?
-        = link_to "Sign up through Strava", user_strava_omniauth_authorize_path
+        = link_to "Sign up through Strava", user_strava_omniauth_authorize_path, class: 'btn btn-strava btn-block'
       = devise_error_messages!
       .form-group
         = f.label :email
         = f.email_field :email, autofocus: true, class: 'form-control',
           placeholder: 'Enter email'
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control',
+          placeholder: 'Enter name'
       .form-group
         .form-row
           .col-md-6
