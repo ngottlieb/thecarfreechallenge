@@ -26,6 +26,7 @@ class GoalsController < ApplicationController
   private
 
   def goal_params
+    params[:goal][:total].gsub!(',','')
     params.require(:goal).permit(:total, :metric)
   end
 end
