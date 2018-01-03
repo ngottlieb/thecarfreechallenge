@@ -14,6 +14,7 @@ class GoalsController < ApplicationController
   def create
     @goal = Goal.new(goal_params)
     @goal.user = current_user
+
     if @goal.save
       flash[:notice] = 'Thanks! Click below to share your goal with your friends!'
       redirect_to goals_url

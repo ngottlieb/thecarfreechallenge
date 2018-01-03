@@ -1,0 +1,17 @@
+.form-group
+  = f.label :email
+  = f.email_field :email, autofocus: true, class: 'form-control',
+    placeholder: 'Enter email'
+.form-group
+  = f.label :name
+  = f.text_field :name, class: 'form-control',
+    placeholder: 'Enter name'
+.form-group
+  = f.label :measurement_system
+  .form-control
+    = f.radio_button :measurement_system, 'imperial_system'
+    = f.label :measurement_system, 'Miles and feet', value: 'imperial_system'
+    .float-right
+      = f.radio_button :measurement_system, 'metric_system'
+      = f.label :measurement_system, 'Kilometers and meters', value: 'metric_system'
+

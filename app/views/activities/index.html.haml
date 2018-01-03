@@ -32,6 +32,6 @@
             %tr
               %td= act.created_at.try(:strftime,"%m-%d-%Y")
               %td= act.activity_date.try(:strftime,"%m-%d-%Y")
-              %td= act.distance
-              %td= act.vertical_gain
+              %td= act.converted_distance
+              %td= act.converted_vertical_gain
               %td= act.sport

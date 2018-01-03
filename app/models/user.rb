@@ -31,7 +31,7 @@ class User < ApplicationRecord
   has_many :goals
   has_many :activities
 
-  enum measurement_system: [ :imperial, :metric ]
+  enum measurement_system: [ :imperial_system, :metric_system ]
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

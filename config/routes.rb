@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 
   resources :goals, only: [:index, :create, :show]
   resources :activities, only: [:index, :create, :new]
+  resources :users, only: [:edit, :update]
 end

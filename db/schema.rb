@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103170859) do
+ActiveRecord::Schema.define(version: 20180103225615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20180103170859) do
 
   create_table "goals", force: :cascade do |t|
     t.string "metric"
-    t.integer "total"
+    t.float "total"
     t.string "tag_line"
     t.string "period"
     t.boolean "public"

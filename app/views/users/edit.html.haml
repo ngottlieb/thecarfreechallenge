@@ -1,0 +1,15 @@
+%h2 Edit Account
+
+.row
+  .col-md-6
+    = form_for @user do |f|
+      - if @user.errors.any?
+        #error_explanation.alert.alert-danger
+          %h2
+            #{pluralize(@user.errors.count, 'error')} prohibited this
+            account from being saved:
+          %ul
+            - @user.errors.full_messages.each do |msg|
+              %li= msg
+      = render partial: 'users/shared/user_fields', locals: { f: f }
+      = f.submit 'Update', class: 'btn btn-primary btn-block'
