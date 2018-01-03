@@ -17,6 +17,8 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
+#  measurement_system     :string           default("imperial")
+#  name                   :string
 #
 
 class User < ApplicationRecord

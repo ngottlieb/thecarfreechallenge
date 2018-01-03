@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: goals
+#
+#  id         :integer          not null, primary key
+#  metric     :string
+#  total      :integer
+#  tag_line   :string
+#  period     :string
+#  public     :boolean
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Goal, type: :model do

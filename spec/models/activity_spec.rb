@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: activities
+#
+#  id            :integer          not null, primary key
+#  distance      :integer
+#  vertical_gain :integer
+#  activity_date :datetime
+#  sport         :string
+#  user_id       :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
 require 'rails_helper'
 
 RSpec.describe Activity, type: :model do
