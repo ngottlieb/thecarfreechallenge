@@ -319,7 +319,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
   database_cleaner
-  devise
+  devise (~> 4.3.0)
   factory_bot_rails
   faker
   guard-bundler
