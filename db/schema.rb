@@ -10,14 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103225615) do
+ActiveRecord::Schema.define(version: 20180105003808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.integer "distance"
-    t.integer "vertical_gain"
+    t.float "distance"
+    t.float "vertical_gain"
     t.datetime "activity_date"
     t.string "sport"
     t.bigint "user_id"
