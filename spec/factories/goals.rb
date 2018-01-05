@@ -18,7 +18,7 @@ FactoryBot.define do
     metric Goal::METRICS_LABELS.keys[0]
     tag_line "MyString"
     period "MyString"
-    public false
+    public true
     user
     total 100000
   end
