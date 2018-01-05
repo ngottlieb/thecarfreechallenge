@@ -23,6 +23,8 @@ class Goal < ApplicationRecord
 
   before_save :unit_conversion
 
+  validates_presence_of :total, :metric
+
   METRICS_LABELS = {
     'distance' =>
       {

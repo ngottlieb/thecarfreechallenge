@@ -20,7 +20,7 @@
         %section.bg-image-full.landing-image-1
         .card-body
           %h4
-            #{@goal.user.name} has pledged to travel #{number_with_delimiter(@goal.converted_total)} human powered #{@goal.metric_label} in 2018 without driving!
+            #{@goal.user.name} has pledged to travel #{number_with_delimiter(@goal.converted_total)} human-powered #{@goal.metric_label} in 2018 without driving!
           = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
           = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
       -# if user is signed in, show them the share buttons

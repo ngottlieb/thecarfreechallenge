@@ -13,6 +13,13 @@
 .row
   .col-12
     = form_for @activity do |f|
+      - if @activity.errors.any?
+        #error_explanation.alert.alert-danger
+          %h2
+            #{pluralize(@activity.errors.count, 'error')} prohibited this activity from being logged:
+          %ul
+            - @activity.errors.full_messages.each do |msg|
+              %li= msg
       %h4 Required Stuff
       .form-group
         .form-row

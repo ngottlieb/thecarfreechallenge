@@ -31,7 +31,7 @@ class Activity < ApplicationRecord
 
   def converted_distance
     if user.imperial_system? or distance.blank?
-      distance
+      distance.try(:round)
     else
       Goal.miles_to_kms(distance).round
     end
@@ -39,7 +39,7 @@ class Activity < ApplicationRecord
 
   def converted_vertical_gain
     if user.imperial_system? or vertical_gain.blank?
-      vertical_gain
+      vertical_gain.try(:round)
     else
       Goal.feet_to_meters(vertical_gain).round
     end

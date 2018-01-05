@@ -12,8 +12,7 @@ class ActivitiesController < ApplicationController
       flash[:notice] = 'Thanks for logging your progress!'
       redirect_to activities_url
     else
-      flash[:error] = 'There was an error logging your progress.'
-      redirect_to activities_url
+      render 'new'
     end
   end
 
