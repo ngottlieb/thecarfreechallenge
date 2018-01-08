@@ -38,6 +38,6 @@ class ActivitiesController < ApplicationController
   def activity_params
     params[:activity][:distance].gsub!(',','')
     params[:activity][:vertical_gain].gsub!(',','')
-    params.require(:activity).permit(:distance, :vertical_gain, :activity_date, :sport)
+    params.require(:activity).permit(:distance, :vertical_gain, :activity_date, :sport, :name)
   end
 end

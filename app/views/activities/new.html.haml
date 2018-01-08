@@ -35,10 +35,14 @@
       %h4 Optional Fields
       .form-group
         .form-row
+          .col-md-8
+            = f.text_field :name, placeholder: '#carfreechallenge ski day out the back door!', class: 'form-control'
+            = f.label :name, "Title"
+        .form-row
           .col-md-4
             = f.date_field :activity_date, class: 'form-control'
             = f.label :activity_date
           .col-md-4
-            = f.text_field :sport, class: 'form-control'
+            = f.text_field :sport, class: 'form-control', placeholder: 'NordicSki'
             = f.label :sport
       = f.submit 'Submit', class: 'btn btn-primary btn-block'
