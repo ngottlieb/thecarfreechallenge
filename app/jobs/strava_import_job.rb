@@ -13,6 +13,7 @@ class StravaImportJob < ApplicationJob
     imported_activities = []
     activities.each do |act|
       begin
+        act.deep_symbolize_keys!
         imported_activities << Activity.update_or_create_from_strava(act) if act[:name].include? "#carfreechallenge"
       rescue Exception => msg
         logger.error "There was an error importing Strava activity #{act[:id]}: #{msg}; skipping"

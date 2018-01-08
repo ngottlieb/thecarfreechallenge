@@ -22,8 +22,8 @@ class Activity < ApplicationRecord
   before_save :unit_conversion
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
-  AFTER_EPOCH = 1514764800
-  BEFORE_EPOCH = 1546214400
+  AFTER_EPOCH = "1514764800"
+  BEFORE_EPOCH = "1546214400"
 
   # before save callback that ensures all `totals` are saved in miles
   # or feet
@@ -51,7 +51,6 @@ class Activity < ApplicationRecord
   end
 
   def self.update_or_create_from_strava(data)
-    data.deep_symbolize_keys!
     user = User.find_by(provider: 'strava', uid: data[:athlete][:id])
 
     activity = Activity.find_or_create_by(user: user, provider: 'strava', external_id: data[:id])
