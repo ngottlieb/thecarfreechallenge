@@ -4,7 +4,7 @@
     - if current_user.is_strava_user?
       #import_button.float-md-right
         = link_to "Import Activities From Strava", trigger_import_path,
-          class: "btn btn-strava text-small #{current_user.import_in_progress? ? 'importing disabled' : '' }",
+          class: "btn btn-strava #{current_user.import_in_progress? ? 'importing disabled' : '' }",
           remote: true
     %h1 Log Your Progress
     - if current_user.is_strava_user?
@@ -17,6 +17,9 @@
             %strong #carfreechallenge
             to the title of any applicable activities on Strava and they'll show up here
             and count towards your goals.
+          %p
+            When you login here, we automatically send a request to Strava to retrieve activities.
+            You can also manually refresh from Strava by clicking the button above.
 .card.mb-3
   .card-header Progress Log
   .card-body
