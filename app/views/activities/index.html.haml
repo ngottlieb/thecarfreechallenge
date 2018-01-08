@@ -1,6 +1,11 @@
 .row
   .col-12
     = link_to '+ Log an activity', new_activity_path, class: 'float-md-right btn btn-success'
+    - if current_user.is_strava_user?
+      #import_button.float-md-right
+        = link_to "Import Activities From Strava", trigger_import_path,
+          class: "btn btn-strava text-small #{current_user.import_in_progress? ? 'importing disabled' : '' }",
+          remote: true
     %h1 Log Your Progress
     - if current_user.is_strava_user?
       .card.mb-3
@@ -10,12 +15,8 @@
             It's really easy to log activities and progress since you already use Strava.
             Just add the hash tag
             %strong #carfreechallenge
-            to the title or description of any applicable activities on Strava and they'll show up here
+            to the title of any applicable activities on Strava and they'll show up here
             and count towards your goals.
-          .alert.alert-info
-            We don't have real-time importing of data from Strava just yet, but we'll be able to pull
-            the information retroactively, so don't worry about logging your progress here (but DO use
-            the hash tag on Strava)! We'll have it up and running within a week or two.
 .card.mb-3
   .card-header Progress Log
   .card-body

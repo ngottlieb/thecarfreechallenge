@@ -10,25 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180105003808) do
+ActiveRecord::Schema.define(version: 20180108031644) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activities", force: :cascade do |t|
-    t.float "distance"
-    t.float "vertical_gain"
+    t.decimal "distance"
+    t.decimal "vertical_gain"
     t.datetime "activity_date"
     t.string "sport"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.string "external_id"
+    t.string "provider"
+    t.index ["provider", "external_id"], name: "index_activities_on_provider_and_external_id", unique: true
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
   create_table "goals", force: :cascade do |t|
     t.string "metric"
-    t.float "total"
+    t.decimal "total"
     t.string "tag_line"
     t.string "period"
     t.boolean "public"
@@ -54,6 +58,7 @@ ActiveRecord::Schema.define(version: 20180105003808) do
     t.string "uid"
     t.string "name"
     t.integer "measurement_system", default: 0
+    t.boolean "import_in_progress", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

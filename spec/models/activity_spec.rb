@@ -152,4 +152,57 @@ RSpec.describe Activity, type: :model do
     end
   end
 
+  describe 'Activity.from_strava', focus: true do
+    subject { Activity.update_or_create_from_strava(strava_data) }
+
+    context 'with no matching user' do
+      let(:strava_data) { StravaTesting.example_activity }
+
+      it 'should raise a validation error' do
+        expect{subject}.to raise_error(ActiveRecord::RecordInvalid)
+      end
+    end
+
+    context 'with a valid user' do
+      let(:user) { FactoryBot.create :user, provider: 'strava', uid: rand(100000),
+        measurement_system: system }
+      let(:system) { :imperial_system }
+      let(:strava_data) { StravaTesting.example_activity(user_id: user.uid) }
+
+      it 'should create a valid activity' do
+        expect{subject}.to change{user.activities.count}.by(1)
+      end
+
+      # it should be saved in feet / miles regardless, and it's given in meters regardless,
+      # so the tests are the same, but the code handling it is different, so we're testing both
+      # scenarios
+      [:metric_system, :imperial_system].each do |sys|
+        context "who uses the #{sys}" do
+          let(:system) { sys }
+          it 'should save vertical_gain accurately' do
+            expect(subject.reload.vertical_gain).to eq Goal.meters_to_feet(strava_data[:total_elevation_gain])
+          end
+          it 'should save distance accurately' do
+            expect(subject.reload.distance).to eq Goal.kms_to_miles(strava_data[:distance] / 1000)
+          end
+        end
+      end
+
+      context 'with an existing activity' do
+        let!(:activity) { FactoryBot.create :activity, user: user, provider: 'strava',
+          external_id: strava_data[:id], name: 'fake name but not the same as the strava name' }
+
+        it 'should not create a new activity' do
+          expect{subject}.to_not change{user.activities.count}
+        end
+
+        Activity::STRAVA_UPDATEABLE_ATTRIBUTES.each do |attr|
+          it "should update #{attr} on the existing activity" do
+            expect{subject}.to change{activity.reload.send(attr)}
+          end
+        end
+      end
+    end
+
+  end
 end

@@ -17,8 +17,13 @@ class Activity < ApplicationRecord
 
   validates :user, presence: true
   validate :metric_data_available
+  validates :external_id, uniqueness: { scope: :provider }
 
   before_save :unit_conversion
+
+  STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
+  AFTER_EPOCH = 1514764800
+  BEFORE_EPOCH = 1546214400
 
   # before save callback that ensures all `totals` are saved in miles
   # or feet
@@ -43,6 +48,30 @@ class Activity < ApplicationRecord
     else
       Goal.feet_to_meters(vertical_gain).round
     end
+  end
+
+  def self.update_or_create_from_strava(data)
+    data.deep_symbolize_keys!
+    user = User.find_by(provider: 'strava', uid: data[:athlete][:id])
+
+    activity = Activity.find_or_create_by(user: user, provider: 'strava', external_id: data[:id])
+
+    # strava provides distance and total_elevation_gain in meters,
+    # so we need to ensure this works properly
+    if user.present? and user.metric_system? # conversion happens automatically on save
+      activity.distance = data[:distance] / 1000 # make kms instead of ms
+      activity.vertical_gain = data[:total_elevation_gain]
+    else
+      activity.distance = Goal.kms_to_miles(data[:distance] / 1000)
+      activity.vertical_gain = Goal.meters_to_feet(data[:total_elevation_gain])
+    end
+
+    activity.name = data[:name] if data[:name].present?
+    activity.sport = data[:type] if data[:type].present?
+    activity.activity_date = DateTime.parse(data[:start_date]) if data[:start_date].present?
+
+    activity.save!
+    activity
   end
 
   private

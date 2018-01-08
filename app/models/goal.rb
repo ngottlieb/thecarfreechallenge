@@ -86,18 +86,18 @@ class Goal < ApplicationRecord
 
   # these are purposely *slightly* rough
   def self.feet_to_meters(feet)
-    feet / 3.28
+    feet.to_d / 3.28
   end
 
   def self.meters_to_feet(meters)
-    meters * 3.28
+    meters.to_d * 3.28
   end
 
   def self.miles_to_kms(miles)
-    miles * 1.6
+    miles.to_d * 1.6
   end
 
   def self.kms_to_miles(kms)
-    kms / 1.6
+    kms.to_d / 1.6
   end
 end

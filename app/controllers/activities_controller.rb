@@ -20,6 +20,19 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
   end
 
+  def trigger_import
+    if current_user.is_strava_user?
+      StravaImportJob.perform_later(current_user, strava_token)
+      respond_to do |format|
+        format.json { render json: { msg: "Enqueued Strava import job" }, status: :created }
+      end
+    else
+      respond_to do |format|
+        format.json { render json: { errors: ["#{current_user} is not a Strava user"] }, status: :error }
+      end
+    end
+  end
+
   private
 
   def activity_params

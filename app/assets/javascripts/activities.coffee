@@ -4,3 +4,5 @@
 
 $(document).ready ->
   $('#activityTable').dataTable()
+  $('#import_button').on 'click', ->
+    $('#import_button a.btn').addClass('importing disabled')

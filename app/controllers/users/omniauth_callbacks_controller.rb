@@ -4,6 +4,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.persisted?
       sign_in_and_redirect @user, event: :authentication
+      session['strava_access_token'] = request.env["omniauth.auth"].credentials.token
+      StravaImportJob.perform_later(@user, strava_token)
       set_flash_message(:notice, :success, kind: "Strava") if is_navigational_format?
     else
       session["devise.strava_data"] = request.env["omniauth.auth"]

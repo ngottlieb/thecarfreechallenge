@@ -9,4 +9,6 @@ Rails.application.routes.draw do
   resources :goals, only: [:index, :create, :show]
   resources :activities, only: [:index, :create, :new]
   resources :users, only: [:edit, :update]
+
+  get '/activities/trigger_import', to: 'activities#trigger_import', as: 'trigger_import'
 end
