@@ -16,7 +16,7 @@ feature 'Login' do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'NOT THE PASSWORD'
     click_button 'Login'
-    expect(page).to have_content 'Login'
+    expect(page).to have_content 'Invalid'
   end
 
 end
