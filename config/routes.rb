@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   root to: 'visitors#index'
 
   resources :goals, only: [:index, :create, :show]
-  resources :activities, only: [:index, :create, :new]
+  resources :activities, only: [:index, :create, :new, :destroy]
   resources :users, only: [:edit, :update]
 
   get '/activities/trigger_import', to: 'activities#trigger_import', as: 'trigger_import'

@@ -32,6 +32,7 @@
           %th Sport
           %th= Goal.metric_label('distance', current_user.measurement_system).titlecase
           %th= Goal.metric_label('vertical_gain', current_user.measurement_system).titlecase
+          %th
         %tbody
           - @activities.each do |act|
             %tr{ class: "activity-#{act.id}" }
@@ -40,3 +41,12 @@
               %td= act.sport
               %td= act.converted_distance
               %td= act.converted_vertical_gain
+              %td
+                - if act.provider.present?
+                  - confirm_message = "You can delete Strava activities here, but they'll |
+                      be reimported unless you remove the #carfreechallenge hashtag on Strava" |
+                - else
+                  - confirm_message = "Are you sure?"
+                = link_to 'Delete', activity_path(act), method: :delete,
+                  class: "btn btn-danger delete-activity-#{act.id} btn-sm",
+                  data: { confirm: confirm_message }

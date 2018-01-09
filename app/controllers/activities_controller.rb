@@ -20,6 +20,13 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new
   end
 
+  def destroy
+    @activity = Activity.find(params[:id])
+    @activity.destroy! if @activity.user == current_user
+    flash[:notice] = 'Activity deleted'
+    redirect_to activities_path
+  end
+
   def trigger_import
     if current_user.is_strava_user?
       StravaImportJob.perform_later(current_user, strava_token)
