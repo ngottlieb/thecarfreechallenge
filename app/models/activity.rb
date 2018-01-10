@@ -36,9 +36,9 @@ class Activity < ApplicationRecord
 
   def converted_distance
     if user.imperial_system? or distance.blank?
-      distance.try(:round)
+      distance.try(:round, 2)
     else
-      Goal.miles_to_kms(distance).round
+      Goal.miles_to_kms(distance).round(2)
     end
   end
 

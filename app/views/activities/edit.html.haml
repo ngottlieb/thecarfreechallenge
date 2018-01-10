@@ -1,2 +1,7 @@
 %h1 Edit Activity
+- if @activity.provider.present?
+  .alert.alert-info
+    Editing your activity here will be overwritten the next time your activities are
+    imported from Strava (unless you've removed the activity there). Consider editing
+    the activity there if you want the changes to persist.
 = render 'activities/form'
