@@ -27,6 +27,20 @@ class ActivitiesController < ApplicationController
     redirect_to activities_path
   end
 
+  def edit
+    @activity = Activity.find(params[:id])
+  end
+
+  def update
+    @activity = Activity.find(params[:id])
+    if @activity.update activity_params
+      flash[:notice] = "Activity updated"
+      redirect_to activities_url
+    else
+      render 'edit'
+    end
+  end
+
   def trigger_import
     if current_user.is_strava_user?
       StravaImportJob.perform_later(current_user, strava_token)

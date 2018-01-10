@@ -42,6 +42,8 @@
               %td= act.converted_distance
               %td= act.converted_vertical_gain
               %td
+                = link_to 'Edit', edit_activity_path(act),
+                  class: "btn btn-warning btn-sm edit-activity-#{act.id}"
                 - if act.provider.present?
                   - confirm_message = "You can delete Strava activities here, but they'll |
                       be reimported unless you remove the #carfreechallenge hashtag on Strava" |
