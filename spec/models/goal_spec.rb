@@ -126,14 +126,14 @@ RSpec.describe Goal, type: :model do
     end
   end
 
-  describe 'progress' do
+  describe 'percent_complete' do
     let(:user) { FactoryBot.create :user }
     before do
       allow(user).to receive(:total_metric_in_date_range).with(goal.metric).and_return(user_total)
     end
     let(:goal) { FactoryBot.create :goal, user: user }
 
-    subject { goal.progress }
+    subject { goal.percent_complete }
 
     context 'if the user has not completed the goal' do
       let(:user_total) { perc * goal.total }
@@ -150,6 +150,19 @@ RSpec.describe Goal, type: :model do
       it 'should return 100' do
         expect(subject).to eq 100
       end
+    end
+  end
+
+  describe 'progress' do
+    let(:user) { FactoryBot.create :user }
+    let(:goal) { FactoryBot.create :goal, user: user }
+    let!(:activity) { FactoryBot.create :activity, distance: 100, vertical_gain: 1000,
+                     user: user }
+
+    subject { goal.progress }
+
+    it 'should return the total amount of the relevant metric the user has completed' do
+      expect(subject).to eq(activity.send(goal.metric))
     end
   end
 end

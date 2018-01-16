@@ -54,7 +54,11 @@ class Goal < ApplicationRecord
 
   # returns progress towards goal %
   def progress
-    result = user.total_metric_in_date_range(metric)*100 / total
+    user.total_metric_in_date_range(metric)
+  end
+
+  def percent_complete
+    result = progress * 100 / total
     result > 100 ? 100 : result
   end
 
