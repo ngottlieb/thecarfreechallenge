@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
-  $('#activityTable').dataTable()
+  $('#activityTable').dataTable(
+    order: [[0, 'desc']]
+  )
   $('#import_button').on 'click', ->
     $('#import_button a.btn').addClass('importing disabled')
