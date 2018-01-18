@@ -15,6 +15,7 @@
   #landingNavLinks.collapse.navbar-collapse
     %ul.nav.navbar-nav
       = link_to 'What', '#what', class: 'nav-link'
+      = link_to 'Who', '#who', class: 'nav-link'
       = link_to 'How', '#how', class: 'nav-link'
       = link_to 'Share', '#share', class: 'nav-link'
       = link_to 'FAQ', '#faq', class: 'nav-link'
@@ -45,6 +46,39 @@
 %section.py-5.bg-image-full.landing-image-2
   &nbsp;
 
+%section#who.py-5
+  .container
+    %h1 Who's doing it?
+    .container
+      .row
+        .col-md-4
+          .card
+            .card-body
+              %h3.numberCircle.bg-primary.text-white
+                #{@summary[:users]} adventurers
+        .col-md-8
+          .card
+            .card-header Vertical Gain (feet)
+            .card-body.text-center.p-0
+              %h1
+                .badge.badge-info #{number_with_delimiter(@summary[:vertical_gain_sum].to_i)} / #{number_with_delimiter(@summary[:vertical_gain_goal].to_i)}
+            %hr.my-0
+            .card-body.bg-success.text-white
+              .progress
+                .progress-bar.bg-primary{ style: "width: #{@summary[:vertical_gain_sum] * 100 / @summary[:vertical_gain_goal]}%;" }
+            %hr.my-0
+            .card-header Distance (miles)
+            .card-body.text-center.p-0
+              %h1
+                .badge.badge-info #{number_with_delimiter(@summary[:distance_sum].to_i)} / #{number_with_delimiter(@summary[:distance_goal].to_i)}
+            %hr.my-0
+            .card-body.bg-success.text-white
+              .progress
+                .progress-bar.bg--primary{ style: "width: #{@summary[:distance_sum] * 100 / @summary[:distance_goal]}%;" }
+
+%section.py-5.bg-image-full.landing-image-3
+  &nbsp;
+
 %section#how.py-5
   .container
     %h1 How can I join?
@@ -63,7 +97,7 @@
       %strong #carfreechallenge
       in the title and we'll find them automatically and tally them towards your goals.
 
-%section.py-5.bg-image-full.landing-image-3
+%section.py-5.bg-image-full.landing-image-4
   &nbsp;
 
 %section#share.py-5
@@ -76,7 +110,7 @@
       hashtag on Instagram or other social media! Once you've signed up and created a goal,
       you can share that directly from the app, as well.
 
-%section.py-5.bg-image-full.landing-image-4
+%section.py-5.bg-image-full.landing-image-5
   &nbsp;
 
 %section#faq.py-5
