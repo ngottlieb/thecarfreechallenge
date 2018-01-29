@@ -4,3 +4,5 @@
       = link_to 'Goals', goals_path, class: 'nav-link'
     %li.nav-item{ class: (controller_name == 'activities' ? 'active' : '') }
       = link_to 'Log Your Progress', activities_path, class: 'nav-link'
+    %li.nav-item#appSocialLinks
+      = render 'layouts/social_links'

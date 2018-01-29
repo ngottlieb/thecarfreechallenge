@@ -45,3 +45,15 @@ nav {
 
 section {
 }
+
+// social links styling specific to logged in app
+li#appSocialLinks {
+  @include media-breakpoint-up(lg) {
+    position: fixed;
+    bottom: 56px;
+    text-align: center;
+  }
+  @include media-breakpoint-down(lg) {
+    margin-left: -8px;
+  }
+}

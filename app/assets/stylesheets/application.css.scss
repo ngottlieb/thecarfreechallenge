@@ -48,3 +48,26 @@ header.bg-image-full {
   padding: 2px;
   background-color: red;
 }
+
+// generic social links styling
+.social-menu-container {
+  ul {
+    list-style-type: none;
+    padding: 0;
+    li {
+      display: inline-block;
+      a {
+        color: white;
+        font-size: 40px;
+        margin: 0 4px;
+
+        svg {
+          fill: currentColor;
+          height: 1em;
+          width: 1em;
+        }
+      }
+    }
+  }
+}
+
