@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   authenticated :user do
-    root to: 'goals#index', as: :authenticated_root
+    root to: 'home#dashboard', as: :authenticated_root
   end
   root to: 'visitors#index'
 
-  resources :goals, only: [:index, :create, :show]
+  resources :goals, except: [:index]
   resources :activities, except: [:show]
   resources :users, only: [:edit, :update]
 

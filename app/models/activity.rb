@@ -17,7 +17,7 @@ class Activity < ApplicationRecord
 
   validates :user, presence: true
   validate :metric_data_available
-  validates :external_id, uniqueness: { scope: :provider }, if: 'external_id.present?'
+  validates :external_id, uniqueness: { scope: :provider }, if: :external_id?
 
   before_save :unit_conversion
 

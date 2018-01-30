@@ -1,7 +1,7 @@
 - if user_signed_in?
   %ul.navbar-nav.navbar-sidenav
-    %li.nav-item{ class: (controller_name == 'goals' ? 'active' : '') }
-      = link_to 'Goals', goals_path, class: 'nav-link'
+    %li.nav-item{ class: (controller_name == 'home' ? 'active' : '') }
+      = link_to 'Dashboard', root_path, class: 'nav-link'
     %li.nav-item{ class: (controller_name == 'activities' ? 'active' : '') }
       = link_to 'Log Your Progress', activities_path, class: 'nav-link'
     %li.nav-item#appSocialLinks

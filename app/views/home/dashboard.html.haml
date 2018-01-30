@@ -1,0 +1,32 @@
+%section
+  .row
+    .col-lg-4
+      .card
+        .card-header Activities Logged
+        .card-body
+          = link_to activities_path do 
+            %h3.numberCircle.bg-primary.text-white
+              #{current_user.activities.count}
+    .col-lg-8
+      .card
+        .card-header
+          Your Goals
+          = link_to '+ Set a Goal', new_goal_path, class: 'btn btn-info float-right'
+        - current_user.goals.each do |g|
+          .card-body{ class: "goal-#{g.id}" }
+            .row
+              .col-lg-8
+                %p
+                  %strong= g.converted_total
+                  car-free
+                  %strong= g.metric_label
+                  in 2018
+              .col-lg-4
+                .btn-group
+                  = link_to 'Share', goal_path(g), class: 'btn btn-success'
+                  = link_to 'Edit', edit_goal_path(g), class: 'btn btn-warning'
+                  = link_to 'Delete', goal_path(g), class: 'btn btn-danger', method: :delete
+            .row
+              .col-sm-12.progress-bar-container
+                .progress
+                  = progress_bar(g)

@@ -28,4 +28,4 @@
         .float-md-left
           - desc = "#{@goal.user.name} has taken the #carfreechallenge. Find out more and join them!"
           = social_share_button_tag(desc, url: goal_url(@goal), desc: desc)
-        = link_to 'Back', goals_path, class: 'float-md-right'
+        = link_to 'Back', root_path, class: 'float-md-right'

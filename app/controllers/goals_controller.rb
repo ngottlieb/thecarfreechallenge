@@ -7,8 +7,29 @@ class GoalsController < ApplicationController
     render 'show', layout: nil
   end
 
-  def index
+  def new
     @goal = Goal.new
+  end
+
+  def edit
+    @goal = Goal.find(params[:id])
+  end
+
+  def update
+    @goal = Goal.find(params[:id])
+    if @goal.update goal_params
+      flash[:notice] = "Goal updated"
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @goal = Goal.find(params[:id])
+    @goal.destroy! if @goal.user == current_user
+    flash[:notice] = 'Goal abandoned'
+    redirect_to root_path
   end
 
   def create
@@ -17,10 +38,10 @@ class GoalsController < ApplicationController
 
     if @goal.save
       flash[:notice] = 'Thanks! Click below to share your goal with your friends!'
-      redirect_to goals_url
+      redirect_to root_path
     else
       flash[:error] = 'There was an issue setting your goal.'
-      redirect_to goals_url
+      render 'new' 
     end
   end
 

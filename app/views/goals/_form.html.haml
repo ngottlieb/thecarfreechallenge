@@ -1,0 +1,11 @@
+= form_for goal do |f|
+  .form-group
+    .form-row
+      .col-md-10
+        I pledge to travel
+        = f.text_field :total, placeholder: current_user.imperial_system? ? '100,000' : '30,000'
+        human-powered
+        = f.select(:metric, Goal.metrics_select_values(current_user), selected: 'vertical_gain')
+        in 2018 (without driving!)
+      .col-md-2
+        = f.submit 'Set Goal', class: 'btn btn-primary btn-block'
