@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :goals, except: [:index]
   resources :activities, except: [:show]
   resources :users, only: [:edit, :update]
+  get '/help', to: 'home#help', as: :help
 
   get '/activities/trigger_import', to: 'activities#trigger_import', as: 'trigger_import'
 end

@@ -3,4 +3,7 @@ class HomeController < ApplicationController
 
   def dashboard
   end
+
+  def help
+  end
 end
