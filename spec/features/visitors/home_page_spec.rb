@@ -17,7 +17,7 @@ feature 'Home page' do
 
   it 'should have a user count' do
     visit root_path
-    expect(page).to have_content "#{User.count} adventurers"
+    expect(page).to have_content "#{User.count}"
   end
 
   context "with some existing goals and activities" do
