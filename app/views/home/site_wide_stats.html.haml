@@ -1,0 +1,27 @@
+%section
+  .row
+    .col-lg-4
+      .card
+        .card-header Who's Doing It
+        .card-body
+          %h3.numberCircle.bg-primary.text-white
+            #{@summary[:users]} 
+    .col-lg-8
+      .card
+        .card-header Vertical #{current_user.metric_system? ? 'Meters' : 'Feet'}
+        .card-body.text-center.p-0
+          %h1
+            .badge.badge-info #{number_with_delimiter(@summary[:vertical_gain_sum].to_i)} / #{number_with_delimiter(@summary[:vertical_gain_goal].to_i)}
+        %hr.my-0
+        .card-body.bg-success.text-white
+          .progress
+            .progress-bar.bg-primary{ style: "width: #{@summary[:vertical_gain_sum] * 100 / @summary[:vertical_gain_goal]}%;" }
+        %hr.my-0
+        .card-header #{current_user.metric_system? ? 'Kilometers' : 'Miles'}
+        .card-body.text-center.p-0
+          %h1
+            .badge.badge-info #{number_with_delimiter(@summary[:distance_sum].to_i)} / #{number_with_delimiter(@summary[:distance_goal].to_i)}
+        %hr.my-0
+        .card-body.bg-success.text-white
+          .progress
+            .progress-bar.bg--primary{ style: "width: #{@summary[:distance_sum] * 100 / @summary[:distance_goal]}%;" }

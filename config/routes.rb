@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :activities, except: [:show]
   resources :users, only: [:edit, :update]
   get '/help', to: 'home#help', as: :help
+  get '/site-wide-stats', to: 'home#site_wide_stats', as: :site_wide_stats
 
   get '/activities/trigger_import', to: 'activities#trigger_import', as: 'trigger_import'
 end

@@ -4,7 +4,7 @@ feature 'Create a goal' do
 
   scenario 'creating a goal' do
     visit root_path
-    click_link '+ Set a Goal'
+    click_link '+ Set a Goal', match: :first
     fill_in 'goal[total]', with: '1000'
     click_button 'Set Goal'
     expect(page).to have_content "1000 car-free"
@@ -12,7 +12,7 @@ feature 'Create a goal' do
 
   scenario 'creating an invalid goal' do
     visit root_path
-    click_link '+ Set a Goal'
+    click_link '+ Set a Goal', match: :first
     # don't fill in the total field
     click_button 'Set Goal'
     expect(page).to have_content 'There was an issue setting your goal'
@@ -24,7 +24,7 @@ feature 'Create a goal' do
 
     it 'should use metric system labels for new goals' do
       visit root_path
-      click_link '+ Set a Goal'
+      click_link '+ Set a Goal', match: :first
       expect(page).to have_css('option[value="distance"]', text: 'kilometers')
     end
 
@@ -32,7 +32,7 @@ feature 'Create a goal' do
     # in the background we're converting to imperial and back
     scenario 'creating a goal' do
       visit root_path
-      click_link '+ Set a Goal'
+      click_link '+ Set a Goal', match: :first
       fill_in 'goal[total]', with: '1000'
       click_button 'Set Goal'
       expect(page).to have_content '1000 car-free'
