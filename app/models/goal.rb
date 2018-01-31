@@ -58,7 +58,7 @@ class Goal < ApplicationRecord
   end
 
   def percent_complete
-    result = progress * 100 / total
+    result = progress * 100 / converted_total
     result > 100 ? 100 : result
   end
 
