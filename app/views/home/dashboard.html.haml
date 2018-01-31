@@ -1,3 +1,31 @@
+- if current_user.goals.empty? and current_user.activities.empty?
+  %section
+    .row
+      .col-lg-12
+        .card.mb-3
+          .card-header Getting Started
+          .card-body
+            %ol
+              %li
+                Set a goal for car-free vertical gain or distance in 2018 by clicking
+                = link_to "+ Set a Goal", new_goal_path, class: 'btn btn-info btn-sm'
+              %li
+                - if current_user.is_strava_user?
+                  Log activities on Strava with the text "#carfreechallenge" in the title
+                - else
+                  = link_to "Log activities", activities_path
+                  (or
+                  = succeed ')' do
+                    = link_to 'link your account with Strava', user_strava_omniauth_authorize_path
+              %li
+                Share your goals  with your friends using the "Share" button next to your goal
+              %li
+                Share your adventures on
+                = link_to 'Instagram', 'https://www.instagram.com/carfreechallenge/'
+                and
+                = link_to 'Facebook', 'https://www.facebook.com/carfreechallenge/'
+                with the hashtag #CarFreeChallenge
+
 %section
   .row
     .col-lg-4

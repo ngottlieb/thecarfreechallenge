@@ -11,7 +11,12 @@ feature 'Dashboard page' do
         it 'should have + Set a Goal link' do
           expect(page).to have_link "+ Set a Goal"
         end
+
+        it 'should have Getting Started copy' do
+          expect(page).to have_content 'Getting Started'
+        end
       end
+
     end
 
     context 'with existing goals' do
