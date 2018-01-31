@@ -49,6 +49,15 @@ class User < ApplicationRecord
   def total_metric_in_date_range(metric, start_date=Date.parse("Jan 1 2018"), end_date=Date.parse("Dec 31 2018"))
     counted_activities = activities.where("(activity_date >= ? AND activity_date <= ?) OR (activity_date IS NULL AND created_at >= ? AND created_at <= ?)",
                                        start_date, end_date, start_date, end_date)
-    counted_activities.sum(metric)
+    sum = counted_activities.sum(metric)
+    if metric_system?
+      if metric == 'vertical_gain'
+        Goal.feet_to_meters(sum)
+      else
+        Goal.miles_to_kms(sum)
+      end
+    else
+      sum
+    end
   end
 end
