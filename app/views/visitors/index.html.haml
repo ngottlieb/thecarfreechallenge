@@ -22,9 +22,10 @@
     = render 'layouts/user_navigation'
 
 %header#landing_header.bg-image-full.py-5.align-items-center.flex-column.justify-content-center.d-flex.min-100.mb-0.landing-image-1
-  %h1.display-3 #carfreechallenge
-  %p Put your money where your mouth is and pledge to recreate outdoors without driving.
-  = render partial: 'layouts/social_links'
+  .header-text.align-items-center.flex-column.justify-content-center.d-flex
+    %h1.display-2 #carfreechallenge
+    %p.text-center Put your money where your mouth is and pledge to recreate outdoors without driving.
+    = render partial: 'layouts/social_links'
 
 %section#what.py-5
   .container
@@ -54,9 +55,10 @@
       .row
         .col-md-4
           .card
+            .card-header Adventurers
             .card-body
               %h3.numberCircle.bg-primary.text-white
-                #{@summary[:users]} adventurers
+                #{@summary[:users]}
         .col-md-8
           .card
             .card-header Vertical Gain (feet)
