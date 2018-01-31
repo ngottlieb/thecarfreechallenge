@@ -35,18 +35,26 @@ class Activity < ApplicationRecord
   end
 
   def converted_distance
-    if user.imperial_system? or distance.blank?
-      distance.try(:round, 2)
+    if distance?
+      if user.imperial_system? or distance.blank?
+        distance.try(:round, 2)
+      else
+        Goal.miles_to_kms(distance).round(2)
+      end
     else
-      Goal.miles_to_kms(distance).round(2)
+      nil
     end
   end
 
   def converted_vertical_gain
-    if user.imperial_system? or vertical_gain.blank?
-      vertical_gain.try(:round)
+    if vertical_gain?
+      if user.imperial_system? or vertical_gain.blank?
+        vertical_gain.try(:round)
+      else
+        Goal.feet_to_meters(vertical_gain).round
+      end
     else
-      Goal.feet_to_meters(vertical_gain).round
+      nil
     end
   end
 

@@ -12,10 +12,12 @@
       .form-group
         .form-row
           .col-md-4
-            = f.text_field :distance, placeholder: '25', class: 'form-control'
+            = f.text_field :distance, placeholder: '25', class: 'form-control',
+              value: @activity.converted_distance
             = f.label :distance, Goal.metric_label('distance', current_user.measurement_system)
           .col-md-4
-            = f.text_field :vertical_gain, placeholder: '1000', class: 'form-control'
+            = f.text_field :vertical_gain, placeholder: '1000', class: 'form-control',
+              value: @activity.converted_vertical_gain
             = f.label :vertical_gain, Goal.metric_label('vertical_gain', current_user.measurement_system)
           .col-md-4
             %small.form-text.text-muted (both are allowed, but at least one is required)

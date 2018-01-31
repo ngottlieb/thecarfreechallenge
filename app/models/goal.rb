@@ -76,15 +76,19 @@ class Goal < ApplicationRecord
   end
 
   def converted_total
-    if user.imperial_system?
-      total.to_i
-    else
-      if metric == 'distance'
-        output = Goal.miles_to_kms(total)
-      elsif metric == 'vertical_gain'
-        output = Goal.feet_to_meters(total)
+    if total?
+      if user.imperial_system?
+        total.to_i
+      else
+        if metric == 'distance'
+          output = Goal.miles_to_kms(total)
+        elsif metric == 'vertical_gain'
+          output = Goal.feet_to_meters(total)
+        end
+        output.round
       end
-      output.round
+    else
+      nil
     end
   end
 
