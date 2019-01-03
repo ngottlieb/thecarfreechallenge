@@ -8,8 +8,20 @@ class StravaImportJob < ApplicationJob
 
   def perform(user, access_token)
     # TODO: modify these before and after dates to reflect user timezone
-    activities = StravaService.activities(user, access_token, { after: Activity::AFTER_EPOCH,
-                                          before: Activity::BEFORE_EPOCH })
+    per_page = Activity::PER_PAGE # max (identified through manual testing)
+    page = 1
+    activities = []
+
+    # loop through to ensure we retrieve all the activities
+    loop do
+      import_batch = StravaService.activities(user, access_token, { after: Activity::AFTER_EPOCH,
+                                          before: Activity::BEFORE_EPOCH, per_page: per_page, page: page})
+      activities += import_batch
+      break if import_batch.count < per_page
+      # increment page and run the import again
+      page += 1
+    end
+
     imported_activities = []
     activities.each do |act|
       begin

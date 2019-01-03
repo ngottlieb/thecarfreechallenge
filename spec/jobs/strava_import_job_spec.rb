@@ -19,13 +19,41 @@ RSpec.describe StravaImportJob, type: :job do
     end
 
     it 'should call StravaService.activities' do
-      expect(StravaService).to receive(:activities).with(user, access_token,{ after: Activity::AFTER_EPOCH, before: Activity::BEFORE_EPOCH })
+      expect(StravaService).to receive(:activities).with(user, access_token,{ after: Activity::AFTER_EPOCH, before: Activity::BEFORE_EPOCH,
+                                                                              per_page: Activity::PER_PAGE, page: 1  })
       subject
     end
 
     it 'should update the user before and after execution' do
       expect(user).to receive(:update).twice
       subject
+    end
+
+    describe "with more than #{Activity::PER_PAGE} activities" do
+      before do
+        first_page = []
+        Activity::PER_PAGE.times do
+          first_page += [StravaTesting.example_activity(test_activity_params)]
+        end
+        @car_free_activity = StravaTesting.example_activity(test_activity_params.merge({ name: '#carfreechallenge activity' }))
+        second_page = [@car_free_activity]
+        allow(StravaService).to receive(:activities).with(user, access_token, first_page_params).and_return(first_page)
+        allow(StravaService).to receive(:activities).with(user, access_token, second_page_params).and_return(second_page)
+      end
+
+      let(:first_page_params) { { after: Activity::AFTER_EPOCH, before: Activity::BEFORE_EPOCH, per_page: Activity::PER_PAGE, page: 1 } }
+      let(:second_page_params) { { after: Activity::AFTER_EPOCH, before: Activity::BEFORE_EPOCH, per_page: Activity::PER_PAGE, page: 2 } }
+
+      it 'should call StravaService twice' do
+        expect(StravaService).to receive(:activities).with(user, access_token, first_page_params)
+        expect(StravaService).to receive(:activities).with(user, access_token, second_page_params)
+        subject
+      end
+
+      it 'should call Activity.update_or_create_from_strava with the second page activity' do
+        expect(Activity).to receive(:update_or_create_from_strava).with(@car_free_activity)
+        subject
+      end
     end
 
     describe 'after execution is finished' do
