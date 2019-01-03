@@ -14,13 +14,10 @@
 #
 development:
   adapter:  postgresql
-  host:     /tmp
   encoding: unicode
   database: car_free_adventure_challenge_development
   pool:     5
-  username: car_free_adventure_challenge
-  password:
-  template: template0
+  username: <%= ENV['RAILS_DB_USERNAME'] %>
 
   # Connect on a TCP socket. Omitted by default since the client uses a
   # domain socket that doesn't need configuration. Windows does not have
@@ -42,20 +39,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   adapter:  postgresql
-  host:     /tmp
   encoding: unicode
   database: car_free_adventure_challenge_test
   pool:     5
-  username: car_free_adventure_challenge
-  password:
-  template: template0
-
-production:
-  adapter:  postgresql
-  host:     /tmp
-  encoding: unicode
-  database: car_free_adventure_challenge_production
-  pool:     5
-  username: car_free_adventure_challenge
-  password:
-  template: template0
+  username: <%= ENV['RAILS_DB_USERNAME'] %>
