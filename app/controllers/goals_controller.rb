@@ -9,8 +9,8 @@ class GoalsController < ApplicationController
 
   def new
     @goal = Goal.new(
-      start_date: Date.parse("Jan 1 2019"),
-      end_date: Date.parse("Dec 31 2019")
+      start_date: Date.today.beginning_of_year,
+      end_date: Date.today.end_of_year
     )
   end
 
