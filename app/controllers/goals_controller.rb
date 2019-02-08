@@ -8,7 +8,10 @@ class GoalsController < ApplicationController
   end
 
   def new
-    @goal = Goal.new
+    @goal = Goal.new(
+      start_date: Date.parse("Jan 1 2019"),
+      end_date: Date.parse("Dec 31 2019")
+    )
   end
 
   def edit
@@ -49,6 +52,6 @@ class GoalsController < ApplicationController
 
   def goal_params
     params[:goal][:total].gsub!(',','')
-    params.require(:goal).permit(:total, :metric)
+    params.require(:goal).permit(:total, :metric, :start_date, :end_date)
   end
 end

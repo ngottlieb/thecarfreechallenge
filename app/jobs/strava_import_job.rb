@@ -1,6 +1,5 @@
 # given a user and an access token,
 # retrieves and processes all Activities
-# from 2018
 class StravaImportJob < ApplicationJob
   queue_as :default
 
@@ -12,10 +11,12 @@ class StravaImportJob < ApplicationJob
     page = 1
     activities = []
 
+    after_query_date = user.start_of_earliest_goal.try(:to_i) || Activity::AFTER_EPOCH
+
     # loop through to ensure we retrieve all the activities
     loop do
-      import_batch = StravaService.activities(user, access_token, { after: Activity::AFTER_EPOCH,
-                                          before: Activity::BEFORE_EPOCH, per_page: per_page, page: page})
+      import_batch = StravaService.activities(user, access_token, { after: after_query_date,
+                                          per_page: per_page, page: page})
       activities += import_batch
       break if import_batch.count < per_page
       # increment page and run the import again
@@ -32,7 +33,7 @@ class StravaImportJob < ApplicationJob
       end
     end
     logger.info "Successfully imported #{imported_activities.count} activities"
-    logger.info "Failed to import #{activities.count - imported_activities.count}"
+    logger.info "Scanned but did not import #{activities.count - imported_activities.count}"
   end
 
   private

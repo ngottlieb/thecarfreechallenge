@@ -7,6 +7,9 @@
           value: @goal.converted_total
         human-powered
         = f.select(:metric, Goal.metrics_select_values(current_user))
-        in 2018 (without driving!)
+        between
+        = f.date_field :start_date
+        and
+        = f.date_field :end_date
       .col-md-2
         = f.submit 'Set Goal', class: 'btn btn-primary btn-block'
