@@ -129,7 +129,7 @@ RSpec.describe Goal, type: :model do
   describe 'percent_complete' do
     let(:user) { FactoryBot.create :user }
     before do
-      allow(user).to receive(:total_metric_in_date_range).with(goal.metric).and_return(user_total)
+      allow(user).to receive(:total_metric_in_date_range).with(metric: goal.metric, start_date: goal.start_date, end_date: goal.end_date).and_return(user_total)
     end
     let(:goal) { FactoryBot.create :goal, user: user }
 
@@ -158,6 +158,10 @@ RSpec.describe Goal, type: :model do
     let(:goal) { FactoryBot.create :goal, user: user }
     let!(:activity) { FactoryBot.create :activity, distance: 100, vertical_gain: 1000,
                      user: user }
+
+    before do
+      allow(user).to receive(:total_metric_in_date_range).with(metric: goal.metric, start_date: goal.start_date, end_date: goal.end_date).and_return(activity.send(goal.metric))
+    end
 
     subject { goal.progress }
 

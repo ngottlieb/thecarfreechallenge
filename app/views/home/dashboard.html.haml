@@ -7,7 +7,7 @@
           .card-body
             %ol
               %li
-                Set a goal for car-free vertical gain or distance in 2018 by clicking
+                Set a goal for car-free vertical gain or distance by clicking
                 = link_to "+ Set a Goal", new_goal_path, class: 'btn btn-info btn-sm'
               %li
                 - if current_user.is_strava_user?
@@ -48,7 +48,13 @@
                   %strong= g.converted_total
                   car-free
                   %strong= g.metric_label
-                  in 2018
+                  - if g.start_date.present?
+                    between
+                    %strong= g.start_date.strftime("%b %d, %Y")
+                    and
+                  - else
+                    by
+                  %strong= g.end_date.try(:strftime,"%b %d, %Y")
               .col-lg-4
                 .btn-group
                   = link_to 'Share', goal_path(g), class: 'btn btn-success'

@@ -23,7 +23,6 @@ class Activity < ApplicationRecord
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
   AFTER_EPOCH = "1514764800"
-  BEFORE_EPOCH = "1546214400"
   PER_PAGE = 200
 
   # before save callback that ensures all `totals` are saved in miles
