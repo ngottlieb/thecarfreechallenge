@@ -3,20 +3,26 @@
 # .NET, PHP, Python, Node, and Go applications with deep visibility and low
 # overhead.  For more information, visit www.newrelic.com.
 #
-# Generated January 17, 2018
+# Generated February 09, 2019
 #
-# This configuration file is custom generated for app84845206@heroku.com
+# This configuration file is custom generated for app84845206@heroku.com_1
 #
 # For full documentation of agent configuration options, please refer to
 # https://docs.newrelic.com/docs/agents/ruby-agent/installation-configuration/ruby-agent-configuration
 
 common: &default_settings
+  # Required license key associated with your New Relic account.
+  license_key: e1e2412d2d58607edc910506551ef5cf8510d6ac
+
+  # Your application name. Renaming here affects where data displays in New
+  # Relic.  For more details, see https://docs.newrelic.com/docs/apm/new-relic-apm/maintenance/renaming-applications
+  app_name: TheCarFreeChallenge
 
   # To disable the agent regardless of other settings, uncomment the following:
   # agent_enabled: false
 
   # Logging level for log/newrelic_agent.log
-  log_level: debug
+  log_level: info
 
 
 # Environment-specific settings are in this section.
@@ -24,7 +30,7 @@ common: &default_settings
 # If your application has other named environments, configure them here.
 development:
   <<: *default_settings
-  app_name: My Application (Development)
+  app_name: TheCarFreeChallenge (Development)
 
 test:
   <<: *default_settings
@@ -33,8 +39,7 @@ test:
 
 staging:
   <<: *default_settings
-  app_name: The Car Free Challenge STAGING
+  app_name: TheCarFreeChallenge (Staging)
 
 production:
   <<: *default_settings
-  app_name: The Car Free Challenge
