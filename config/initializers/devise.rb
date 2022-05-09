@@ -251,7 +251,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :strava, Rails.application.secrets.strava_app_id, Rails.application.secrets.strava_client_secret, scope: 'view_private'
+  config.omniauth :strava, Rails.application.secrets.strava_app_id, Rails.application.secrets.strava_client_secret, scope: 'activity:read'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
