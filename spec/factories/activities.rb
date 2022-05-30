@@ -14,10 +14,10 @@
 
 FactoryBot.define do
   factory :activity do
-    distance 100
-    vertical_gain 1000
-    activity_date DateTime.parse("2018-01-25")
-    sport "trail_running"
+    distance { 100 }
+    vertical_gain { 1000 }
+    activity_date { DateTime.parse("2018-01-25") }
+    sport { "trail_running" }
     user
   end
 end
