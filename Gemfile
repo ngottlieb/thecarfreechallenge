@@ -3,16 +3,16 @@ git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
-ruby '2.4.0'
+ruby '2.4.9'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'rails', '~> 5.1.4'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'jbuilder', '~> 2.5'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jbuilder'
 
 gem 'devise', '~> 4.3.0'
 
@@ -57,6 +57,6 @@ end
 gem "omniauth-strava"
 gem 'annotate', '~> 2.7.2'
 gem 'social-share-button', '~> 1.1.0'
-gem 'strava-api-v3'
+gem 'strava-api-v3', git: 'https://github.com/jaredholdcroft/strava-api-v3'
 
 gem 'newrelic_rpm'
