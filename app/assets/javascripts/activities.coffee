@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+  $.fn.dataTable.moment('MM-DD-YYYY')
+
   $('#activityTable').dataTable(
     order: [[0, 'desc']]
   )

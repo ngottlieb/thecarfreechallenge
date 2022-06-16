@@ -14,6 +14,7 @@
 //= require rails-ujs
 //= require popper
 //= require bootstrap-sprockets
+//= require moment.js
 //= require datatables.min.js
 //= require social-share-button
 //= require_tree .
