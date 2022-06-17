@@ -54,7 +54,7 @@ group :test do
   gem 'launchy'
 end
 
-gem "omniauth-strava"
+gem "omniauth-strava", git: 'https://github.com/thogg4/omniauth-strava'
 gem 'annotate', '~> 2.7.2'
 gem 'social-share-button', '~> 1.1.0'
 gem 'strava-api-v3', git: 'https://github.com/jaredholdcroft/strava-api-v3'

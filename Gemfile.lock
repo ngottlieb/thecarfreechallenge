@@ -6,6 +6,14 @@ GIT
       httmultiparty
       multi_json
 
+GIT
+  remote: https://github.com/thogg4/omniauth-strava
+  revision: 23c947b1c58bb1920cd7be2dd0c395f5e0152bea
+  specs:
+    omniauth-strava (0.0.6)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -127,8 +135,8 @@ GEM
     faraday-em_synchrony (1.0.0)
     faraday-excon (1.1.0)
     faraday-httpclient (1.0.1)
-    faraday-multipart (1.0.3)
-      multipart-post (>= 1.2, < 3)
+    faraday-multipart (1.0.4)
+      multipart-post (~> 2)
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.2.0)
     faraday-patron (1.0.0)
@@ -233,9 +241,6 @@ GEM
     omniauth-oauth2 (1.7.2)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
-    omniauth-strava (0.0.6)
-      omniauth (~> 1.0)
-      omniauth-oauth2 (~> 1.0)
     orm_adapter (0.5.0)
     pg (1.2.3)
     popper_js (1.16.0)
@@ -383,7 +388,7 @@ DEPENDENCIES
   launchy
   listen (>= 3.0.5, < 3.2)
   newrelic_rpm
-  omniauth-strava
+  omniauth-strava!
   pg
   puma (~> 3.7)
   rails (~> 5.1.4)
