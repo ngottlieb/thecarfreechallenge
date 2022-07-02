@@ -19,6 +19,6 @@ feature 'Signup' do
   scenario 'signing up with invalid information' do
     click_link "Sign up"
     click_button 'Sign up'
-    expect(page).to have_content 'errors'
+    expect(page).to have_content 'error'
   end
 end
