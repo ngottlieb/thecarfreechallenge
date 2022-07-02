@@ -31,6 +31,8 @@ class User < ApplicationRecord
   has_many :goals
   has_many :activities
 
+  validates :email, presence: true, unless: :is_strava_user?
+
   enum measurement_system: [ :imperial_system, :metric_system ]
 
   def self.from_omniauth(auth)
