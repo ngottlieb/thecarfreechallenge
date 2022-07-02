@@ -7,7 +7,9 @@ ruby '2.7.6'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
-gem 'rails', '~> 5.1.4'
+gem 'rails', '~> 5.2'
+gem 'bootsnap', require: false
+
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier'
@@ -55,6 +57,7 @@ group :test do
 end
 
 gem "omniauth-strava", git: 'https://github.com/thogg4/omniauth-strava'
+gem "oauth2", '~> 1.4'
 gem 'annotate', '~> 2.7.2'
 gem 'social-share-button', '~> 1.1.0'
 gem 'strava-api-v3', git: 'https://github.com/jaredholdcroft/strava-api-v3'

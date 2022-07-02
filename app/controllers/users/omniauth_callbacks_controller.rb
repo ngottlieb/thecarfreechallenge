@@ -1,5 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def strava
+    puts "HELLOOOOO\n\n\n"
+    puts request.env["omniauth.auth"]
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
