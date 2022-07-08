@@ -7,7 +7,7 @@ ruby '2.7.6'
 
 gem 'dotenv-rails', groups: [:development, :test]
 
-gem 'rails', '~> 6.0.5'
+gem 'rails', '~> 6.1'
 gem 'bootsnap', require: false
 
 gem 'puma', '~> 3.7'
