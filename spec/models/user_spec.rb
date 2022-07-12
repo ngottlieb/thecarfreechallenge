@@ -2,8 +2,8 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
+#  id                     :bigint           not null, primary key
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -17,8 +17,11 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
-#  measurement_system     :string           default("imperial")
 #  name                   :string
+#  measurement_system     :integer          default("imperial_system")
+#  import_in_progress     :boolean          default(FALSE)
+#  strava_access_token    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 require 'rails_helper'
