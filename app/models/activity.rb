@@ -23,6 +23,7 @@ class Activity < ApplicationRecord
   validates :external_id, uniqueness: { scope: :provider }, if: :external_id?
 
   before_save :unit_conversion
+  after_save :trigger_user_milestone_check
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
   AFTER_EPOCH = "1514764800"
@@ -82,6 +83,10 @@ class Activity < ApplicationRecord
 
     activity.save!
     activity
+  end
+
+  def trigger_user_milestone_check
+    user.update_milestones
   end
 
   private
