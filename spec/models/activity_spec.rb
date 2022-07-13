@@ -155,7 +155,7 @@ RSpec.describe Activity, type: :model do
     end
   end
 
-  describe 'Activity.from_strava', focus: true do
+  describe 'Activity.from_strava' do
     subject { Activity.update_or_create_from_strava(strava_data) }
 
     context 'with no matching user' do

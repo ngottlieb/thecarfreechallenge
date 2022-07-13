@@ -57,9 +57,9 @@
                   %strong= g.end_date.try(:strftime,"%b %d, %Y")
               .col-lg-4
                 .btn-group
-                  = link_to 'Share', goal_path(g), class: 'btn btn-success'
-                  = link_to 'Edit', edit_goal_path(g), class: 'btn btn-warning'
-                  = link_to 'Delete', goal_path(g), class: 'btn btn-danger', method: :delete
+                  = link_to 'Share', goal_path(g), class: 'btn btn-success btn-sm'
+                  = link_to 'Edit', edit_goal_path(g), class: 'btn btn-warning btn-sm'
+                  = link_to 'Delete', goal_path(g), class: 'btn btn-danger btn-sm', method: :delete
             .row
               .col-sm-12.progress-bar-container
                 .progress
