@@ -42,6 +42,8 @@ feature 'Create a milestone' do
     end
 
     context 'with activities completing the milestone' do
+      include ActiveJob::TestHelper
+
       given!(:activities) { FactoryBot.create_list :activity, 3, user: user, distance: 10 }
 
       # NOTE: this requires testing with active job queue adapter :inline
@@ -49,11 +51,13 @@ feature 'Create a milestone' do
       # will need to add a custom flag to allow inline testing
       context 'creating a milestone' do
         before do
-          visit milestones_path
-          click_link 'Create a New Milestone', match: :first
-          fill_in 'milestone[threshold]', with: '10'
-          select 'miles', from: 'milestone[metric]'
-          click_button 'Submit'
+          perform_enqueued_jobs do
+            visit milestones_path
+            click_link 'Create a New Milestone', match: :first
+            fill_in 'milestone[threshold]', with: '10'
+            select 'miles', from: 'milestone[metric]'
+            click_button 'Submit'
+          end
         end
 
         it 'should show the milestone achieved' do
