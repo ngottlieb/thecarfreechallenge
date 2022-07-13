@@ -35,6 +35,13 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: ENV['HOST'] || 'http://www.thecarfreechallenge.com' }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'email-smtp.us-west-2.amazonaws.com',
+    user_name: ENV["AWS_SMTP_USERNAME"],
+    password: ENV["AWS_SMTP_PASSWORD"]
+  }
+
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = 'X-Sendfile' # for Apache
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
