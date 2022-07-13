@@ -2,8 +2,8 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
+#  id                     :bigint           not null, primary key
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -17,8 +17,11 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
-#  measurement_system     :string           default("imperial")
 #  name                   :string
+#  measurement_system     :integer          default("imperial_system")
+#  import_in_progress     :boolean          default(FALSE)
+#  strava_access_token    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 class User < ApplicationRecord
@@ -30,6 +33,7 @@ class User < ApplicationRecord
 
   has_many :goals
   has_many :activities
+  has_and_belongs_to_many :milestones
 
   validates :email, presence: true, unless: :is_strava_user?
 
@@ -65,5 +69,18 @@ class User < ApplicationRecord
 
   def start_of_earliest_goal
     goals.minimum(:start_date).try(:beginning_of_day)
+  end
+
+  # checks the users' activities against the currently available list of milestones
+  def matching_milestones
+    total_distance = activities.sum(:distance)
+    total_vert = activities.sum(:vertical_gain)
+
+    Milestone.where("(metric = 'distance' AND threshold <= ?) OR (metric = 'vertical_gain' AND threshold <= ?)", total_distance, total_vert)
+  end
+  
+  # assigns any milestones that have been achieved to the user
+  def update_milestones
+    self.milestones = matching_milestones
   end
 end

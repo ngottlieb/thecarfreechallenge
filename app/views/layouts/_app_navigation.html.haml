@@ -6,6 +6,8 @@
       = link_to 'Log Your Progress', activities_path, class: 'nav-link'
     %li.nav-item{ class: (action_name == 'site_wide_stats' ? 'active' : '') }
       = link_to 'Site-wide Stats', site_wide_stats_path, class: 'nav-link'
+    %li.nav-item
+      = link_to 'Browse Milestones', milestones_path, class: 'nav-link'
     %li.nav-item{ class: (action_name == 'help' ? 'active' : '') }
       = link_to 'Help', help_path, class: 'nav-link'
     %li.nav-item#appSocialLinks

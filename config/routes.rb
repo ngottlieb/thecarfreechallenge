@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :goals, except: [:index]
   resources :activities, except: [:show]
   resources :users, only: [:edit, :update]
+  resources :milestones, except: [:show]
+
   get '/help', to: 'home#help', as: :help
   get '/site-wide-stats', to: 'home#site_wide_stats', as: :site_wide_stats
 

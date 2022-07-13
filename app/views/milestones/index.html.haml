@@ -1,0 +1,39 @@
+.row
+  .col-12
+    - if current_user.admin?
+      = link_to 'Create a New Milestone', new_milestone_path, class: 'float-md-right btn btn-success'
+    %h1 Milestones
+    .card.mb-3
+      .card-header What are milestones?
+      .card-body
+        %p
+          Milestones are global goals. When you upload activities that push you over a threshold, you'll
+          get a badge for completing the milestone. Bar-U-Eat will also ship out prize packs for certain
+          milestones!
+.card.mb-3
+  .card-header Milestones
+  .card-body
+    .table-responsive
+      %table.table.table-bordered#milestoneTable
+        %thead
+          %th Metric
+          %th Threshold
+          %th Number of Users Achieved
+          - if current_user.admin?
+            %th
+          %th Achieved?
+        %tbody
+          - @milestones.each do |milestone|
+            %tr{ class: "milestone-#{milestone.id}" }
+              %td= milestone.metric.titlecase
+              %td= friendly_display_of_threshold(milestone)
+              %td= milestone.users.count
+              %td
+                - if current_user.milestones.include?(milestone)
+                  %svg{ xmlns: "http://www.w3.org/2000/svg", width: "16", height: "16", fill: "currentColor", class: "bi bi-check2-square", viewBox: "0 0 16 16" }
+                    %path{ d: "M3 14.5A1.5 1.5 0 0 1 1.5 13V3A1.5 1.5 0 0 1 3 1.5h8a.5.5 0 0 1 0 1H3a.5.5 0 0 0-.5.5v10a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5V8a.5.5 0 0 1 1 0v5a1.5 1.5 0 0 1-1.5 1.5H3z" }
+                    %path{ d: "m8.354 10.354 7-7a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0z" }
+              - if current_user.admin?
+                %td
+                  = link_to 'Edit', edit_milestone_path(milestone), class: 'btn btn-sm btn-warning'
+                  = link_to 'Delete', milestone_path(milestone), class: 'btn btn-sm btn-danger', method: :delete, confirm: "Are you sure?"
