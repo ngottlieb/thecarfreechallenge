@@ -2,8 +2,8 @@
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
+#  id                     :bigint           not null, primary key
+#  email                  :string           default("")
 #  encrypted_password     :string           default(""), not null
 #  reset_password_token   :string
 #  reset_password_sent_at :datetime
@@ -17,8 +17,11 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
-#  measurement_system     :string           default("imperial")
 #  name                   :string
+#  measurement_system     :integer          default("imperial_system")
+#  import_in_progress     :boolean          default(FALSE)
+#  strava_access_token    :string
+#  admin                  :boolean          default(FALSE)
 #
 
 require 'rails_helper'
@@ -79,6 +82,58 @@ RSpec.describe User, type: :model do
         end
       end
     end
+  end
 
-  end 
+  describe '#matching_milestones' do
+    let(:user) { FactoryBot.create :user, measurement_system: :imperial_system }
+    let!(:milestone) { FactoryBot.create :milestone, metric: Goal::METRICS_LABELS.keys[0], threshold: 10 }
+
+    subject { user.matching_milestones }
+    
+    describe 'with no activities' do
+      it 'should not assign any milestones' do
+        expect(subject).to be_empty
+      end
+    end
+
+    describe 'with activities totalling less than any available milestones' do
+      let!(:activities) { FactoryBot.create_list :activity, 2, distance: 1, vertical_gain: 1, user: user }
+
+      it 'should not assign any milestones' do
+        expect(subject).to be_empty
+      end
+    end
+
+    describe 'with combined activities totaling the threshold of an existing milestone' do
+      let!(:activities) { FactoryBot.create_list :activity, 5, distance: 5, user: user }
+
+      it 'should include any matched milestones' do
+        expect(subject).to match_array([milestone])
+      end
+    end
+  end
+
+  describe '#update_milestones' do
+    let!(:user) { FactoryBot.create :user, measurement_system: :imperial_system }
+    let!(:milestone) { FactoryBot.create :milestone, metric: Goal::METRICS_LABELS.keys[0], threshold: 10 }
+
+    subject { user.update_milestones }
+
+    describe 'with no matching milestones' do
+      before { allow(user).to receive(:matching_milestones).and_return([]) }
+
+      it 'should leave the user milestones empty' do
+        expect{ subject }.to_not change{ user.milestones }
+      end
+    end
+
+    describe 'with a matching milestone' do
+      before { allow(user).to receive(:matching_milestones).and_return([milestone]) }
+
+      it 'should save the matching milestone' do
+        expect{ subject }.to change{ user.reload.milestones }.to match_array([milestone])
+      end
+    end
+  end
+
 end

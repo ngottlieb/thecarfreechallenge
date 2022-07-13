@@ -2,15 +2,17 @@
 #
 # Table name: goals
 #
-#  id         :integer          not null, primary key
+#  id         :bigint           not null, primary key
 #  metric     :string
-#  total      :integer
+#  total      :decimal(, )
 #  tag_line   :string
 #  period     :string
 #  public     :boolean
 #  user_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  start_date :date
+#  end_date   :date
 #
 
 require 'rails_helper'

@@ -1,0 +1,15 @@
+= form_for @milestone do |f|
+  - if @milestone.errors.any?
+    #error_explanation.alert.alert-danger
+      %h2
+        #{pluralize(@milestone.errors.count, 'error')} prohibited this milestone from being created:
+      %ul
+        - @milestone.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    .form-row
+      .col-md-10
+        Reward users for reaching 
+        = f.text_field :threshold, placeholder: '1000'
+        = f.select :metric, Goal.metrics_select_values(current_user)
+  = f.submit 'Submit', class: 'btn btn-primary btn-block'

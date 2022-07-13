@@ -2,14 +2,17 @@
 #
 # Table name: activities
 #
-#  id            :integer          not null, primary key
-#  distance      :integer
-#  vertical_gain :integer
+#  id            :bigint           not null, primary key
+#  distance      :decimal(, )
+#  vertical_gain :decimal(, )
 #  activity_date :datetime
 #  sport         :string
-#  user_id       :integer
+#  user_id       :bigint
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  name          :string
+#  external_id   :string
+#  provider      :string
 #
 
 class Activity < ApplicationRecord
@@ -20,6 +23,7 @@ class Activity < ApplicationRecord
   validates :external_id, uniqueness: { scope: :provider }, if: :external_id?
 
   before_save :unit_conversion
+  after_save :trigger_user_milestone_check
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
   AFTER_EPOCH = "1514764800"
@@ -79,6 +83,10 @@ class Activity < ApplicationRecord
 
     activity.save!
     activity
+  end
+
+  def trigger_user_milestone_check
+    user.update_milestones
   end
 
   private
