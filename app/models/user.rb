@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   has_many :goals
   has_many :activities
-  has_and_belongs_to_many :milestones
+  has_and_belongs_to_many :milestones, after_add: :notify_of_milestone_achievement
 
   has_one_attached :avatar
 
@@ -85,5 +85,9 @@ class User < ApplicationRecord
   # assigns any milestones that have been achieved to the user
   def update_milestones
     self.milestones = matching_milestones
+  end
+
+  def notify_of_milestone_achievement(milestone)
+    BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
   end
 end

@@ -133,6 +133,10 @@ RSpec.describe User, type: :model do
       it 'should save the matching milestone' do
         expect{ subject }.to change{ user.reload.milestones }.to match_array([milestone])
       end
+
+      it 'should send an email' do
+        expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob )
+      end
     end
   end
 

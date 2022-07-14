@@ -1,0 +1,10 @@
+A user has completed a milestone!
+===============================================
+
+#{@user.name} just passed #{@milestone.threshold} #{Goal.metric_label(@milestone.metric, :imperial_system)}
+at #{Time.zone.now}
+
+Contact Info
+===============================================
+= @user.name
+= @user.email
