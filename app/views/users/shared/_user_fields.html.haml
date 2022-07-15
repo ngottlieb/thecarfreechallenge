@@ -6,6 +6,12 @@
   = f.label :name
   = f.text_field :name, class: 'form-control',
     placeholder: 'Enter name'
+.form-group.d-flex
+  %div
+    = f.label :avatar
+    = f.file_field :avatar
+  - if @user.avatar.attached?
+    .user-avatar= image_tag @user.avatar
 .form-group
   = f.label :measurement_system
   .form-control
@@ -14,4 +20,3 @@
     .float-right
       = f.radio_button :measurement_system, 'metric_system'
       = f.label :measurement_system, 'Kilometers and meters', value: 'metric_system'
-

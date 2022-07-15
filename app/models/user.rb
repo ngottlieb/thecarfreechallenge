@@ -35,6 +35,8 @@ class User < ApplicationRecord
   has_many :activities
   has_and_belongs_to_many :milestones
 
+  has_one_attached :avatar
+
   validates :email, presence: true, unless: :is_strava_user?
 
   enum measurement_system: [ :imperial_system, :metric_system ]
