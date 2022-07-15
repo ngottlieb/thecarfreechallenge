@@ -65,3 +65,6 @@ gem 'strava-api-v3', git: 'https://github.com/jaredholdcroft/strava-api-v3'
 gem 'newrelic_rpm'
 
 gem 'cancancan', '~> 3.4'
+
+gem "aws-sdk-s3", require: false
+

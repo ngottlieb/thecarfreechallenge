@@ -18,3 +18,5 @@
 //= require datatables.min.js
 //= require social-share-button
 //= require_tree .
+
+require("@rails/activestorage").start()

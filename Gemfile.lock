@@ -83,6 +83,22 @@ GEM
       rake (>= 10.4, < 13.0)
     autoprefixer-rails (10.4.7.0)
       execjs (~> 2)
+    aws-eventstream (1.2.0)
+    aws-partitions (1.607.0)
+    aws-sdk-core (3.131.2)
+      aws-eventstream (~> 1, >= 1.0.2)
+      aws-partitions (~> 1, >= 1.525.0)
+      aws-sigv4 (~> 1.1)
+      jmespath (~> 1, >= 1.6.1)
+    aws-sdk-kms (1.57.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sigv4 (~> 1.1)
+    aws-sdk-s3 (1.114.0)
+      aws-sdk-core (~> 3, >= 3.127.0)
+      aws-sdk-kms (~> 1)
+      aws-sigv4 (~> 1.4)
+    aws-sigv4 (1.5.0)
+      aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
     better_errors (2.9.1)
       coderay (>= 1.0.0)
@@ -200,6 +216,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    jmespath (1.6.1)
     jwt (2.4.1)
     launchy (2.5.0)
       addressable (~> 2.7)
@@ -393,6 +410,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate (~> 2.7.2)
+  aws-sdk-s3
   better_errors
   bootsnap
   bootstrap (~> 4.6)
