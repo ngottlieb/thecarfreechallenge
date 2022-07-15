@@ -11,7 +11,7 @@
     = f.label :avatar
     = f.file_field :avatar
   - if @user.avatar.attached?
-    .user-avatar= image_tag @user.avatar
+    .user-avatar= image_tag url_for(@user.avatar)
 .form-group
   = f.label :measurement_system
   .form-control
