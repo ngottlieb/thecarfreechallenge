@@ -2,16 +2,26 @@
   = f.label :email
   = f.email_field :email, autofocus: true, class: 'form-control',
     placeholder: 'Enter email'
+  %small.form-text.text-muted
+    Strava doesn't automatically share your email with us. If you want to receive
+    notifications about achieving milestones or prizes from Bar-U-Eat, you need 
+    to add your email. We won't share it with anyone else!
 .form-group
   = f.label :name
   = f.text_field :name, class: 'form-control',
     placeholder: 'Enter name'
+.form-group
+  = f.label :short_bio
+  = f.text_field :short_bio, class: 'form-control', placeholder: 'Runner, cyclist, dog parent'
 .form-group.d-flex
   %div
     = f.label :avatar
     = f.file_field :avatar
   - if @user.avatar.attached?
     .user-avatar= image_tag @user.avatar
+.form-group
+  = f.label :location
+  = f.text_field :location, class: 'form-control', placeholder: 'Steamboat Springs, CO'
 .form-group
   = f.label :measurement_system
   .form-control
@@ -20,3 +30,14 @@
     .float-right
       = f.radio_button :measurement_system, 'metric_system'
       = f.label :measurement_system, 'Kilometers and meters', value: 'metric_system'
+%fieldset.form-group
+  %legend Athlete Info
+  %small.form-text.text-muted
+    These fields are optional but help us produce leaderboards and give prizes
+    based on gender and age.
+  .form-group
+    = f.label :age
+    = f.number_field :age, class: 'form-control'
+  .form-group
+    = f.label :gender
+    = f.select :gender, User.genders.keys.map{ |g| [g.titlecase, g]}, { }, { class: 'form-control' }

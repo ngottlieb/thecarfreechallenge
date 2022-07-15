@@ -40,6 +40,7 @@ class User < ApplicationRecord
   validates :email, presence: true, unless: :is_strava_user?
 
   enum measurement_system: [ :imperial_system, :metric_system ]
+  enum gender: [:prefer_not_to_say, :man, :woman, :non_binary, :other], _default: :prefer_not_to_say
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
