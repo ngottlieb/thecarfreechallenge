@@ -11,6 +11,13 @@ class UsersController < ApplicationController
     render 'edit'
   end
 
+  # for facebook sharing
+  def share_milestone
+    @user = User.find(params[:id])
+    @milestone = Milestone.find(params[:id])
+    render 'share_milestone', layout: nil
+  end
+
   def user_params
     params.require(:user).permit(
       :name,

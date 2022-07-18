@@ -27,6 +27,13 @@
                 with the hashtag #CarFreeChallenge
 
 %section
+  .row.mb-4
+    .col-lg-12
+      .card
+        .card-header Badges Earned
+        .card-body.d-flex.justify-content-between
+          - current_user.milestones.each do |m|
+            = render partial: 'milestones/badge', locals: { milestone: m }
   .row
     .col-lg-4
       .card
@@ -34,7 +41,7 @@
         .card-body
           = link_to activities_path do 
             %h3.numberCircle.bg-primary.text-white
-              #{current_user.activities.count}
+              = current_user.activities.count
     .col-lg-8
       .card
         .card-header
