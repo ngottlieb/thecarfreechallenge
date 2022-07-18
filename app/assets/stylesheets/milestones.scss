@@ -1,4 +1,9 @@
-img.milestone-badge {
-  max-width: 100px;
-  max-height: 100px;
+.milestone-badge {
+  img {
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  padding: 1rem;
+  text-align: center;
 }

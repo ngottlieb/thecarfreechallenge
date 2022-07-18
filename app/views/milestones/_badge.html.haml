@@ -1,0 +1,3 @@
+.card.milestone-badge.d-flex.flex-column
+  = image_tag milestone.badge if milestone.badge.attached?
+  %span.badge.badge-primary.badge-pill= friendly_display_of_threshold(milestone)

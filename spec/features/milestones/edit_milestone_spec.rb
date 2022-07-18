@@ -23,7 +23,7 @@ feature 'Edit a milestone' do
     scenario 'editing a milestone' do
       fill_in 'milestone[threshold]', with: '12345'
       click_button 'Submit'
-      expect(all("tr.milestone-#{milestone.id} td")[2]).to have_content('12345')
+      expect(all("tr.milestone-#{milestone.id} td")[0]).to have_content('12345')
     end
 
     scenario 'uploading a badge' do

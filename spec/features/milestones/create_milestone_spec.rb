@@ -61,11 +61,11 @@ feature 'Create a milestone' do
         end
 
         it 'should show the milestone achieved' do
-          expect(page).to have_selector('table#milestoneTable svg')          
+          expect(page).to have_selector('table#milestoneTable svg')    
         end
 
         it 'should show the count of users who have achieved the milestone' do
-          expect(page.all('table#milestoneTable tr td')[2]).to have_content '1'
+          expect(page.all('table#milestoneTable tr td')[1]).to have_content '1'
         end
       end
     end
