@@ -4,7 +4,11 @@ A user has completed a milestone!
 #{@user.name} just passed #{@milestone.threshold} #{Goal.metric_label(@milestone.metric, :imperial_system)}
 at #{Time.zone.now}
 
-Contact Info
+User Info
 ===============================================
-= @user.name
+= @user.name if @user.name.present?
 = @user.email
+= @user.short_bio if @user.short_bio.present?
+= @user.location if @user.location.present?
+= @user.age if @user.age.present?
+= @user.gender if @user.gender.present?

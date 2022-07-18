@@ -88,6 +88,8 @@ class User < ApplicationRecord
   end
 
   def notify_of_milestone_achievement(milestone)
-    BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
+    if email.present? # no point notifying BarUEat if we can't contact the user
+      BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
+    end
   end
 end

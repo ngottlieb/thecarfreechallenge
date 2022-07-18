@@ -8,3 +8,7 @@
 %ul
   %li= @user.name
   %li= @user.email
+  %li= @user.short_bio if @user.short_bio.present?
+  %li= @user.location if @user.location.present?
+  %li= @user.age if @user.age.present?
+  %li= @user.gender if @user.gender.present?
