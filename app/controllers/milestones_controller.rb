@@ -44,6 +44,6 @@ class MilestonesController < ApplicationController
 
   def milestone_params
     params[:milestone][:threshold].gsub!(',', '')
-    params.require(:milestone).permit(:threshold, :metric)
+    params.require(:milestone).permit(:threshold, :metric, :badge)
   end
 end

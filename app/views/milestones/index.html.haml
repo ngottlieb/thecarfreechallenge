@@ -16,15 +16,19 @@
     .table-responsive
       %table.table.table-bordered#milestoneTable
         %thead
+          %th Badge
           %th Metric
           %th Threshold
           %th Number of Users Achieved
+          %th Achieved?
           - if current_user.admin?
             %th
-          %th Achieved?
         %tbody
           - @milestones.each do |milestone|
             %tr{ class: "milestone-#{milestone.id}" }
+              %td
+                - if milestone.badge.attached?
+                  = image_tag milestone.badge, class: 'milestone-badge'
               %td= milestone.metric.titlecase
               %td= friendly_display_of_threshold(milestone)
               %td= milestone.users.count
