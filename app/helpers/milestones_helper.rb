@@ -1,7 +1,7 @@
 module MilestonesHelper
-  def friendly_display_of_threshold(milestone)
-    label = Goal.metric_label(milestone.metric, current_user.measurement_system)
-    if current_user.imperial_system?
+  def friendly_display_of_threshold(milestone, user)
+    label = Goal.metric_label(milestone.metric, user.measurement_system)
+    if user.imperial_system?
       number = milestone.threshold.to_i
     else
       if milestone.metric == 'distance'
