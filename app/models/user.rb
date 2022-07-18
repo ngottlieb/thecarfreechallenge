@@ -53,7 +53,7 @@ class User < ApplicationRecord
 
   def self.weekly_leaderboard
     User.leaderboard
-      .where('activity_date < ?', Date.today.beginning_of_week)
+      .where('activity_date >= ?', Date.today.beginning_of_week)
   end
 
   def self.yearly_leaderboard
