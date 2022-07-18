@@ -12,4 +12,11 @@
         Reward users for reaching 
         = f.text_field :threshold, placeholder: '1000'
         = f.select :metric, Goal.metrics_select_values(current_user)
+  .form-group.d-flex
+    %div
+      = f.label :badge
+      = f.file_field :badge
+    - if @milestone.badge.attached?
+      = image_tag @milestone.badge, class: 'milestone-badge'
+
   = f.submit 'Submit', class: 'btn btn-primary btn-block'

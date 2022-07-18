@@ -19,6 +19,8 @@ class Milestone < ApplicationRecord
   before_save :unit_conversion
   after_save :trigger_update_milestones_job
 
+  has_one_attached :badge
+
   # before save callback that ensures all `totals` are saved in miles
   # or feet
   # assumes incoming units are the created_by user's
