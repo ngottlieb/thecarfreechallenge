@@ -1,0 +1,14 @@
+%h1 A user has completed a milestone!
+
+%p
+  #{@user.name} just passed #{@milestone.threshold} #{Goal.metric_label(@milestone.metric, :imperial_system)}
+  at #{Time.zone.now}
+
+%h4 Contact Info
+%ul
+  %li= @user.name
+  %li= @user.email
+  %li= @user.short_bio if @user.short_bio.present?
+  %li= @user.location if @user.location.present?
+  %li= @user.age if @user.age.present?
+  %li= @user.gender if @user.gender.present?
