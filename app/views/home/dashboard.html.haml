@@ -25,7 +25,13 @@
                 and
                 = link_to 'Facebook', 'https://www.facebook.com/carfreechallenge/'
                 with the hashtag #CarFreeChallenge
-
+%section
+  .row.mb-4
+    .col-lg-12
+      .card
+        .card-header Leaderboard
+        .card-body
+          = render partial: 'home/leaderboard'
 %section
   .row.mb-4
     .col-lg-12

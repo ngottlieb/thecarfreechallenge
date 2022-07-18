@@ -140,4 +140,30 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'User.leaderboard' do
+    let!(:user1) { FactoryBot.create :user }
+    
+    subject { User.leaderboard }
+
+    it 'should not return users with no activities' do
+      expect(subject).to_not include(user1)
+    end
+
+    describe 'for a user with multiple activities' do
+      let!(:activities) { FactoryBot.create_list :activity, 3, user: user1 }
+
+      it 'should aggregate the activities distance' do
+        expect(subject.first.distance).to eq activities.sum(&:distance)
+      end
+
+      it 'should aggregate the activities vertical gain' do
+        expect(subject.first.vert).to eq activities.sum(&:vertical_gain)
+      end
+
+      it 'should include a total activity count' do
+        expect(subject.first.activity_count).to eq activities.count
+      end
+    end
+  end
+
 end

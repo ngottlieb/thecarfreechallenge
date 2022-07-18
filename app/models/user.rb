@@ -51,6 +51,24 @@ class User < ApplicationRecord
     end
   end
 
+  def self.weekly_leaderboard
+    User.leaderboard
+      .where('activity_date < ?', Date.today.beginning_of_week)
+  end
+
+  def self.yearly_leaderboard
+    User.leaderboard
+      .where('activity_date >= ?', Date.today.beginning_of_year)
+  end
+
+  def self.leaderboard
+    User.joins(:activities)
+      .group('users.id')
+      .select('users.*, SUM(activities.vertical_gain) as vert, SUM(activities.distance) as distance, COUNT(activities) as activity_count')
+      .order('distance DESC')
+      .limit(10)
+  end
+
   def is_strava_user?
     provider == 'strava' and uid.present?
   end

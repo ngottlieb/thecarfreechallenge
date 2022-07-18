@@ -1,0 +1,45 @@
+%ul.nav.nav-tabs#leaderboardTabs{ role: "tablist" }
+  %li.nav-item{ role: "presentation" }
+    %a.nav-link.active#weeklyTab{ data: { toggle: "tab" }, role: "tab", aria: { controls: "weekly", selected: true }, href: "#weekly" }
+      Weekly
+  %li.nav-item{ role: "presentation" }
+    %a.nav-link#yearlyTab{ data: { toggle: "tab" }, role: "tab", aria: { controls: "yearly", selected: false }, href: "#yearly" }
+      Year to date
+
+.table-responsive.tab-content#leaderboardTabs
+  .tab-pane.fade.show.active#weekly{ role: "tabpanel", aria: { labelledby: "weeklyTab"} }
+    %table.table.table-bordered
+      %thead
+        %th
+        %th Name
+        %th Location
+        %th Distance
+        %th Vertical Gain
+        %th # of Activities
+      %tbody
+        - @weekly_leaderboard.each_with_index do |u, index|
+          %tr
+            %td= index+1
+            %td= u.name
+            %td= u.location
+            %td= display_distance(u.distance)
+            %td= display_vert(u.vert)
+            %td= u.activity_count
+  .tab-pane.fade#yearly{ role: "tabpanel", aria: { labelledby: "yearlyTab"} }
+    %table.table.table-bordered
+      %thead
+        %th
+        %th Name
+        %th Location
+        %th Distance
+        %th Vertical Gain
+        %th # of Activities
+      %tbody
+        - @yearly_leaderboard.each_with_index do |u, index|
+          %tr
+            %td= index+1
+            %td= u.name
+            %td= u.location
+            %td= display_distance(u.distance)
+            %td= display_vert(u.vert)
+            %td= u.activity_count            
