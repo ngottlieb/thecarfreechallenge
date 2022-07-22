@@ -31,19 +31,20 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable,
          :omniauthable, omniauth_providers: %i[strava]
 
-  has_many :goals
-  has_many :activities
+  has_many :goals, dependent: :destroy
+  has_many :activities, dependent: :destroy
   has_and_belongs_to_many :milestones, after_add: :notify_of_milestone_achievement
 
   has_one_attached :avatar
 
   validates :email, presence: true, unless: :is_strava_user?
+  validates :email, uniqueness: { allow_blank: true }
 
   enum measurement_system: [ :imperial_system, :metric_system ]
   enum gender: [:prefer_not_to_say, :man, :woman, :non_binary, :other], _default: :prefer_not_to_say
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name

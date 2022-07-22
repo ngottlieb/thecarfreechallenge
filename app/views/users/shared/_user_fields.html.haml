@@ -3,9 +3,20 @@
   = f.email_field :email, autofocus: true, class: 'form-control',
     placeholder: 'Enter email'
   %small.form-text.text-muted
-    Strava doesn't automatically share your email with us. If you want to receive
-    notifications about achieving milestones or prizes from Bar-U-Eat, you need 
-    to add your email. We won't share it with anyone else!
+    If you want to be eligible for prizes, you need to add your email.
+    We won't share it with anyone else!
+- if include_password
+  .form-group
+    .form-row
+      .col-md-6
+        = f.label :password
+        = f.password_field :password, autocomplete: 'new-password', class: 'form-control',
+          placeholder: 'Password'
+      .col-md-6
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control',
+          placeholder: 'Confirm password'
+  %hr
 .form-group
   = f.label :name
   = f.text_field :name, class: 'form-control',
