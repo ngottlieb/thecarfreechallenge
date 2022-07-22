@@ -1,7 +1,7 @@
 %h2 Edit Account
 
 .row
-  .col-md-6
+  .col-md-8
     = form_for @user do |f|
       - if @user.errors.any?
         #error_explanation.alert.alert-danger
@@ -11,5 +11,5 @@
           %ul
             - @user.errors.full_messages.each do |msg|
               %li= msg
-      = render partial: 'users/shared/user_fields', locals: { f: f }
+      = render partial: 'users/shared/user_fields', locals: { f: f, include_password: false }
       = f.submit 'Update', class: 'btn btn-primary btn-block'
