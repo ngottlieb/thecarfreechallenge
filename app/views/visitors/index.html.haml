@@ -9,7 +9,8 @@
     }(document, 'script', 'facebook-jssdk'));
 
 %nav.navbar.navbar-light.bg-light.navbar-expand-md.fixed-top
-  %a.navbar-brand{ href: '#' }#carfreechallenge
+  = link_to root_path, class: 'navbar-brand' do
+    = image_tag 'cfc-logo.png', alt: '#CarFreeChallenge'
   %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavLinks' } }
     %span.navbar-toggler-icon
   #landingNavLinks.collapse.navbar-collapse
@@ -21,45 +22,39 @@
       = link_to 'FAQ', '#faq', class: 'nav-link'
     = render 'layouts/user_navigation'
 
-%header#landing_header.bg-image-full.py-5.align-items-center.flex-column.justify-content-center.d-flex.min-100.mb-0.landing-image-1
-  .header-text.align-items-center.flex-column.justify-content-center.d-flex
-    %h1.display-2 #carfreechallenge
-    %p.text-center Put your money where your mouth is and pledge to recreate outdoors without driving.
-    = render partial: 'layouts/social_links'
+%header#landing_header.bg-image-full.py-5.min-100.mb-0.landing-image-1
+
 
 %section#what.py-5
   .container
-    %h1 What is the #carfreechallenge?
+    %h1 What is the BAR-U-EAT #carfreechallenge?
     %p
-      Outdoor sports enthusiasts are often also environmentalists. We want to protect the world
-      we play in, and part of that is doing what we can to combat climate change.
-      Unfortunately, the pursuit of adventure sports often involves a lot of travel,
-      both on a large scale -- international trips -- and on a daily basis (your drive to the trailhead).
-      Join me in pledging to minimize the carbon impact of our recreation by finding adventures
-      close to home and using alternative methods of transit!
+      The pursuit of adventure sports often involves travel, but
+      we're here to let you know that there's adventure just steps beyond your front door!
     %p
-      Different sports might require different metrics -- if you're a road biker or sea kayaker,
-      you might want to use miles. As a mountain biker, skier, trail runner, and kayaker,
-      I pledged to gain at least 150,000 feet of elevation without driving my car in 2018 and I
-      succeeded (barely) through biking, trail running, and even kayaking and skiing (from home!).
-      Join me by
-      = link_to 'signing up', new_user_registration_path
-      and setting your own goals!
+      With the climate quickly changing and altering the way we live and play, there's
+      no better way to preserve our fun and protect our planet than stepping outside and
+      taking advantage of the area you live in!
+    %p
+      So join us in pledging to minimize the carbon impact of our recreation by finding
+      adventures close to home and leaving your car parked!
+    %p
+      = link_to 'Sign up', new_user_registration_path
+      and set your own #carfreechallenge goals today!
 
 %section.py-5.bg-image-full.landing-image-2
   &nbsp;
 
 %section#who.py-5
   .container
-    %h1 Who's doing it?
+    %h1 Who's participating?
     .container
       .row
-        .col-md-4
+        .col-md-12
           .card
-            .card-header Adventurers
+            .card-header Leaderboard
             .card-body
-              %h3.numberCircle.bg-primary.text-white
-                #{@summary[:users]}
+              pending
         .col-md-8
           .card
             .card-header Vertical Gain (feet)
@@ -87,19 +82,15 @@
   .container
     %h1 How can I join?
     %p
-      The simplest way to join is to
-      = link_to 'sign up', new_user_registration_path
-      here. You can set goals, update progress and share with friends.
+      Sign up with Strava or link your existing user account later. Then, mark your
+      carbon neutral activities with the hashtag #carfreechallenge in the title and
+      we'll automatically tally them towards your goals!
     %p
-      You can also use the hashtag
-      %strong #carfreechallenge
-      on social media to help spread the message!
+      You can set goals, update progress, win awards for hitting milestones, and share with friends.
     %p
-      If you're on Strava, your activities can be automatically tracked here.
-      = link_to 'Sign up with Strava', user_strava_omniauth_authorize_path
-      or link your existing user account later. Then, just mark your carbon neutral activities with the hashtag
-      %strong #carfreechallenge
-      in the title and we'll find them automatically and tally them towards your goals.
+      You can also use the hashtag #carfreechallenge on social media to help spread the message!
+    %p.text-center
+      = link_to 'SIGN UP HERE!', new_user_registration_path, class: "btn btn-strava"
 
 %section.py-5.bg-image-full.landing-image-4
   &nbsp;
@@ -108,11 +99,17 @@
   .container
     %h1 Share
     %p
-      .fb-share-button{ data: { href: 'http://www.thecarfreechallenge.com', layout: 'button' } }
-      on Facebook and use the
-      %strong #carfreechallenge
-      hashtag on Instagram or other social media! Once you've signed up and created a goal,
-      you can share that directly from the app, as well.
+      Share your adventures with the Car-Free Challenge community by using the hashtag #carfreechallenge on
+      = succeed ',' do
+        = link_to 'Instagram', 'https://www.instagram.com/barueat/'
+      = succeed ',' do
+        = link_to 'TikTok', 'https://www.tiktok.com/@barueat'
+      and
+      = succeed '.' do
+        = link_to 'Strava', 'https://www.strava.com/clubs/1056991'
+      Don't forget to sign up for the
+      = link_to 'BAR-U-EAT Collective on Strava', 'https://www.strava.com/clubs/1056991'
+      for exclusive deals, prizes, and events!
 
 %section.py-5.bg-image-full.landing-image-5
   &nbsp;
@@ -122,9 +119,8 @@
     %h1 FAQ
     %h4 But I live in X...I can't get outside without driving!
     %p
-      Fair enough! We can't all live in Jackson (who can afford to anyway!), but I bet there are a lot of
-      adventures you can find close to home. We'll be adding some tools for finding local adventures to the website,
-      but here are a few ideas to get you started:
+      Fair enough! We can't all live in Jackson, but there are a lot of adventures you can find close to home.
+      Here are a few ideas to get you started:
       %ul
         %li
           = link_to 'Strava', 'http://www.strava.com'
@@ -141,11 +137,14 @@
           (even old decommissioned ones).
         %li
           = link_to 'Instagram.', 'http://www.instagram.com'
-          It pains me a little to say this, but browsing Instagram can be a great way to discover new, local spots.
+          Browsing Instagram can be a great way to discover new, local spots or get ideas on what other people are
+          doing! Follow the hashtag #carfreechallenge and
+          = link_to '@barueat', 'https://www.instagram.com/barueat/'
+          to see what our community is up to!
     %h4 But really though. I can't find anything that doesn't involve driving.
     %p
-      = mail_to 'nick@thecarfreechallenge.com', 'Email me'
-      and I will personally help you find adventures close to home.
+      = mail_to 'nick@thecarfreechallenge.com', 'Email us'
+      and we will personally help you find adventures close to home.
     %h4 What counts as "car free?"
     %p
       Great question. The short answer is, it's up to you -- this is all voluntary and self-reporting.
@@ -159,11 +158,17 @@
       and spend your whole day earning turns in Granite Creek, that can count, as long as you didn't
       drive to the mountain.
 
+%section.py-5.bg-image-full.landing-image-6
+  &nbsp;
+
 %section.py-5
   .container
-    %p.text-small
-      This website and campaign were created by
-      = succeed '.' do
-        = link_to 'Nick Gottlieb', 'http://www.nicholasgottlieb.com'
-      He's pledging to gain 150,000 vertical feet without driving this year.
-      
+    .flex-column.justify-content-center.d-flex.align-items-center
+      %h4.pb-4 Powered by
+      = link_to 'http://barueat.com/' do
+        = image_tag 'barueat-logo.png', class: 'barueat-logo'    
+
+%section.py-5
+  .container
+    .flex-column-.justify-content-center.d-flex.align-items-center
+      = render partial: 'layouts/social_links'
