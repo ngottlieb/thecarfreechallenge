@@ -1,5 +1,5 @@
 - if user_signed_in?
-  %ul.navbar-nav.navbar-sidenav
+  %ul.navbar-nav.navbar-sidenav.bg-primary
     %li.nav-item{ class: (action_name == 'dashboard' ? 'active' : '') }
       = link_to 'Dashboard', root_path, class: 'nav-link'
     %li.nav-item{ class: (controller_name == 'activities' ? 'active' : '') }
