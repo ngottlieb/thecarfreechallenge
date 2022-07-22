@@ -9,7 +9,8 @@
     }(document, 'script', 'facebook-jssdk'));
 
 %nav.navbar.navbar-light.bg-light.navbar-expand-md.fixed-top
-  %a.navbar-brand{ href: '#' }#carfreechallenge
+  = link_to root_path, class: 'navbar-brand' do
+    = image_tag 'cfc-logo.png', alt: '#CarFreeChallenge'
   %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavLinks' } }
     %span.navbar-toggler-icon
   #landingNavLinks.collapse.navbar-collapse

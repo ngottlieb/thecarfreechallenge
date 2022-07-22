@@ -1,5 +1,6 @@
 %nav#mainNav.navbar.navbar-dark.bg-dark.fixed-top.navbar-expand-lg
-  = link_to '#carfreechallenge', root_path, class: 'navbar-brand'
+  = link_to root_path, class: 'navbar-brand' do
+    = image_tag 'cfc-logo.png', alt: '#CarFreeChallenge'
   %button.navbar-toggler.navbar-toggler-right{ type: "button", data: { toggle: "collapse", target: "#navbarResponsive" },
     aria: { expanded: "false", label: "Toggle navigation", controls: 'navbarResponsive' }}
     %span.navbar-toggler-icon
