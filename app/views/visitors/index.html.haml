@@ -162,6 +162,14 @@
 
 %section.py-5
   .container
+  %h1 Sponsors
+  .flex-column.justify-content-center.d-flex.align-items-center
+    %span.pb-4 Powered by
+    = link_to 'http://barueat.com/' do
+      = image_tag 'barueat-logo.png', class: 'barueat-logo'    
+
+%section.py-5
+  .container
     %p.text-small
       This website and campaign were created by
       = succeed '.' do
