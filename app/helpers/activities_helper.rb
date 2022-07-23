@@ -21,6 +21,6 @@ module ActivitiesHelper
 
   def emissions_given_distance(distance)
     tons = distance * 404 / 1000000
-    "#{tons.round(2)} tons"
+    "#{tons.round(2)} metric tons"
   end
 end
