@@ -1,5 +1,5 @@
 - if current_user.goals.empty? and current_user.activities.empty?
-  %section
+  %section.mb-4
     .row
       .col-lg-12
         .card.mb-3
@@ -25,30 +25,29 @@
                 and
                 = link_to 'Facebook', 'https://www.facebook.com/carfreechallenge/'
                 with the hashtag #CarFreeChallenge
-%section
+
+%section.mb-4
   .row.mb-4
-    .col-lg-12
-      .card
-        .card-header Leaderboard
-        .card-body
-          = render partial: 'home/leaderboard'
-%section
-  .row.mb-4
-    .col-lg-12
-      .card
-        .card-header Badges Earned
-        .card-body.d-flex.justify-content-between
-          - current_user.milestones.each do |m|
-            = render partial: 'milestones/badge', locals: { milestone: m }
-  .row
     .col-lg-4
       .card
-        .card-header Activities Logged
-        .card-body
-          = link_to activities_path do 
-            %h3.numberCircle.bg-primary.text-white
-              = current_user.activities.count
+        .card-header= current_user.name
+        .card-body.user-avatar.d-flex.align-items-center
+          - if current_user.avatar.attached?
+            = image_tag current_user.avatar 
     .col-lg-8
+      .card.mb-4
+        .card-header Activities Logged
+        .card-body.text-center
+          %h1
+            .badge.text-primary= current_user.activities.count
+      .card.mb-4
+        .card-header
+          Emissions Avoided
+          = surround "(", ")" do
+            %a{ href: "#", data: { toggle: "tooltip" }, title: "The average passenger vehicle emits 404 grams per mile." } ?
+        .card-body.text-center
+          %h1
+            .badge.text-primary= emissions_given_distance(current_user.activities.sum(:distance))
       .card
         .card-header
           Your Goals
@@ -77,3 +76,10 @@
               .col-sm-12.progress-bar-container
                 .progress
                   = progress_bar(g)
+  .row
+    .col-lg-12
+      .card
+        .card-header Badges Earned
+        .card-body.d-flex.justify-content-between
+          - current_user.milestones.each do |m|
+            = render partial: 'milestones/badge', locals: { milestone: m }
