@@ -1,4 +1,9 @@
-.card.mb-3
+.row
+  .col
+    = link_to "< Back", :back
+.card.my-3
   .card-header Set a Goal for Car Free Adventures
   .card-body
+    .alert.alert-info
+      Different sports might require different metrics — if you're a road biker or sea kayaker, you might want to use miles. As a mountain biker, skier, trail runner, or kayaker, consider using vertical feet of elevation of car-free recreation!
     = render partial: 'goals/form', locals: { goal: @goal }

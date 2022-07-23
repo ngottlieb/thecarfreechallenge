@@ -18,4 +18,9 @@ module ActivitiesHelper
 
     return "#{number_with_delimiter number.round} #{Goal.metric_label('vertical_gain', current_user.measurement_system.to_s)}"
   end
+
+  def emissions_given_distance(distance)
+    tons = distance * 404 / 1000000
+    "#{tons.round(2)} metric tons"
+  end
 end
