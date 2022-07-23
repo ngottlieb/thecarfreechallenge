@@ -1,5 +1,5 @@
 .bg-image-full {
-  height: 400px;
+  height: 500px;
   background: no-repeat center center scroll;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -8,7 +8,10 @@
   color: white;
 
   &.landing-image-1 {
-    background-position: 50% 20%;
+    height: 800px;
+    @include media-breakpoint-down(xs) {
+      height: 500px;
+    }
   }
 }
 @for $i from 1 through 6 {
@@ -50,26 +53,16 @@
   padding-right:8px;
 }
 
-#landing_header {
-  .header-text {
-    @extend .rounded;
-    padding: 10px;
-    background-color: rgba(52, 58, 64, 0.4);
-    h1 {
-      @include media-breakpoint-down(md) {
-        font-size: 4.5rem;
-      }
-      @include media-breakpoint-down(xs) {
-        font-size: 2.5rem;
-      }
-    }
-  }
-}
-
 .landing-page {
   .social-menu-container {
     svg {
       color: black;
+    }
+  }
+
+  h1 {
+    @include media-breakpoint-down(xs) {
+      font-size: 1.5rem;
     }
   }
 }
