@@ -5,6 +5,7 @@
       .form-group
         %strong Got a Strava account?
         = link_to "Sign up through Strava", user_strava_omniauth_authorize_path, class: 'btn btn-strava btn-block'
+        %small.form-text.text-muted Note: you are only eligible to win prizes if you sign up using Strava.
       %h4.text-center
         OR
       = render "devise/shared/error_messages", resource: resource
