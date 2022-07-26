@@ -12,7 +12,7 @@ feature 'Home page' do
   #   Then I see "Welcome"
   scenario 'visit the home page' do
     visit root_path
-    expect(page).to have_content '#carfreechallenge'
+    expect(page).to have_content '#CarFreeChallenge'
   end
 
   it 'should have a user count' do

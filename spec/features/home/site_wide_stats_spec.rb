@@ -10,7 +10,7 @@ feature 'Dashboard page' do
 
         it 'should load the page' do
           visit site_wide_stats_path
-          expect(page).to have_content "Who's Doing It"
+          expect(page).to have_content "Participants"
         end
       end
     end
