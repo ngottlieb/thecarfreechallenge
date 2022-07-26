@@ -14,14 +14,15 @@
   %btn.navbar-toggler{ type: 'button', data: { toggle: 'collapse', target: '#landingNavLinks' } }
     %span.navbar-toggler-icon
   #landingNavLinks.collapse.navbar-collapse
-    %ul.nav.navbar-nav
-      = link_to 'What', '#what', class: 'nav-link'
-      = link_to 'Who', '#who', class: 'nav-link'
-      = link_to 'How', '#how', class: 'nav-link'
-      = link_to 'Share', '#share', class: 'nav-link'
-      = link_to 'FAQ', '#faq', class: 'nav-link'
-    = render 'layouts/user_navigation'
-
+    .d-flex.flex-column.flex-sm-row.justify-content-between.w-100
+      %ul.nav.navbar-nav.order-12.order-sm-0
+        = link_to 'What', '#what', class: 'nav-link'
+        = link_to 'Who', '#who', class: 'nav-link'
+        = link_to 'How', '#how', class: 'nav-link'
+        = link_to 'Share', '#share', class: 'nav-link'
+        = link_to 'FAQ', '#faq', class: 'nav-link'
+      .order-0.order-sm-12
+        = render 'layouts/user_navigation'
 %header#landing_header.bg-image-full.py-5.min-100.mb-0.landing-image-1
 
 
