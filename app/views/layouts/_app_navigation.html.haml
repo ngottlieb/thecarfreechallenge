@@ -1,7 +1,7 @@
 - if user_signed_in?
   %ul.navbar-nav.navbar-sidenav.bg-primary
     %li.nav-item{ class: (action_name == 'dashboard' ? 'active' : '') }
-      = link_to 'Dashboard', root_path, class: 'nav-link'
+      = link_to 'Dashboard', dashboard_path, class: 'nav-link'
     %li.nav-item{ class: (controller_name == 'activities' ? 'active' : '') }
       = link_to 'Log Your Progress', activities_path, class: 'nav-link'
     %li.nav-item{ class: (action_name == 'site_wide_stats' ? 'active' : '') }

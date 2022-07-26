@@ -2,7 +2,7 @@ feature 'Edit profile' do
   given(:user) { FactoryBot.create :user }
   background do
     login_as(user, scope: :user)
-    visit root_path
+    visit dashboard_path
     click_link "Account"
   end
 

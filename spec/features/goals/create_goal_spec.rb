@@ -3,7 +3,7 @@ feature 'Create a goal' do
   background { login_as(user, scope: :user) }
 
   scenario 'creating a goal' do
-    visit root_path
+    visit dashboard_path
     click_link '+ Set a Goal', match: :first
     fill_in 'goal[total]', with: '1000'
     click_button 'Set Goal'
@@ -11,7 +11,7 @@ feature 'Create a goal' do
   end
 
   scenario 'creating an invalid goal' do
-    visit root_path
+    visit dashboard_path
     click_link '+ Set a Goal', match: :first
     # don't fill in the total field
     click_button 'Set Goal'
@@ -23,7 +23,7 @@ feature 'Create a goal' do
     background { login_as(user, scope: :user) }
 
     it 'should use metric system labels for new goals' do
-      visit root_path
+      visit dashboard_path
       click_link '+ Set a Goal', match: :first
       expect(page).to have_css('option[value="distance"]', text: 'kilometers')
     end
@@ -31,7 +31,7 @@ feature 'Create a goal' do
     # ensure that it displays the same thing the user input even though
     # in the background we're converting to imperial and back
     scenario 'creating a goal' do
-      visit root_path
+      visit dashboard_path
       click_link '+ Set a Goal', match: :first
       fill_in 'goal[total]', with: '1000'
       click_button 'Set Goal'

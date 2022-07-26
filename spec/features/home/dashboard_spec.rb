@@ -6,7 +6,7 @@ feature 'Dashboard page' do
 
     context 'without goals or activities' do
       feature 'visit the dashboard' do
-        background { visit root_path }
+        background { visit dashboard_path }
 
         it 'should have + Set a Goal link' do
           expect(page).to have_link "+ Set a Goal"
@@ -23,7 +23,7 @@ feature 'Dashboard page' do
       given!(:goal) { FactoryBot.create :goal, user: user }
 
       feature 'visit the dashboard' do
-        background { visit root_path }
+        background { visit dashboard_path }
 
         it 'should display the goal' do
           expect(page).to have_content "#{goal.converted_total} car-free #{goal.metric_label}"
@@ -41,7 +41,7 @@ feature 'Dashboard page' do
       feature 'visit the dashboard' do
 
         it 'should display the activity count' do
-          visit root_path
+          visit dashboard_path
           expect(page).to have_content "#{activities.count}"
         end
       end

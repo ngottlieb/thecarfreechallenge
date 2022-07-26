@@ -3,7 +3,7 @@ feature 'Delete a goal' do
   given!(:goal) { FactoryBot.create :goal, user: user }
   background do
     login_as(user, scope: :user)
-    visit root_path
+    visit dashboard_path
   end
 
   scenario 'clicking delete on a goal' do

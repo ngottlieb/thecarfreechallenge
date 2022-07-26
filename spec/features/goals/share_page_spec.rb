@@ -25,7 +25,7 @@ feature 'Share goal' do
 
     background do
       login_as(user, scope: :user)
-      visit root_path
+      visit dashboard_path
       click_link 'Share'
     end
 

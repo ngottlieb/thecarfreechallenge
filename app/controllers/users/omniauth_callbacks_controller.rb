@@ -14,7 +14,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to edit_user_path(@user)
       else
         set_flash_message(:notice, :success, kind: "Strava") if is_navigational_format?
-        redirect_to root_path
+        redirect_to dashboard_path
       end
     else
       session["devise.strava_data"] = request.env["omniauth.auth"]
