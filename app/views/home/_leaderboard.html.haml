@@ -1,45 +1,29 @@
-%ul.nav.nav-tabs#leaderboardTabs{ role: "tablist" }
-  %li.nav-item{ role: "presentation" }
-    %a.nav-link.active#weeklyTab{ data: { toggle: "tab" }, role: "tab", aria: { controls: "weekly", selected: true }, href: "#weekly" }
-      Weekly
-  %li.nav-item{ role: "presentation" }
-    %a.nav-link#yearlyTab{ data: { toggle: "tab" }, role: "tab", aria: { controls: "yearly", selected: false }, href: "#yearly" }
-      Year to date
-
-.table-responsive.tab-content#leaderboardTabs
-  .tab-pane.fade.show.active#weekly{ role: "tabpanel", aria: { labelledby: "weeklyTab"} }
-    %table.table.table-bordered
-      %thead
-        %th
-        %th Name
-        %th Location
-        %th Distance
-        %th Vertical Gain
-        %th # of Activities
-      %tbody
-        - @weekly_leaderboard.each_with_index do |u, index|
-          %tr
-            %td= index+1
-            %td= u.name
-            %td= u.location
-            %td= display_distance(u.distance)
-            %td= display_vert(u.vert)
-            %td= u.activity_count
-  .tab-pane.fade#yearly{ role: "tabpanel", aria: { labelledby: "yearlyTab"} }
-    %table.table.table-bordered
-      %thead
-        %th
-        %th Name
-        %th Location
-        %th Distance
-        %th Vertical Gain
-        %th # of Activities
-      %tbody
-        - @yearly_leaderboard.each_with_index do |u, index|
-          %tr
-            %td= index+1
-            %td= u.name
-            %td= u.location
-            %td= display_distance(u.distance)
-            %td= display_vert(u.vert)
-            %td= u.activity_count            
+- if @leaderboard[:most_distance].nil? || @leaderboard[:most_vert].nil? || @leaderboard[:most_combined].nil?
+  %h5 There aren't any leaders yet. Get out %there!
+- else
+  .row
+    .col-12.col-md-4
+      .card.text-center
+        .card-header Most Distance
+        .card-body.user-avatar
+          - if @leaderboard[:most_distance].avatar.attached?
+            = image_tag @leaderboard[:most_distance].avatar
+          %h5= @leaderboard[:most_distance].name
+          %h6= display_distance(@leaderboard[:most_distance].distance)
+    .col-12.col-md-4
+      .card.text-center
+        .card-header Most Elevation
+        .card-body.user-avatar
+          - if @leaderboard[:most_vert].avatar.attached?
+            = image_tag @leaderboard[:most_vert].avatar
+          %h5= @leaderboard[:most_vert].name
+          %h6= display_vert(@leaderboard[:most_vert].vert)
+    .col-12.col-md-4
+      .card.text-center
+        .card-header Most Combined
+        .card-body.user-avatar
+          - if @leaderboard[:most_combined].avatar.attached?
+            = image_tag @leaderboard[:most_combined].avatar
+          %h5= @leaderboard[:most_combined].name
+          %h6
+            #{display_distance(@leaderboard[:most_combined].distance)} + #{display_vert(@leaderboard[:most_combined].vert)}

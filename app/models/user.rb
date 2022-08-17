@@ -52,22 +52,25 @@ class User < ApplicationRecord
     end
   end
 
-  def self.weekly_leaderboard
-    User.leaderboard
-      .where('activity_date >= ?', Date.today.beginning_of_week)
-  end
-
-  def self.yearly_leaderboard
-    User.leaderboard
-      .where('activity_date >= ?', Date.today.beginning_of_year)
+  def self.top_three_users
+    leaderboard = User.leaderboard
+    {
+      most_distance: leaderboard.order('distance DESC').first,
+      most_vert: leaderboard.order('vert DESC').first,
+      most_combined: leaderboard.order('combined DESC').first
+    }
   end
 
   def self.leaderboard
     User.joins(:activities)
       .group('users.id')
-      .select('users.*, SUM(activities.vertical_gain) as vert, SUM(activities.distance) as distance, COUNT(activities) as activity_count')
-      .order('distance DESC')
-      .limit(10)
+      .select('
+        users.*,
+        SUM(activities.vertical_gain) as vert,
+        SUM(activities.distance) as distance,
+        (SUM(activities.vertical_gain) + SUM(activities.distance)) as combined,
+        COUNT(activities) as activity_count'
+      )
   end
 
   def is_strava_user?

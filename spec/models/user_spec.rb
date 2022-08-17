@@ -166,4 +166,34 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'User.top_three_users' do
+    let!(:user1) { FactoryBot.create :user }
+
+    subject { User.top_three_users }
+
+    it 'should return a hash with no users as values if there are no activities' do
+      expect(subject).to eq ({
+        most_distance: nil,
+        most_vert: nil,
+        most_combined: nil
+      })
+    end
+
+    describe 'with activities present' do
+      let!(:activity1) { FactoryBot.create :activity, distance: 1000, vertical_gain: 1000, user: user1 }
+      let!(:activity2) { FactoryBot.create :activity, distance: 50, vertical_gain: 2000 }
+
+      it 'should return the user with the most accumulated distance under distance' do
+        expect(subject[:most_distance]).to eq user1
+      end
+
+      it 'should return the user with the most accumulated vertical gain under vert' do
+        expect(subject[:most_vert]).to eq activity2.user
+      end
+
+      it 'should return the user with the most accumulated combined metrics under combined' do
+        expect(subject[:most_combined]).to eq activity2.user
+      end
+    end
+  end
 end
