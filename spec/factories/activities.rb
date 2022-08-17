@@ -17,8 +17,8 @@
 
 FactoryBot.define do
   factory :activity do
-    distance { 100 }
-    vertical_gain { 1000 }
+    distance { Random.random_number(50) }
+    vertical_gain { Random.random_number(3000) }
     activity_date { DateTime.parse("2018-01-25") }
     sport { "trail_running" }
     user

@@ -28,7 +28,6 @@ class HomeController < ApplicationController
   private
 
   def prep_leaderboard_data
-    @weekly_leaderboard = User.weekly_leaderboard
-    @yearly_leaderboard = User.yearly_leaderboard
+    @leaderboard = User.top_three_users
   end
 end

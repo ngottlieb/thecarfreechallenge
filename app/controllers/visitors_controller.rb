@@ -9,5 +9,7 @@ class VisitorsController < ApplicationController
       vertical_gain_sum: Activity.sum(:vertical_gain),
       distance_sum: Activity.sum(:distance)
     }
+
+    @leaderboard = User.top_three_users
   end
 end

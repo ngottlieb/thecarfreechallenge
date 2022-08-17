@@ -25,7 +25,6 @@
         = render 'layouts/user_navigation'
 %header#landing_header.bg-image-full.py-5.min-100.mb-0.landing-image-1
 
-
 %section#what.py-5
   .container
     %h1 What is the BAR-U-EAT #CarFreeChallenge?
@@ -55,7 +54,7 @@
           .card
             .card-header Leaderboard
             .card-body
-              pending
+              = render partial: 'home/leaderboard'
         .col-md-12
           .card
             .card-header #CarFreeChallenge Participants
