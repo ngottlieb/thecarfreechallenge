@@ -183,17 +183,17 @@ RSpec.describe Activity, type: :model do
         context "who uses the #{sys}" do
           let(:system) { sys }
           it 'should save vertical_gain accurately' do
-            expect(subject.reload.vertical_gain).to eq Goal.meters_to_feet(strava_data[:total_elevation_gain])
+            expect(subject.reload.vertical_gain).to eq Goal.meters_to_feet(strava_data.total_elevation_gain)
           end
           it 'should save distance accurately' do
-            expect(subject.reload.distance).to eq Goal.kms_to_miles(strava_data[:distance] / 1000)
+            expect(subject.reload.distance).to eq Goal.kms_to_miles(strava_data.distance / 1000)
           end
         end
       end
 
       context 'with an existing activity' do
         let!(:activity) { FactoryBot.create :activity, user: user, provider: 'strava',
-          external_id: strava_data[:id], name: 'fake name but not the same as the strava name' }
+          external_id: strava_data.id, name: 'fake name but not the same as the strava name' }
 
         it 'should not create a new activity' do
           expect{subject}.to_not change{user.activities.count}

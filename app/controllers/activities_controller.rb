@@ -43,7 +43,7 @@ class ActivitiesController < ApplicationController
 
   def trigger_import
     if current_user.is_strava_user?
-      StravaImportJob.perform_later(current_user, strava_token)
+      StravaImportJob.perform_later(current_user)
       respond_to do |format|
         format.json { render json: { msg: "Enqueued Strava import job" }, status: :created }
       end

@@ -5,7 +5,7 @@ class StravaImportJob < ApplicationJob
 
   around_perform :set_user_job_in_progress_flag
 
-  def perform(user, access_token)
+  def perform(user)
     # TODO: modify these before and after dates to reflect user timezone
     per_page = Activity::PER_PAGE # max (identified through manual testing)
     page = 1
@@ -15,7 +15,7 @@ class StravaImportJob < ApplicationJob
 
     # loop through to ensure we retrieve all the activities
     loop do
-      import_batch = StravaService.activities(user, access_token, { after: after_query_date,
+      import_batch = StravaService.activities(user, { after: after_query_date,
                                           per_page: per_page, page: page})
       activities += import_batch
       break if import_batch.count < per_page
@@ -26,10 +26,9 @@ class StravaImportJob < ApplicationJob
     imported_activities = []
     activities.each do |act|
       begin
-        act.deep_symbolize_keys!
-        imported_activities << Activity.update_or_create_from_strava(act) if act[:name].include? "#carfreechallenge"
+        imported_activities << Activity.update_or_create_from_strava(act) if act.name.include? "#carfreechallenge"
       rescue Exception => msg
-        logger.error "There was an error importing Strava activity #{act[:id]}: #{msg}; skipping"
+        logger.error "There was an error importing Strava activity #{act.id}: #{msg}; skipping"
       end
     end
     logger.info "Successfully imported #{imported_activities.count} activities"
