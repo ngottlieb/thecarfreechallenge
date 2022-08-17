@@ -5,9 +5,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user.save!
       sign_in @user, event: :authentication
-      session['strava_access_token'] = request.env["omniauth.auth"].credentials.token
-      @user.update(strava_access_token: strava_token)
-      StravaImportJob.perform_later(@user, strava_token)
+      strava_token = request.env["omniauth.auth"].credentials.token
+      refresh_token = request.env["omniauth.auth"].credentials.refresh_token
+
+      @user.update(
+        strava_access_token: strava_token,
+        strava_refresh_token: refresh_token
+      )
+      StravaImportJob.perform_later(@user)
 
       if @new_user
         flash[:info] = "Strava doesn't share your email with us. If you'd like to receive prizes, you'll need to add your email."

@@ -63,23 +63,23 @@ class Activity < ApplicationRecord
   end
 
   def self.update_or_create_from_strava(data)
-    user = User.find_by(provider: 'strava', uid: data[:athlete][:id])
+    user = User.find_by(provider: 'strava', uid: data.athlete.id)
 
-    activity = Activity.find_or_create_by(user: user, provider: 'strava', external_id: data[:id])
+    activity = Activity.find_or_create_by(user: user, provider: 'strava', external_id: data.id)
 
     # strava provides distance and total_elevation_gain in meters,
     # so we need to ensure this works properly
     if user.present? and user.metric_system? # conversion happens automatically on save
-      activity.distance = data[:distance] / 1000 # make kms instead of ms
-      activity.vertical_gain = data[:total_elevation_gain]
+      activity.distance = data.distance / 1000 # make kms instead of ms
+      activity.vertical_gain = data.total_elevation_gain
     else
-      activity.distance = Goal.kms_to_miles(data[:distance] / 1000)
-      activity.vertical_gain = Goal.meters_to_feet(data[:total_elevation_gain])
+      activity.distance = Goal.kms_to_miles(data.distance / 1000)
+      activity.vertical_gain = Goal.meters_to_feet(data.total_elevation_gain)
     end
 
-    activity.name = data[:name] if data[:name].present?
-    activity.sport = data[:type] if data[:type].present?
-    activity.activity_date = DateTime.parse(data[:start_date]) if data[:start_date].present?
+    activity.name = data.name if data.name.present?
+    activity.sport = data.type if data.type.present?
+    activity.activity_date = data.start_date if data.start_date.present?
 
     activity.save!
     activity

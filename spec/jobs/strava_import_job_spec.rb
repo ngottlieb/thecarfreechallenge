@@ -4,7 +4,6 @@ RSpec.describe StravaImportJob, type: :job do
 
   describe 'perform' do
     let(:user) { FactoryBot.create :user, provider: 'strava', uid: '12345' }
-    let(:access_token) { '1234567890' }
     let(:activity) { StravaTesting.example_activity(test_activity_params )}
     let(:test_activity_params) {
       {
@@ -12,14 +11,14 @@ RSpec.describe StravaImportJob, type: :job do
       }
     }
 
-    subject { StravaImportJob.perform_now(user, access_token) }
+    subject { StravaImportJob.perform_now(user) }
 
     before do
       allow(StravaService).to receive(:activities).and_return [activity]
     end
 
     it 'should call StravaService.activities' do
-      expect(StravaService).to receive(:activities).with(user, access_token,{ after: Activity::AFTER_EPOCH,
+      expect(StravaService).to receive(:activities).with(user,{ after: Activity::AFTER_EPOCH,
                                                                               per_page: Activity::PER_PAGE, page: 1  })
       subject
     end
@@ -37,16 +36,16 @@ RSpec.describe StravaImportJob, type: :job do
         end
         @car_free_activity = StravaTesting.example_activity(test_activity_params.merge({ name: '#carfreechallenge activity' }))
         second_page = [@car_free_activity]
-        allow(StravaService).to receive(:activities).with(user, access_token, first_page_params).and_return(first_page)
-        allow(StravaService).to receive(:activities).with(user, access_token, second_page_params).and_return(second_page)
+        allow(StravaService).to receive(:activities).with(user, first_page_params).and_return(first_page)
+        allow(StravaService).to receive(:activities).with(user, second_page_params).and_return(second_page)
       end
 
       let(:first_page_params) { { after: Activity::AFTER_EPOCH, per_page: Activity::PER_PAGE, page: 1 } }
       let(:second_page_params) { { after: Activity::AFTER_EPOCH, per_page: Activity::PER_PAGE, page: 2 } }
 
       it 'should call StravaService twice' do
-        expect(StravaService).to receive(:activities).with(user, access_token, first_page_params)
-        expect(StravaService).to receive(:activities).with(user, access_token, second_page_params)
+        expect(StravaService).to receive(:activities).with(user, first_page_params)
+        expect(StravaService).to receive(:activities).with(user, second_page_params)
         subject
       end
 
@@ -61,7 +60,7 @@ RSpec.describe StravaImportJob, type: :job do
       let!(:goal) { FactoryBot.create :goal, user: user, start_date: start_date }
 
       it 'should use the minimum start_date as the `after` parameter' do
-        expect(StravaService).to receive(:activities).with(user, access_token,
+        expect(StravaService).to receive(:activities).with(user,
                                                            { after: start_date.beginning_of_day.to_i, per_page: Activity::PER_PAGE, page: 1 })
         subject
       end

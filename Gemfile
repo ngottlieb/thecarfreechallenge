@@ -60,7 +60,7 @@ gem "omniauth-strava", git: 'https://github.com/thogg4/omniauth-strava'
 gem "oauth2", '~> 1.4'
 gem 'annotate', '~> 2.7.2'
 gem 'social-share-button', '~> 1.1.0'
-gem 'strava-api-v3', git: 'https://github.com/jaredholdcroft/strava-api-v3'
+gem 'strava-ruby-client', git: 'https://github.com/dblock/strava-ruby-client'
 
 gem 'newrelic_rpm'
 
