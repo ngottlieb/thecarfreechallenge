@@ -37,7 +37,12 @@
           - @activities.each do |act|
             %tr{ class: "activity-#{act.id}" }
               %td= act.activity_date.try(:strftime,"%m-%d-%Y") || act.created_at.strftime("%m-%d-%Y")
-              %td= act.name
+              %td
+                = act.name
+                - if act.provider == "strava"
+                  %strong.text-small
+                    = surround '(', ')' do
+                      = link_to "View on Strava", "https://www.strava.com/activities/#{act.external_id}"
               %td= act.sport
               %td= act.converted_distance
               %td= act.converted_vertical_gain

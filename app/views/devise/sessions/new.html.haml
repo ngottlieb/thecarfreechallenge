@@ -1,8 +1,9 @@
 .card.card-login.mx-auto.mt-5
   .card-header Login
   .card-body
-    %p
-      = link_to 'Login with Strava', user_strava_omniauth_authorize_path, class: 'btn btn-block btn-strava'
+    %p.text-center
+      = link_to user_strava_omniauth_authorize_path do
+        = image_tag "btn_strava_connectwith_orange.svg", alt: "Sign in with Strava"
     %h4.text-center
       OR
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|

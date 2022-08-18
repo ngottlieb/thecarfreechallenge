@@ -16,7 +16,8 @@
                   = link_to "Log activities", activities_path
                   (or
                   = succeed ')' do
-                    = link_to 'link your account with Strava', user_strava_omniauth_authorize_path
+                    = link_to user_strava_omniauth_authorize_path do
+                      = image_tag "btn_strava_connectwith_orange.svg", alt: "Connect with Strava"
               %li
                 Share your goals  with your friends using the "Share" button next to your goal
               %li
