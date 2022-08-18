@@ -137,11 +137,20 @@ RSpec.describe User, type: :model do
       it 'should send an email' do
         expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob )
       end
+
+      describe 'for a user who has opted out of barueat emails' do
+        let!(:user) { FactoryBot.create :user, measurement_system: :imperial_system, opt_out_of_barueat_emails: true }
+
+        it 'should not send an email' do
+          expect{ subject }.to_not enqueue_job( ActionMailer::MailDeliveryJob )
+        end
+      end
     end
   end
 
   describe 'User.leaderboard' do
     let!(:user1) { FactoryBot.create :user }
+    let(:opt_out_user) { FactoryBot.create :user, opt_out_of_leaderboard: true }
     
     subject { User.leaderboard }
 
@@ -162,6 +171,15 @@ RSpec.describe User, type: :model do
 
       it 'should include a total activity count' do
         expect(subject.first.activity_count).to eq activities.count
+      end
+    end
+
+    describe 'when the top user has opted out' do
+      let(:opt_out_user) { FactoryBot.create :user, opt_out_of_leaderboard: true }
+      let!(:activities) { FactoryBot.create_list :activity, 3, user: opt_out_user }
+
+      it 'should not include them' do
+        expect(subject).to_not include(opt_out_user)
       end
     end
   end
