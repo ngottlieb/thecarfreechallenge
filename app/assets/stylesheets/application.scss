@@ -70,7 +70,12 @@ li#appSocialLinks {
     bottom: 56px;
     text-align: center;
   }
-  @include media-breakpoint-down(lg) {
+
+}
+
+.cptbl-with-strava-image {
+  max-width: 250px;
+  @include media-breakpoint-down(md) {
     margin-left: -8px;
   }
 }
