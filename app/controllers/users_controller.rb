@@ -27,7 +27,9 @@ class UsersController < ApplicationController
       :short_bio,
       :location,
       :gender,
-      :age
+      :age,
+      :opt_out_of_leaderboard,
+      :opt_out_of_barueat_emails
     )
   end
 end

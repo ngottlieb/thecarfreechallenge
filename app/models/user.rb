@@ -64,6 +64,7 @@ class User < ApplicationRecord
   def self.leaderboard
     User.joins(:activities)
       .group('users.id')
+      .where('NOT opt_out_of_leaderboard')
       .select('
         users.*,
         SUM(activities.vertical_gain) as vert,
@@ -110,7 +111,7 @@ class User < ApplicationRecord
   end
 
   def notify_of_milestone_achievement(milestone)
-    if email.present? # no point notifying BarUEat if we can't contact the user
+    if email.present? && !opt_out_of_barueat_emails # no point notifying BarUEat if we can't contact the user
       BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
     end
   end
