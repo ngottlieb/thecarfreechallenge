@@ -1,0 +1,9 @@
+%h1 Congrats! You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
+
+- if @milestone.badge.attached?
+  = image_tag @milestone.badge
+
+%p
+  Head to
+  = link_to "your #CarFreeChallenge dashboard", url_for(controller: "home", action: "dashboard")
+  to share your achievement.
