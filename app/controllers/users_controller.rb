@@ -29,7 +29,8 @@ class UsersController < ApplicationController
       :gender,
       :age,
       :opt_out_of_leaderboard,
-      :opt_out_of_barueat_emails
+      :opt_out_of_barueat_emails,
+      :opt_out_of_milestone_notifications
     )
   end
 end

@@ -111,8 +111,14 @@ class User < ApplicationRecord
   end
 
   def notify_of_milestone_achievement(milestone)
-    if email.present? && !opt_out_of_barueat_emails # no point notifying BarUEat if we can't contact the user
-      BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
+    if email.present? 
+      unless opt_out_of_barueat_emails
+        BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
+      end
+
+      unless opt_out_of_milestone_notifications
+        UserNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
+      end
     end
   end
 end

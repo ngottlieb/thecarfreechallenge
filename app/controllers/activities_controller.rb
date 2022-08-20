@@ -57,8 +57,14 @@ class ActivitiesController < ApplicationController
   private
 
   def activity_params
-    params[:activity][:distance].gsub!(',','')
-    params[:activity][:vertical_gain].gsub!(',','')
+    # if both metrics are blank, the activity is invalid, but if only one is blank, the other needs to be set to 0
+    unless params[:activity][:distance].blank? && params[:activity][:vertical_gain].blank?
+      [:distance, :vertical_gain].each do |metric|
+        params[:activity][metric].gsub!(',','')
+        params[:activity][metric] = 0 if params[:activity][metric].blank?
+      end
+    end
+
     params.require(:activity).permit(:distance, :vertical_gain, :activity_date, :sport, :name)
   end
 end

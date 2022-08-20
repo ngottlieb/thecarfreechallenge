@@ -134,14 +134,38 @@ RSpec.describe User, type: :model do
         expect{ subject }.to change{ user.reload.milestones }.to match_array([milestone])
       end
 
-      it 'should send an email' do
-        expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob )
+      describe 'for a user who has not opted out of anything' do
+        it 'should send two emails' do
+          expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob ).exactly(:twice)
+        end
       end
 
       describe 'for a user who has opted out of barueat emails' do
         let!(:user) { FactoryBot.create :user, measurement_system: :imperial_system, opt_out_of_barueat_emails: true }
 
-        it 'should not send an email' do
+        it 'should only send one email' do
+          expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob ).exactly(:once)
+        end
+      end
+
+      describe 'for a user who has opted out of notification emails' do
+        let!(:user) { FactoryBot.create :user, measurement_system: :imperial_system, opt_out_of_milestone_notifications: true }
+
+        it 'should only send one email' do
+          expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob ).exactly(:once)
+        end
+      end
+
+
+      describe 'for a user who has opted out of both barueat and milestone emails' do
+        let!(:user) do
+          FactoryBot.create :user,
+          measurement_system: :imperial_system,
+          opt_out_of_barueat_emails: true,
+          opt_out_of_milestone_notifications: true
+        end
+
+        it 'should send zero emails' do
           expect{ subject }.to_not enqueue_job( ActionMailer::MailDeliveryJob )
         end
       end
