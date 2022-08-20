@@ -28,12 +28,12 @@ feature 'Home page' do
 
     it 'should display vertical gain progress' do
       visit root_path
-      expect(page).to have_content "#{number_with_delimiter(Activity.sum(:vertical_gain).to_i)} / #{number_with_delimiter(Goal.where(metric: :vertical_gain).sum(:total).to_i)}"
+      expect(page).to have_content "#{number_with_delimiter(Activity.sum(:vertical_gain).to_i)}"
     end
 
     it 'should display distance progress' do
       visit root_path
-      expect(page).to have_content "#{number_with_delimiter(Activity.sum(:distance).to_i)} / #{number_with_delimiter(Goal.where(metric: :distance).sum(:total).to_i)}"
+      expect(page).to have_content "#{number_with_delimiter(Activity.sum(:distance).to_i)}"
     end
   end
 
