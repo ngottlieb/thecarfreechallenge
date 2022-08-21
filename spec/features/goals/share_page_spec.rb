@@ -32,9 +32,5 @@ feature 'Share goal' do
     it 'should display the username and goal' do
       expect(page).to have_content "#{goal.user.name} has pledged to travel"
     end
-
-    it 'should have social share buttons' do
-      expect(page).to have_css('div.social-share-button a')
-    end
   end
 end

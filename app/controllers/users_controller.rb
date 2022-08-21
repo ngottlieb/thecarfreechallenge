@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   # for facebook sharing
   def share_milestone
     @user = User.find(params[:id])
-    @milestone = Milestone.find(params[:id])
+    @milestone = Milestone.find(params[:milestone_id])
     render 'share_milestone', layout: nil
   end
 
