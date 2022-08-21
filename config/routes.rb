@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get '/site-wide-stats', to: 'home#site_wide_stats', as: :site_wide_stats
 
   get '/users/:id/milestones/:milestone_id', to: 'users#share_milestone', as: :share_milestone
+  get '/users/:id/unsubscribe', to: 'users#unsubscribe', as: :unsubscribe
 
   get '/activities/trigger_import', to: 'activities#trigger_import', as: 'trigger_import'
 end

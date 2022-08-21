@@ -7,3 +7,7 @@
   Head to
   = link_to "your #CarFreeChallenge dashboard", url_for(controller: "home", action: "dashboard")
   to share your achievement.
+
+%small
+  Don't want to receive these emails?
+  = link_to "Unsubscribe", url_for(controller: "users", action: "unsubscribe", id: @user.id)

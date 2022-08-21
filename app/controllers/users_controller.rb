@@ -18,6 +18,12 @@ class UsersController < ApplicationController
     render 'share_milestone', layout: nil
   end
 
+  def unsubscribe
+    @user = User.find(params[:id])
+    @user.update opt_out_of_milestone_notifications: true
+    render 'unsubscribe', layout: nil
+  end
+
   def user_params
     params.require(:user).permit(
       :name,
