@@ -23,9 +23,3 @@
             #{@goal.user.name} has pledged to travel #{number_with_delimiter(@goal.converted_total)} human-powered #{@goal.metric_label} without driving!
           = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
           = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
-      -# if user is signed in, show them the share buttons
-      - if user_signed_in?
-        .float-md-left
-          - desc = "#{@goal.user.name} has taken the #carfreechallenge. Find out more and join them!"
-          = social_share_button_tag(desc, url: goal_url(@goal), desc: desc)
-        = link_to 'Back', root_path, class: 'float-md-right'

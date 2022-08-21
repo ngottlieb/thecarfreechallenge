@@ -358,8 +358,6 @@ GEM
       websocket (~> 1.0)
     sexp_processor (4.16.1)
     shellany (0.0.1)
-    social-share-button (1.1.0)
-      coffee-rails
     spring (2.1.1)
     spring-commands-rspec (1.0.4)
       spring (>= 0.9.1)
@@ -436,7 +434,6 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver
-  social-share-button (~> 1.1.0)
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
