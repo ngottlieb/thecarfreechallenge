@@ -14,4 +14,8 @@ module MilestonesHelper
 
     return "#{number} #{label}"
   end
+
+  def milestone_achievement_verb(milestone)
+    milestone.metric == 'distance' ? "traveled" : "gained"
+  end
 end

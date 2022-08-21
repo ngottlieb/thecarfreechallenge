@@ -2,11 +2,13 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'Take the #carfreechallenge'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #carfreechallenge'}"}
-    %meta{ property: 'og:title', content: 'Take the #carfreechallenge' }
-    %meta{ property: 'og:description', content: "#{@user.name} has taken the #carfreechallenge. Join them in pledging to minimize your driving for outdoor recreation!!" }
-    %meta{ property: 'og:image', content: url_for(@milestone.badge) }
+    %title= content_for?(:title) ? yield(:title) : 'Take the #CarFreeChallenge'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #CarFreeChallenge'}"}
+    %meta{ property: 'og:title', content: 'Take the #CarFreeChallenge' }
+    %meta{ property: 'og:description', content: "#{@user.name} has #{milestone_achievement_verb(@milestone)} human-powered #{friendly_display_of_threshold(@milestone, @user)}." }
+    %meta{ property: 'og:image', content: @milestone.badge.attached? ? polymorphic_url(@milestone.badge) : asset_url("landing-pg-1") }
+    %meta{ property: 'og:url', content: share_milestone_url(id: @user.id, milestone_id: @milestone.id) }
+    %meta{ property: 'og:type', content: 'website' }
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -16,16 +18,13 @@
         .card-header
           #{@user.name} is taking the
           = succeed '!' do
-            %strong #carfreechallenge
-        %section.bg-image-full.landing-image-1
+            %strong #CarFreeChallenge
+        - if @milestone.badge.attached?
+          %section.bg-image-full{ style: "background-image: url(#{url_for(@milestone.badge)});" }
+        - else
+          %section.bg-image-full.landing-image-1
         .card-body
           %h4
-            #{@user.name} has adventured #{friendly_display_of_threshold(@milestone, @user)} without driving!
+            #{@user.name} has #{milestone_achievement_verb(@milestone)} #{friendly_display_of_threshold(@milestone, @user)} without driving!
           = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
           = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
-      -# if user is signed in, show them the share buttons
-      - if user_signed_in?
-        .float-md-left
-          - desc = "#{@user.name} has taken the #carfreechallenge. Find out more and join them!"
-          = social_share_button_tag(desc, url: share_milestone_url(@user, @milestone), desc: desc)
-        = link_to 'Back', root_path, class: 'float-md-right'
