@@ -52,8 +52,8 @@ class User < ApplicationRecord
     end
   end
 
-  def self.top_three_users
-    leaderboard = User.leaderboard
+  def self.top_three_users_this_month
+    leaderboard = User.leaderboard.where('activity_date >= ?', Date.today.beginning_of_month)
     {
       most_distance: leaderboard.order('distance DESC').first,
       most_vert: leaderboard.order('vert DESC').first,

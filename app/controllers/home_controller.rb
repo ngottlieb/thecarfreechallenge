@@ -2,7 +2,6 @@ class HomeController < ApplicationController
   before_action :authenticate_user!
 
   def dashboard
-    prep_leaderboard_data
   end
 
   def help
@@ -23,11 +22,7 @@ class HomeController < ApplicationController
       @summary[:distance_goal] = Goal.miles_to_kms(@summary[:distance_goal])
       @summary[:distance_sum] = Goal.miles_to_kms(@summary[:distance_sum])
     end
-  end
 
-  private
-
-  def prep_leaderboard_data
-    @leaderboard = User.top_three_users
+    @leaderboard = User.top_three_users_this_month
   end
 end
