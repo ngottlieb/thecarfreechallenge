@@ -36,19 +36,31 @@
           - if current_user.avatar.attached?
             = image_tag current_user.avatar 
     .col-lg-8
-      .card.mb-4
+      .card
         .card-header Activities Logged
         .card-body.text-center
           %h1
             .badge.text-primary= current_user.activities.count
-      .card.mb-4
+      .card
         .card-header
-          Emissions Avoided
-          = surround "(", ")" do
-            %a{ href: "#", data: { toggle: "tooltip" }, title: "The average passenger vehicle emits 404 grams per mile." } ?
+          Total Carbon Offset
         .card-body.text-center
           %h1
             .badge.text-primary= emissions_given_distance(current_user.activities.sum(:distance))
+      .card
+        .card-header
+          Total Vertical Gain
+        .card-body.text-center
+          %h1
+            .badge.text-primary= display_vert(current_user.activities.sum(:vertical_gain))
+      .card
+        .card-header
+          Total Distance
+        .card-body.text-center
+          %h1
+            .badge.text-primary= display_vert(current_user.activities.sum(:distance))
+  .row.mb-4
+    .col-lg-12
       .card
         .card-header
           Your Goals

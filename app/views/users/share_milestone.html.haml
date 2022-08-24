@@ -13,6 +13,15 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body.bg-dark
+    %div#fb-root
+    %script
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     .container
       .card.mx-auto.mt-5.text-center
         .card-header
@@ -28,3 +37,5 @@
             #{@user.name} has #{milestone_achievement_verb(@milestone)} #{friendly_display_of_threshold(@milestone, @user)} without driving!
           = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
           = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
+          - if user_signed_in?
+            .fb-share-button{ data: { href: share_milestone_url(id: @user, milestone_id: @milestone.id), layout: "button" }}

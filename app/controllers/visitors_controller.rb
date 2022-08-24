@@ -10,6 +10,6 @@ class VisitorsController < ApplicationController
       distance_sum: Activity.sum(:distance)
     }
 
-    @leaderboard = User.top_three_users
+    @leaderboard = User.top_three_users_this_month
   end
 end

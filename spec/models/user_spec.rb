@@ -208,10 +208,10 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'User.top_three_users' do
+  describe 'User.top_three_users_this_month' do
     let!(:user1) { FactoryBot.create :user }
 
-    subject { User.top_three_users }
+    subject { User.top_three_users_this_month }
 
     it 'should return a hash with no users as values if there are no activities' do
       expect(subject).to eq ({
@@ -221,9 +221,21 @@ RSpec.describe User, type: :model do
       })
     end
 
+    describe 'with activities from last month' do
+      let!(:activity1) { FactoryBot.create :activity, activity_date: 1.month.ago }
+
+      it 'should return a hash with no users as values' do
+        expect(subject).to eq({
+          most_distance: nil,
+          most_vert: nil,
+          most_combined: nil
+        })
+      end
+    end
+
     describe 'with activities present' do
-      let!(:activity1) { FactoryBot.create :activity, distance: 1000, vertical_gain: 1000, user: user1 }
-      let!(:activity2) { FactoryBot.create :activity, distance: 50, vertical_gain: 2000 }
+      let!(:activity1) { FactoryBot.create :activity, distance: 1000, vertical_gain: 1000, user: user1, activity_date: Date.today }
+      let!(:activity2) { FactoryBot.create :activity, distance: 50, vertical_gain: 2000, activity_date: Date.today }
 
       it 'should return the user with the most accumulated distance under distance' do
         expect(subject[:most_distance]).to eq user1

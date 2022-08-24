@@ -1,29 +1,32 @@
-- if @leaderboard[:most_distance].nil? || @leaderboard[:most_vert].nil? || @leaderboard[:most_combined].nil?
-  %h5 There aren't any leaders yet. Get out %there!
-- else
-  .row
-    .col-12.col-md-4
-      .card.text-center
-        .card-header Most Distance
-        .card-body.user-avatar
-          - if @leaderboard[:most_distance].avatar.attached?
-            = image_tag @leaderboard[:most_distance].avatar
-          %h5= @leaderboard[:most_distance].name
-          %h6= display_distance(@leaderboard[:most_distance].distance)
-    .col-12.col-md-4
-      .card.text-center
-        .card-header Most Elevation
-        .card-body.user-avatar
-          - if @leaderboard[:most_vert].avatar.attached?
-            = image_tag @leaderboard[:most_vert].avatar
-          %h5= @leaderboard[:most_vert].name
-          %h6= display_vert(@leaderboard[:most_vert].vert)
-    .col-12.col-md-4
-      .card.text-center
-        .card-header Most Combined
-        .card-body.user-avatar
-          - if @leaderboard[:most_combined].avatar.attached?
-            = image_tag @leaderboard[:most_combined].avatar
-          %h5= @leaderboard[:most_combined].name
-          %h6
-            #{display_distance(@leaderboard[:most_combined].distance)} + #{display_vert(@leaderboard[:most_combined].vert)}
+.card
+  .card-header Monthly Leaderboard
+  .card-body
+    - if @leaderboard[:most_distance].nil? || @leaderboard[:most_vert].nil? || @leaderboard[:most_combined].nil?
+      %h5 There aren't any leaders yet. Get out there!
+    - else
+      .row
+        .col-12.col-md-4
+          .card.text-center
+            .card-header Most Distance
+            .card-body.user-avatar
+              - if @leaderboard[:most_distance].avatar.attached?
+                = image_tag @leaderboard[:most_distance].avatar
+              %h5= @leaderboard[:most_distance].name
+              %h6= display_distance(@leaderboard[:most_distance].distance)
+        .col-12.col-md-4
+          .card.text-center
+            .card-header Most Elevation
+            .card-body.user-avatar
+              - if @leaderboard[:most_vert].avatar.attached?
+                = image_tag @leaderboard[:most_vert].avatar
+              %h5= @leaderboard[:most_vert].name
+              %h6= display_vert(@leaderboard[:most_vert].vert)
+        .col-12.col-md-4
+          .card.text-center
+            .card-header Most Combined
+            .card-body.user-avatar
+              - if @leaderboard[:most_combined].avatar.attached?
+                = image_tag @leaderboard[:most_combined].avatar
+              %h5= @leaderboard[:most_combined].name
+              %h6
+                #{display_distance(@leaderboard[:most_combined].distance)} + #{display_vert(@leaderboard[:most_combined].vert)}
