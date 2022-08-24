@@ -7,8 +7,6 @@
     %hr.my-0
     .card-header
       Total Carbon Offset
-      = surround "(", ")" do
-        %a{ href: "#", data: { toggle: "tooltip" }, title: "The average passenger vehicle emits 404 grams per mile." } ?
     .card-body.text-center
       %h1
         .badge.text-primary= emissions_given_distance(@summary[:distance_sum])

@@ -43,9 +43,7 @@
             .badge.text-primary= current_user.activities.count
       .card.mb-4
         .card-header
-          Emissions Avoided
-          = surround "(", ")" do
-            %a{ href: "#", data: { toggle: "tooltip" }, title: "The average passenger vehicle emits 404 grams per mile." } ?
+          Total Carbon Offset
         .card-body.text-center
           %h1
             .badge.text-primary= emissions_given_distance(current_user.activities.sum(:distance))
