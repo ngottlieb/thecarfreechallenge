@@ -29,7 +29,7 @@
           = succeed '!' do
             %strong #CarFreeChallenge
         %section
-          = image_tag("achievements/#{@achievement}")
+          = image_tag("achievements/#{@achievement}.png")
         .card-body
           %h4
             #{@user.name} #{User::ACHIEVEMENTS[@achievement.to_sym]}
