@@ -93,6 +93,13 @@
     .col-lg-12
       .card
         .card-header Badges Earned
-        .card-body.d-flex.justify-content-between
+        .card-body.row
+          - current_user.achievements.each do |a|
+            .col-lg-3
+              .card.milestone-badge.d-flex.flex-column.achievement
+                = image_tag "achievements/#{a.to_s}", alt: a.to_s.titlecase
+                %span.badge.badge-primary.badge-pill= a.to_s.titlecase
+                = link_to "Share", share_achievement_path(id: current_user.id, achievement: a.to_s), class: 'py-2'
           - current_user.milestones.each do |m|
-            = render partial: 'milestones/badge', locals: { milestone: m }
+            .col-lg-3
+              = render partial: 'milestones/badge', locals: { milestone: m }

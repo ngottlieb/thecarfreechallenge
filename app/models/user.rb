@@ -43,6 +43,11 @@ class User < ApplicationRecord
   enum measurement_system: [ :imperial_system, :metric_system ]
   enum gender: [:prefer_not_to_say, :man, :woman, :non_binary, :other], _default: :prefer_not_to_say
 
+  ACHIEVEMENTS = {
+    member: "has signed up for the #CarFreeChallenge!",
+    mission_accomplished: "has achieved a #CarFreeChallenge goal!"
+  }
+
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize do |user|
       user.email = auth.info.email
@@ -120,5 +125,32 @@ class User < ApplicationRecord
         UserNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
       end
     end
+  end
+
+  def achievements
+    achievements = []
+
+    ACHIEVEMENTS.keys.each do |a|
+      achievements << a if send(a.to_s + "?")
+    end
+
+    achievements
+  end
+
+  def member?
+    true
+  end
+
+  def mission_accomplished?
+    goals.where(
+      "(SELECT
+        CASE goals.metric
+          WHEN 'distance' THEN SUM(distance)
+          WHEN 'vertical_gain' THEN SUM(vertical_gain)
+        END
+        AS completed
+        FROM activities
+        WHERE activities.user_id = goals.user_id AND activity_date >= goals.start_date AND activity_date <= goals.end_date) >= goals.total"
+    ).count > 0
   end
 end

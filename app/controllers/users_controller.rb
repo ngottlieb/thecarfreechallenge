@@ -18,6 +18,13 @@ class UsersController < ApplicationController
     render 'share_milestone', layout: nil
   end
 
+  # for sharing programmatically defined achievements
+  def share_achievement
+    @user = User.find(params[:id])
+    @achievement = params[:achievement]
+    render 'share_achievement', layout: nil
+  end
+
   def unsubscribe
     @user = User.find(params[:id])
     @user.update opt_out_of_milestone_notifications: true

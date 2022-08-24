@@ -250,4 +250,61 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'achievements' do
+    let(:user) { FactoryBot.create :user }
+
+    subject { user.achievements }
+
+    it 'should return [:member] for a user who has not done anything' do
+      expect(subject).to eq [:member]
+    end
+  end
+
+  describe 'mission_accomplished?' do
+    let(:user) { FactoryBot.create :user }
+    
+    subject { user.mission_accomplished? }
+
+    describe 'with an incomplete goal' do
+      let!(:goal) { FactoryBot.create :goal, user: user }
+
+      it 'should be false' do
+        expect(subject).to be false
+      end
+    end
+
+    describe 'with no goals' do
+      it 'should be false' do
+        expect(subject).to be false
+      end
+    end
+
+    describe 'with a completed distance goal' do
+      let!(:goal) { FactoryBot.create :goal, user: user, metric: :distance, start_date: 1.month.ago, end_date: Date.today }
+      let!(:activity) { FactoryBot.create :activity, user: user, distance: goal.total + 10, activity_date: 1.week.ago }
+
+      it 'should be true' do
+        expect(subject).to be true
+      end
+    end
+
+    describe 'with a completed vertical gain goal' do
+      let!(:goal) { FactoryBot.create :goal, user: user, metric: :vertical_gain, start_date: 1.month.ago, end_date: Date.today }
+      let!(:activity) { FactoryBot.create :activity, user: user, vertical_gain: goal.total + 10, activity_date: 1.week.ago }
+
+      it 'should be true' do
+        expect(subject).to be true
+      end
+    end
+
+    describe 'with activities over a goal but not within the date range' do
+      let!(:goal) { FactoryBot.create :goal, user: user, metric: :distance, start_date: 1.week.ago, end_date: Date.today }
+      let!(:activity) { FactoryBot.create :activity, user: user, distance: goal.total + 10, activity_date: 1.month.ago }
+
+      it 'should be false' do
+        expect(subject).to be false
+      end
+    end
+  end
 end
