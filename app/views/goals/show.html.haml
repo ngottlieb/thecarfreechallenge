@@ -2,24 +2,35 @@
 %html
   %head
     %meta{:name => "viewport", :content => "width=device-width, initial-scale=1.0"}
-    %title= content_for?(:title) ? yield(:title) : 'Take the #carfreechallenge'
-    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #carfreechallenge'}"}
-    %meta{ property: 'og:title', content: 'Take the #carfreechallenge' }
-    %meta{ property: 'og:description', content: "#{@goal.user.name} has taken the #carfreechallenge. Join them in pledging to minimize your driving for outdoor recreation!!" }
+    %title= content_for?(:title) ? yield(:title) : 'Take the #CarFreeChallenge'
+    %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #CarFreeChallenge'}"}
+    %meta{ property: 'og:title', content: 'Take the #CarFreeChallenge' }
+    %meta{ property: 'og:description', content: "#{@goal.user.name} has taken the #CarFreeChallenge. Join them in pledging to minimize your driving for outdoor recreation!!" }
     %meta{ property: 'og:image', content: image_url('landing-pg-1.jpg') }
     = stylesheet_link_tag 'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body.bg-dark
+    %div#fb-root
+    %script
+      (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     .container
       .card.mx-auto.mt-5.text-center
         .card-header
           #{@goal.user.name} is taking the
           = succeed '!' do
-            %strong #carfreechallenge
+            %strong #CarFreeChallenge
         %section.bg-image-full.landing-image-1
         .card-body
           %h4
             #{@goal.user.name} has pledged to travel #{number_with_delimiter(@goal.converted_total)} human-powered #{@goal.metric_label} without driving!
           = link_to 'Join them!', new_user_registration_path, class: 'btn btn-primary btn-block'
           = link_to 'Learn more', root_path, class: 'btn btn-info btn-block'
+          - if user_signed_in?
+            .fb-share-button{ data: { href: goal_url(@goal), layout: "button" }}
