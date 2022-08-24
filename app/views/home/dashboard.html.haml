@@ -66,7 +66,7 @@
           Your Goals
           = link_to '+ Set a Goal', new_goal_path, class: 'btn btn-info float-right'
         - current_user.goals.each do |g|
-          .card-body{ class: "goal-#{g.id}" }
+          .card-body{ class: "goal goal-#{g.id}" }
             .row
               .col-lg-8
                 %p

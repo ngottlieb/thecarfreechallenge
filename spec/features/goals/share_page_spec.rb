@@ -26,7 +26,7 @@ feature 'Share goal' do
     background do
       login_as(user, scope: :user)
       visit dashboard_path
-      click_link 'Share'
+      find(".goal").click_link 'Share'
     end
 
     it 'should display the username and goal' do
