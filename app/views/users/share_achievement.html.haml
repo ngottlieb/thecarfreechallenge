@@ -6,7 +6,7 @@
     %meta{:name => "description", :content => "#{content_for?(:description) ? yield(:description) : 'Take the #CarFreeChallenge'}"}
     %meta{ property: 'og:title', content: 'Take the #CarFreeChallenge' }
     %meta{ property: 'og:description', content: "#{@user.name} #{User::ACHIEVEMENTS[@achievement.to_sym]}" }
-    %meta{ property: 'og:image', content: asset_url("achievements/#{@achievement}") }
+    %meta{ property: 'og:image', content: asset_url("achievements/#{@achievement}.png") }
     %meta{ property: 'og:url', content: share_achievement_url(id: @user.id, achievement: @achievement) }
     %meta{ property: 'og:type', content: 'website' }
     = stylesheet_link_tag 'application', media: 'all'
