@@ -111,6 +111,38 @@ RSpec.describe User, type: :model do
         expect(subject).to match_array([milestone])
       end
     end
+
+    describe 'with milestone metric carbon' do
+      let!(:carbon_milestone) { FactoryBot.create :milestone, metric: "carbon", threshold: 0.1 }
+      
+      it 'should not be achieved if not exceeded' do
+        expect(subject).to_not include(carbon_milestone)
+      end
+
+      describe 'with distance corresponding to more carbon than the threshold' do
+        let!(:activities) { FactoryBot.create :activity, distance: (carbon_milestone.threshold * 1000000 / 404 + 1), user: user }
+
+        it 'should be achieved' do
+          expect(subject).to include(carbon_milestone)
+        end
+      end
+    end
+
+    describe 'with milestone combined' do
+      let!(:combined_milestone) { FactoryBot.create :milestone, metric: "combined", threshold: 1000 }
+
+      it 'should not be achieved if not exceeded' do
+        expect(subject).to_not include(combined_milestone)
+      end
+
+      describe 'with combined exceeding the milestone' do
+        let!(:activity) { FactoryBot.create :activity, user: user, vertical_gain: (combined_milestone.threshold / 2), distance: (combined_milestone.threshold / 2 + 10) }
+
+        it 'should be achieved' do
+          expect(subject).to include(combined_milestone)
+        end
+      end
+    end
   end
 
   describe '#update_milestones' do

@@ -106,8 +106,15 @@ class User < ApplicationRecord
   def matching_milestones
     total_distance = activities.sum(:distance)
     total_vert = activities.sum(:vertical_gain)
+    total_carbon = total_distance * 404 / 1000000
+    total_combined = total_distance + total_vert
 
-    Milestone.where("(metric = 'distance' AND threshold <= ?) OR (metric = 'vertical_gain' AND threshold <= ?)", total_distance, total_vert)
+    Milestone.where("
+      (metric = 'distance' AND threshold <= ?)
+      OR (metric = 'vertical_gain' AND threshold <= ?)
+      OR (metric = 'carbon' AND threshold <= ?)
+      OR (metric = 'combined' AND threshold <= ?)
+      ", total_distance, total_vert, total_carbon, total_combined)
   end
   
   # assigns any milestones that have been achieved to the user

@@ -1,4 +1,9 @@
-Congrats! You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
+Congrats!
+
+- if @milestone.tagline
+  You earned the #{@milestone.tagline} badge!
+- else
+  You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
 
 Head to #{url_for(controller: "home", action: "dashboard")} to share your achievement.
 
