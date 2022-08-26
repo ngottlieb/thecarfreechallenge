@@ -21,6 +21,8 @@ class Milestone < ApplicationRecord
 
   has_one_attached :badge
 
+  METRICS = %w(distance vertical_gain combined carbon)
+
   # before save callback that ensures all `totals` are saved in miles
   # or feet
   # assumes incoming units are the created_by user's
@@ -32,6 +34,14 @@ class Milestone < ApplicationRecord
       elsif metric == 'vertical_gain'
         self.threshold = Goal.meters_to_feet(old_threshold)
       end
+    end
+  end
+
+  def metric_needs_conversion?
+    if ['distance', 'vertical_gain'].include? metric
+      true
+    else
+      false
     end
   end
 

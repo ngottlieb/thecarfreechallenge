@@ -10,8 +10,8 @@
     .form-row
       .col-md-10
         Reward users for reaching 
-        = f.text_field :threshold, placeholder: '1000'
-        = f.select :metric, Goal.metrics_select_values(current_user)
+        = f.text_field :threshold, placeholder: '1000', value: exact_converted_display_of_threshold(@milestone, current_user)
+        = f.select :metric, milestone_metrics_select_values(current_user)
   .form-group.d-flex
     %div
       = f.label :badge
