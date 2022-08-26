@@ -1,6 +1,6 @@
 %h1
   Congrats!
-  - if @milestone.tagline
+  - if @milestone.tagline.present?
     You earned the #{@milestone.tagline} badge!
   - else
     You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
