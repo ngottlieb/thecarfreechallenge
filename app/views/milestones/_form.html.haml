@@ -12,6 +12,11 @@
         Reward users for reaching 
         = f.text_field :threshold, placeholder: '1000', value: exact_converted_display_of_threshold(@milestone, current_user)
         = f.select :metric, milestone_metrics_select_values(current_user)
+  .form-group
+    .form-row
+      .col-md-10
+        = f.label :tagline
+        = f.text_field :tagline, placeholder: "Peak Pusher"
   .form-group.d-flex
     %div
       = f.label :badge

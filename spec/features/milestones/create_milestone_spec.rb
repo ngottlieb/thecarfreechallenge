@@ -21,6 +21,15 @@ feature 'Create a milestone' do
       expect(page).to have_selector('table#milestoneTable tbody tr')
     end
 
+    scenario 'creating a milestone with a tagline' do
+      visit milestones_path
+      click_link 'Create a New Milestone', match: :first
+      fill_in 'milestone[threshold]', with: '1000'
+      fill_in 'milestone[tagline]', with: 'This is tagline'
+      click_button 'Submit'
+      expect(page).to have_content "This is tagline"
+    end
+
     context 'as a user who uses the metric system' do
       given(:user) { FactoryBot.create :user, admin: true, measurement_system: :metric_system }
 

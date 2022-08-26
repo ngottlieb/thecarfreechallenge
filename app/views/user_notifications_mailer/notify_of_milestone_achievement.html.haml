@@ -1,4 +1,9 @@
-%h1 Congrats! You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
+%h1
+  Congrats!
+  - if @milestone.tagline
+    You earned the #{@milestone.tagline} badge!
+  - else
+    You passed #{friendly_display_of_threshold(@milestone, @user)} without using a car.
 
 - if @milestone.badge.attached?
   = image_tag @milestone.badge

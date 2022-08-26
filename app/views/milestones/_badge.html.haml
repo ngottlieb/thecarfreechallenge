@@ -1,5 +1,9 @@
 .card.milestone-badge.d-flex.flex-column
   = image_tag milestone.badge if milestone.badge.attached?
-  %span.badge.badge-primary.badge-pill= friendly_display_of_threshold(milestone, current_user)
+  %span.badge.badge-primary.badge-pill
+    - if milestone.tagline.present?
+      = milestone.tagline
+    - else
+      = friendly_display_of_threshold(milestone, current_user)
   - if current_user.milestones.include? milestone
     = link_to "Share", share_milestone_path(id: current_user.id, milestone_id: milestone.id), class: 'py-2'
