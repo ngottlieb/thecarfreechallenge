@@ -58,7 +58,7 @@
           Total Distance
         .card-body.text-center
           %h1
-            .badge.text-primary= display_vert(current_user.activities.sum(:distance))
+            .badge.text-primary= display_distance(current_user.activities.sum(:distance))
   .row.mb-4
     .col-lg-12
       .card
