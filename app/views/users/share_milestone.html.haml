@@ -29,7 +29,8 @@
           = succeed '!' do
             %strong #CarFreeChallenge
         - if @milestone.badge.attached?
-          %section.bg-image-full{ style: "background-image: url(#{url_for(@milestone.badge)});" }
+          %section
+            = image_tag @milestone.badge
         - else
           %section.bg-image-full.landing-image-1
         .card-body
