@@ -1,3 +1,16 @@
+:css
+  body {
+    text-align: center;
+  }
+
+  p {
+    font-size: 120%;
+  }
+
+  img {
+    max-width: 100%;
+  }
+
 %h1
   Congrats!
   - if @milestone.tagline.present?
@@ -9,8 +22,10 @@
   = image_tag @milestone.badge
 
 %p
-  Head to
-  = link_to "your #CarFreeChallenge dashboard", url_for(controller: "home", action: "dashboard")
+  Save this badge or
+  %br
+  head to your
+  = link_to "#CarFreeChallenge dashboard", url_for(controller: "home", action: "dashboard")
   to share your achievement.
 
 %small
