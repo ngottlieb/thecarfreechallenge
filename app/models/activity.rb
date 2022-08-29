@@ -26,7 +26,7 @@ class Activity < ApplicationRecord
   after_save :trigger_user_milestone_check
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
-  AFTER_EPOCH = "1514764800"
+  AFTER_EPOCH = "1659312000"
   PER_PAGE = 200
 
   # before save callback that ensures all `totals` are saved in miles
