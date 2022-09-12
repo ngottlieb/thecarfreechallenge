@@ -6,4 +6,9 @@ class BarUEatNotificationsMailer < ApplicationMailer
     @milestone = params[:milestone]
     mail(subject: "User achieved milestone")
   end
+
+  def notify_of_new_signup
+    @user = params[:user]
+    mail(subject: "New user signed up")
+  end
 end
