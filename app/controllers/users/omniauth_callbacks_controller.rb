@@ -1,17 +1,18 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def strava
-    @user = User.from_omniauth(request.env["omniauth.auth"])
+    # existing non-Strava users need to be able to connect to Strava, so check current_user first
+    auth = request.env["omniauth.auth"]
+    @user = current_user || User.from_omniauth(auth)
     @new_user = @user.new_record?
+
+    @user.strava_access_token = auth.credentials.token
+    @user.strava_refresh_token = auth.credentials.refresh_token
+    @user.provider = auth.provider
+    @user.uid = auth.uid
 
     if @user.save!
       sign_in @user, event: :authentication
-      strava_token = request.env["omniauth.auth"].credentials.token
-      refresh_token = request.env["omniauth.auth"].credentials.refresh_token
 
-      @user.update(
-        strava_access_token: strava_token,
-        strava_refresh_token: refresh_token
-      )
       StravaImportJob.perform_later(@user)
 
       if @new_user

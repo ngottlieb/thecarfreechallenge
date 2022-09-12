@@ -1,7 +1,10 @@
-%h2 Edit Account
-
+%header.d-flex.justify-content-between
+  %h2 Edit Account
+  - unless current_user.is_strava_user?
+    = link_to user_strava_omniauth_authorize_path do
+      = image_tag "btn_strava_connectwith_orange.svg", alt: "Connect with Strava"
 .row
-  .col-md-8
+  .col-md-12
     = form_for @user do |f|
       - if @user.errors.any?
         #error_explanation.alert.alert-danger
