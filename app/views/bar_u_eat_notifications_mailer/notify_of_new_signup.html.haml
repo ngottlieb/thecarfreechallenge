@@ -1,0 +1,15 @@
+%h1 A new user just signed up!
+
+%h4 User Info
+%ul
+  %li= @user.name
+  %li= @user.email
+  %li
+    - if @user.is_strava_user?
+      Strava user
+    - else
+      Not a Strava user
+  %li= @user.short_bio if @user.short_bio.present?
+  %li= @user.location if @user.location.present?
+  %li= @user.age if @user.age.present?
+  %li= @user.gender if @user.gender.present?

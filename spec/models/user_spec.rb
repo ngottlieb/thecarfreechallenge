@@ -204,6 +204,24 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '#send_signup_notice_to_barueat' do
+    let!(:user) { FactoryBot.create :user }
+
+    subject { user.send_signup_notice_to_barueat }
+
+    it 'should send an email' do
+      expect{ subject }.to enqueue_job( ActionMailer::MailDeliveryJob ).exactly(:once)
+    end
+
+    describe 'for a user who has opted out' do
+      let!(:user) { FactoryBot.create :user, opt_out_of_barueat_emails: true }
+
+      it 'should not send an email' do
+        expect{ subject }.to_not enqueue_job( ActionMailer::MailDeliveryJob )
+      end
+    end
+  end
+
   describe 'User.leaderboard' do
     let!(:user1) { FactoryBot.create :user }
     let(:opt_out_user) { FactoryBot.create :user, opt_out_of_leaderboard: true }

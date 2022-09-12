@@ -43,6 +43,8 @@ class User < ApplicationRecord
   enum measurement_system: [ :imperial_system, :metric_system ]
   enum gender: [:prefer_not_to_say, :man, :woman, :non_binary, :other], _default: :prefer_not_to_say
 
+  after_create :send_signup_notice_to_barueat
+
   ACHIEVEMENTS = {
     member: "has signed up for the #CarFreeChallenge!",
     mission_accomplished: "has achieved a #CarFreeChallenge goal!"
@@ -122,7 +124,7 @@ class User < ApplicationRecord
   end
 
   def notify_of_milestone_achievement(milestone)
-    if email.present? 
+    if email.present?
       unless opt_out_of_barueat_emails
         BarUEatNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
       end
@@ -130,6 +132,12 @@ class User < ApplicationRecord
       unless opt_out_of_milestone_notifications
         UserNotificationsMailer.with(user: self, milestone: milestone).notify_of_milestone_achievement.deliver_later
       end
+    end
+  end
+
+  def send_signup_notice_to_barueat
+    if !opt_out_of_barueat_emails
+      BarUEatNotificationsMailer.with(user: self).notify_of_new_signup.deliver_later
     end
   end
 
