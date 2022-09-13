@@ -23,9 +23,12 @@ RSpec.describe StravaImportJob, type: :job do
       subject
     end
 
-    it 'should update the user before and after execution' do
-      expect(user).to receive(:update).twice
-      subject
+    describe 'perform_later' do
+      subject { StravaImportJob.perform_later(user) }
+
+      it "set the user's import_in_progress flag when enqueued" do
+        expect{ subject }.to change{ user.import_in_progress }.to true
+      end
     end
 
     describe "with more than #{Activity::PER_PAGE} activities" do

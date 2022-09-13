@@ -3,7 +3,8 @@
 class StravaImportJob < ApplicationJob
   queue_as :default
 
-  around_perform :set_user_job_in_progress_flag
+  before_enqueue :set_user_job_in_progress_flag
+  after_perform :unset_user_job_in_progress_flag
 
   def perform(user)
     # TODO: modify these before and after dates to reflect user timezone
@@ -36,9 +37,12 @@ class StravaImportJob < ApplicationJob
   end
 
   private
+
   def set_user_job_in_progress_flag
     self.arguments[0].update import_in_progress: true
-    yield
+  end
+
+  def unset_user_job_in_progress_flag
     self.arguments[0].update import_in_progress: false
   end
 
