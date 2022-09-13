@@ -2,6 +2,9 @@ class ActivitiesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if current_user.import_in_progress?
+      flash[:notice] = "Importing can take a few minutes. Check back in a bit!"
+    end
     @activities = current_user.activities
   end
 
@@ -44,14 +47,8 @@ class ActivitiesController < ApplicationController
   def trigger_import
     if current_user.is_strava_user?
       StravaImportJob.perform_later(current_user)
-      respond_to do |format|
-        format.json { render json: { msg: "Enqueued Strava import job" }, status: :created }
-      end
-    else
-      respond_to do |format|
-        format.json { render json: { errors: ["#{current_user} is not a Strava user"] }, status: :error }
-      end
     end
+    redirect_to activities_url
   end
 
   private
