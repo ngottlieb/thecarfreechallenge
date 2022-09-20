@@ -4,7 +4,7 @@ RSpec.describe StravaImportJob, type: :job do
 
   describe 'perform' do
     let(:user) { FactoryBot.create :user, provider: 'strava', uid: '12345' }
-    let(:activity) { StravaTesting.example_activity(test_activity_params )}
+    let(:activity) { StravaTesting.example_activity(test_activity_params)}
     let(:test_activity_params) {
       {
         user_id: user.uid
@@ -78,17 +78,19 @@ RSpec.describe StravaImportJob, type: :job do
       end
     end
 
-    context 'with a #carfreechallenge labeled activity' do
-      let(:test_activity_params) {
-        {
-          user_id: user.uid,
-          name: '#carfreechallenge activity'
+    Activity::STRAVA_HASHTAG_MATCHERS.each do |tag|
+      context "with an activity matching #{tag}" do
+        let(:test_activity_params) {
+          {
+            user_id: user.uid,
+            name: "#{tag} activity"
+          }
         }
-      }
 
-      it 'should call Activity.update_or_create_from_strava' do
-        expect(Activity).to receive(:update_or_create_from_strava).with(activity)
-        subject
+        it 'should call Activity.update_or_create_from_strava' do
+          expect(Activity).to receive(:update_or_create_from_strava).with(activity)
+          subject
+        end
       end
     end
 

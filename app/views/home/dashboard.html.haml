@@ -11,7 +11,7 @@
                 = link_to "+ Set a Goal", new_goal_path, class: 'btn btn-info btn-sm'
               %li
                 - if current_user.is_strava_user?
-                  Log activities on Strava with the text "#carfreechallenge" in the title
+                  Log activities on Strava with the text "#carfreechallenge" or "#cfc" in the title
                 - else
                   = link_to "Log activities", activities_path
                   (or
