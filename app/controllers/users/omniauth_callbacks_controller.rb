@@ -16,7 +16,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       StravaImportJob.perform_later(@user)
 
       if @new_user
-        flash[:info] = "Strava doesn't share your email with us. If you'd like to receive prizes, you'll need to add your email."
+        flash[:info] = "CFC participants who are registering via the Strava App must leave a valid email address to be notified about awards and prizes."
         redirect_to edit_user_path(@user)
       else
         set_flash_message(:notice, :success, kind: "Strava") if is_navigational_format?
