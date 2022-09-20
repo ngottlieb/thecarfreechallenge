@@ -26,6 +26,7 @@ class Activity < ApplicationRecord
   after_save :trigger_user_milestone_check
 
   STRAVA_UPDATEABLE_ATTRIBUTES = [:name, :sport, :activity_date, :distance, :vertical_gain]
+  STRAVA_HASHTAG_MATCHERS = %w(#cfc #carfreechallenge #thecarfreechallenge)
   AFTER_EPOCH = "1659312000"
   PER_PAGE = 200
 
